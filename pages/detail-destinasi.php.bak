@@ -1,0 +1,1475 @@
+<?php
+
+// Ambil ID destinasi dari URL
+$id_destinasi = isset($_GET['id']) ? (int) $_GET['id'] : 2;
+// Data utama 6 destinasi JelajahNusa
+$destinasi_data = [
+    1 => [
+        'nama' => 'Raja Ampat',
+        'lokasi' => 'Papua Barat Daya',
+        'deskripsi' => 'Surga bahari dunia dengan keanekaragaman hayati bawah laut terkaya di bumi, gugusan pulau karang (karst), dan air laut yang sangat jernih.',
+        'gambar' => '../assets/images/raja-ampat.jpg', // Sesuaikan path gambar kamu
+        'rating' => '4.9',
+        'kategori' => 'Bahari & Alam'
+    ],
+    2 => [
+        'nama' => 'Pulau Bali',
+        'lokasi' => 'Bali',
+        'deskripsi' => 'Pulau Dewata yang terkenal dengan kebudayaan yang kental, pantai berpasir putih, pura yang ikonik, serta panorama alam dari pegunungan hingga laut.',
+        'gambar' => '../assets/images/bali.jpg',
+        'rating' => '4.8',
+        'kategori' => 'Budaya & Pantai'
+    ],
+    3 => [
+        'nama' => 'Gunung Bromo',
+        'lokasi' => 'Jawa Timur',
+        'deskripsi' => 'Gunung berapi aktif yang terkenal dengan pemandangan matahari terbit (sunrise) spektakuler, lautan pasir luas, dan keindahan kalderanya.',
+        'gambar' => '../assets/images/bromo.jpg',
+        'rating' => '4.8',
+        'kategori' => 'Petualangan & Pegunungan'
+    ],
+    4 => [
+        'nama' => 'Labuan Bajo',
+        'lokasi' => 'Nusa Tenggara Timur',
+        'deskripsi' => 'Gerbang utama menuju Taman Nasional Komodo, rumah bagi kadal purba Komodo, gugusan pulau eksotis, serta spot diving dan sunset kelas dunia.',
+        'gambar' => '../assets/images/labuan-bajo.jpg',
+        'rating' => '4.9',
+        'kategori' => 'Bahari & Satwa'
+    ],
+    5 => [
+        'nama' => 'Danau Toba',
+        'lokasi' => 'Sumatera Utara',
+        'deskripsi' => 'Danau vulkanik terbesar di Asia Tenggara dengan Pulau Samosir di tengahnya, menawarkan keindahan alam megah dan kekayaan budaya Batak.',
+        'gambar' => '../assets/images/danau-toba.jpg',
+        'rating' => '4.7',
+        'kategori' => 'Danau & Budaya'
+    ],
+    6 => [
+        'nama' => 'Yogyakarta & Candi',
+        'lokasi' => 'Daerah Istimewa Yogyakarta',
+        'deskripsi' => 'Pusat kebudayaan Jawa yang kaya akan sejarah, mulai dari Keraton Yogyakarta, jalan Malioboro yang legendaris, hingga kemegahan Candi Prambanan dan Borobudur.',
+        'gambar' => '../assets/images/yogyakarta.jpg',
+        'rating' => '4.8',
+        'kategori' => 'Sejarah & Budaya'
+    ]
+];
+
+// Ambil data spesifik berdasarkan ID, fallback ke Bali (ID 2) jika ID tidak ditemukan
+$current_destinasi = isset($destinasi_data[$id_destinasi]) ? $destinasi_data[$id_destinasi] : $destinasi_data[2];
+/**
+ * JelajahNusa - Halaman Detail Destinasi: Bali
+ * Lokasi: pages/detail-destinasi.php
+ * Konsep: Nature-Inspired, Aesthetic, Minimalist, Clean
+ * Palet Warna: Forest Green (#345B49), Sage Green (#A8B99A), Soft Beige (#E8E6D9), Off White (#F7F7F2), Dark Forest (#29352D)
+ * 
+ * CATATAN UNTUK PENGEMBANG / PEMULA:
+ * Struktur data di bawah ini menggunakan Array PHP Native terstruktur.
+ * Di tahap pengembangan selanjutnya, data ini dapat langsung digantikan dengan
+ * query database MySQL (misalnya: SELECT * FROM destinasi WHERE slug = 'bali').
+ */
+
+// ==========================================================================
+// 1. DATA UTAMA DESTINASI BALI
+// ==========================================================================
+$destinasi = [
+    'id'          => 2,
+    'slug'        => 'bali',
+    'nama'        => 'Bali, Indonesia',
+    'provinsi'    => 'Provinsi Bali',
+    'wilayah'     => 'Kepulauan Sunda Kecil, Indonesia',
+    'kategori'    => 'Budaya, Alam & Bahari',
+    'rating'      => 4.9,
+    'total_ulasan'=> 4820,
+    'hero_image'  => 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1920&q=80',
+    'tagline'     => 'Pulau Seribu Pura dengan Harmoni Alam, Tradisi Sakral, dan Pesona Pesisir Tropis Dunia',
+    'deskripsi'   => 'Bali adalah pulau magis di Indonesia yang terkenal di seluruh dunia berkat keindahan bentang alamnya yang memukau—dari hamparan terasering sawah bertingkat di Ubud, jajaran pura laut yang sakral, hingga pesisir pantai selancar berpasir putih. Lebih dari sekadar pemandangan, jiwa Bali terpancar dari keramahan masyarakatnya serta denyut tradisi seni dan upacara adat Hindu Dharma yang lestari.',
+    'daya_tarik'  => [
+        [
+            'judul' => 'Kekayaan Budaya & Pura Luhur',
+            'desc'  => 'Pura-pura megah di tebing laut dan lereng gunung, seperti Pura Uluwatu, Tanah Lot, dan Besakih, menyajikan harmoni spiritual yang mengagumkan.',
+            'icon'  => 'bi-bank2'
+        ],
+        [
+            'judul' => 'Bentang Alam Hijau & Terasering Ubud',
+            'desc'  => 'Lembah sungai Ayung dan terasering sawah Tegalalang di Ubud menawarkan ketenangan asri serta sistem irigasi Subak warisan dunia UNESCO.',
+            'icon'  => 'bi-tree-fill'
+        ],
+        [
+            'judul' => 'Surga Bahari & Olahraga Selancar',
+            'desc'  => 'Mulai dari ombak selancar kelas dunia di pesisir Uluwatu hingga ketenangan snorkeling bersama ikan pari manta di Nusa Penida.',
+            'icon'  => 'bi-water'
+        ],
+        [
+            'judul' => 'Kesenian & Kuliner Autentik',
+            'desc'  => 'Seni tari Kecak dan Barong yang dramatis, kerajinan ukir perak celuk, serta racikan rempah bumbu base genep khas pulau dewata.',
+            'icon'  => 'bi-stars'
+        ]
+    ],
+    'waktu_terbaik' => [
+        'musim'   => 'April - Oktober (Musim Kemarau)',
+        'cuaca'   => 'Cerah dengan hembusan angin sejuk, kelembapan sedang, sangat ideal untuk aktivitas pantai, trekking fajar, dan eksplorasi pura.',
+        'tips'    => 'Bulan Mei, Juni, dan September merupakan waktu terbaik dengan cuaca prima dan keramaian wisatawan yang lebih tenang dibanding musim puncak liburan.'
+    ]
+];
+
+// Hubungkan data destinasi yang dipilih dengan struktur halaman detail
+if ($id_destinasi !== 2) {
+    $destinasi['id']       = $current_destinasi['id'] ?? $id_destinasi;
+    $destinasi['nama']     = $current_destinasi['nama'];
+    $destinasi['provinsi'] = $current_destinasi['lokasi'];
+    $destinasi['wilayah']  = $current_destinasi['lokasi'];
+    $destinasi['kategori'] = $current_destinasi['kategori'];
+    $destinasi['rating']   = (float) $current_destinasi['rating'];
+    $destinasi['hero_image'] = $current_destinasi['gambar'];
+    $destinasi['deskripsi']  = $current_destinasi['deskripsi'];
+    $destinasi['tagline']    = 'Jelajahi keindahan ' . $current_destinasi['nama'];
+    $destinasi['total_ulasan'] = 0;
+}
+
+// Data identitas destinasi lainnya
+$data_identitas = [
+    1 => [
+        'id' => 1,
+        'slug' => 'raja-ampat',
+        'nama' => 'Raja Ampat',
+        'provinsi' => 'Papua Barat Daya',
+        'wilayah' => 'Papua, Indonesia',
+        'kategori' => 'Wisata Bahari & Alam',
+        'rating' => 4.9,
+        'hero_image' => 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=1920&q=80',
+        'tagline' => 'Surga Bahari dengan Gugusan Pulau Karst dan Laut Jernih',
+        'deskripsi' => 'Raja Ampat merupakan destinasi bahari yang terkenal dengan gugusan pulau karst, perairan jernih, dan keanekaragaman hayati lautnya.'
+    ],
+    3 => [
+        'id' => 3,
+        'slug' => 'bromo',
+        'nama' => 'Gunung Bromo',
+        'provinsi' => 'Jawa Timur',
+        'wilayah' => 'Jawa, Indonesia',
+        'kategori' => 'Wisata Pegunungan',
+        'rating' => 4.9,
+        'hero_image' => 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=1920&q=80',
+        'tagline' => 'Keindahan Kaldera dan Panorama Pegunungan yang Memukau',
+        'deskripsi' => 'Gunung Bromo menawarkan panorama pegunungan, lautan pasir, dan pemandangan alam yang menjadi daya tarik Jawa Timur.'
+    ],
+    4 => [
+        'id' => 4,
+        'slug' => 'labuan-bajo',
+        'nama' => 'Labuan Bajo',
+        'provinsi' => 'Nusa Tenggara Timur',
+        'wilayah' => 'Nusa Tenggara, Indonesia',
+        'kategori' => 'Wisata Alam & Bahari',
+        'rating' => 4.9,
+        'hero_image' => 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1920&q=80',
+        'tagline' => 'Gerbang Petualangan Pulau dan Keindahan Laut Flores',
+        'deskripsi' => 'Labuan Bajo dikenal dengan pulau-pulau indah, panorama savana, serta kekayaan alam dan bahari di kawasan Flores.'
+    ],
+    5 => [
+        'id' => 5,
+        'slug' => 'danau-toba',
+        'nama' => 'Danau Toba',
+        'provinsi' => 'Sumatera Utara',
+        'wilayah' => 'Sumatera, Indonesia',
+        'kategori' => 'Wisata Alam & Budaya',
+        'rating' => 4.7,
+        'hero_image' => 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80',
+        'tagline' => 'Pesona Danau Vulkanik dan Warisan Budaya Batak',
+        'deskripsi' => 'Danau Toba merupakan danau vulkanik yang dikelilingi perbukitan hijau dan memiliki kekayaan budaya masyarakat Batak.'
+    ],
+    6 => [
+        'id' => 6,
+        'slug' => 'yogyakarta',
+        'nama' => 'Yogyakarta & Candi',
+        'provinsi' => 'D.I. Yogyakarta',
+        'wilayah' => 'Jawa, Indonesia',
+        'kategori' => 'Wisata Budaya & Sejarah',
+        'rating' => 4.8,
+        'hero_image' => 'https://images.unsplash.com/photo-1584810359583-96fc3448beaa?auto=format&fit=crop&w=1920&q=80',
+        'tagline' => 'Jelajahi Warisan Budaya dan Keagungan Candi',
+        'deskripsi' => 'Yogyakarta menawarkan perpaduan budaya Jawa, wisata sejarah, keraton, serta destinasi candi yang mengagumkan.'
+    ]
+];
+
+// Pilih data sesuai ID
+if ($id_destinasi !== 2) {
+    $destinasi = $data_identitas[$id_destinasi] ?? null;
+}
+
+if ($destinasi === null) {
+    http_response_code(404);
+    exit('Destinasi tidak ditemukan.');
+}
+
+
+// DATA TEMPAT WISATA POPULER BERDASARKAN DESTINASI
+
+$popular_places_data = [
+    1 => [
+        [
+            'id' => 'pianemo',
+            'nama' => 'Pianemo',
+            'lokasi' => 'Raja Ampat, Papua Barat Daya',
+            'foto' => 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Pulau Karst',
+            'deskripsi' => 'Panorama gugusan pulau karst yang dikelilingi perairan biru jernih.'
+        ],
+        [
+            'id' => 'wayag',
+            'nama' => 'Kepulauan Wayag',
+            'lokasi' => 'Raja Ampat, Papua Barat Daya',
+            'foto' => 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Kepulauan',
+            'deskripsi' => 'Gugusan pulau eksotis dengan panorama laut yang memukau.'
+        ],
+        [
+            'id' => 'arborek',
+            'nama' => 'Desa Arborek',
+            'lokasi' => 'Raja Ampat, Papua Barat Daya',
+            'foto' => 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Desa Wisata',
+            'deskripsi' => 'Desa wisata pesisir yang dikenal dengan budaya lokal dan keindahan bawah laut.'
+        ],
+        [
+            'id' => 'pasir-timbul',
+            'nama' => 'Pasir Timbul Mansuar',
+            'lokasi' => 'Raja Ampat, Papua Barat Daya',
+            'foto' => 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Pantai',
+            'deskripsi' => 'Hamparan pasir putih yang muncul di tengah laut saat air surut.'
+        ]
+    ],
+
+    3 => [
+        [
+            'id' => 'penanjakan',
+            'nama' => 'Penanjakan 1',
+            'lokasi' => 'Taman Nasional Bromo Tengger Semeru',
+            'foto' => 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Panorama Alam',
+            'deskripsi' => 'Titik pandang populer untuk menikmati panorama kawasan Bromo saat pagi.'
+        ],
+        [
+            'id' => 'pasir-berbisik',
+            'nama' => 'Pasir Berbisik',
+            'lokasi' => 'Bromo, Jawa Timur',
+            'foto' => 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Lautan Pasir',
+            'deskripsi' => 'Hamparan pasir luas yang menjadi salah satu lanskap khas kawasan Bromo.'
+        ],
+        [
+            'id' => 'pura-poten',
+            'nama' => 'Pura Luhur Poten',
+            'lokasi' => 'Bromo, Jawa Timur',
+            'foto' => 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Budaya',
+            'deskripsi' => 'Pura yang menjadi tempat penting bagi masyarakat Tengger.'
+        ],
+        [
+            'id' => 'bukit-teletubbies',
+            'nama' => 'Bukit Teletubbies',
+            'lokasi' => 'Bromo, Jawa Timur',
+            'foto' => 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Perbukitan',
+            'deskripsi' => 'Perbukitan hijau yang menawarkan pemandangan alam kawasan Bromo.'
+        ]
+    ],
+
+    4 => [
+        [
+            'id' => 'pulau-padar',
+            'nama' => 'Pulau Padar',
+            'lokasi' => 'Labuan Bajo, NTT',
+            'foto' => 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Panorama Pulau',
+            'deskripsi' => 'Pulau dengan perbukitan savana dan panorama teluk yang khas.'
+        ],
+        [
+            'id' => 'pink-beach',
+            'nama' => 'Pink Beach',
+            'lokasi' => 'Taman Nasional Komodo, NTT',
+            'foto' => 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Pantai',
+            'deskripsi' => 'Pantai dengan pasir berwarna merah muda dan air laut jernih.'
+        ],
+        [
+            'id' => 'pulau-komodo',
+            'nama' => 'Pulau Komodo',
+            'lokasi' => 'NTT',
+            'foto' => 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Satwa & Alam',
+            'deskripsi' => 'Habitat alami komodo yang menjadi daya tarik utama taman nasional.'
+        ],
+        [
+            'id' => 'pulau-kalong',
+            'nama' => 'Pulau Kalong',
+            'lokasi' => 'Labuan Bajo, NTT',
+            'foto' => 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Wisata Bahari',
+            'deskripsi' => 'Kawasan pulau yang terkenal dengan pemandangan senja dan kelelawar.'
+        ]
+    ],
+
+    5 => [
+        [
+            'id' => 'samosir',
+            'nama' => 'Pulau Samosir',
+            'lokasi' => 'Danau Toba, Sumatera Utara',
+            'foto' => 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Pulau & Budaya',
+            'deskripsi' => 'Pulau di tengah Danau Toba yang kaya akan tradisi masyarakat Batak.'
+        ],
+        [
+            'id' => 'bukit-holbung',
+            'nama' => 'Bukit Holbung',
+            'lokasi' => 'Samosir, Sumatera Utara',
+            'foto' => 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Perbukitan',
+            'deskripsi' => 'Perbukitan hijau dengan pemandangan luas ke arah Danau Toba.'
+        ],
+        [
+            'id' => 'tomok',
+            'nama' => 'Desa Tomok',
+            'lokasi' => 'Samosir, Sumatera Utara',
+            'foto' => 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Budaya Batak',
+            'deskripsi' => 'Desa wisata yang dikenal dengan peninggalan sejarah dan budaya Batak.'
+        ],
+        [
+            'id' => 'sipiso-piso',
+            'nama' => 'Air Terjun Sipiso-piso',
+            'lokasi' => 'Karo, Sumatera Utara',
+            'foto' => 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Air Terjun',
+            'deskripsi' => 'Air terjun tinggi dengan panorama alam perbukitan yang indah.'
+        ]
+    ],
+
+    6 => [
+        [
+            'id' => 'prambanan',
+            'nama' => 'Candi Prambanan',
+            'lokasi' => 'Sleman, Yogyakarta',
+            'foto' => 'https://images.unsplash.com/photo-1584810359583-96fc3448beaa?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Warisan Sejarah',
+            'deskripsi' => 'Kompleks candi Hindu yang dikenal dengan arsitektur menjulang dan reliefnya.'
+        ],
+        [
+            'id' => 'borobudur',
+            'nama' => 'Candi Borobudur',
+            'lokasi' => 'Magelang, Jawa Tengah',
+            'foto' => 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Warisan Dunia',
+            'deskripsi' => 'Candi Buddha megah dengan susunan stupa dan relief bersejarah.'
+        ],
+        [
+            'id' => 'keraton',
+            'nama' => 'Keraton Yogyakarta',
+            'lokasi' => 'Kota Yogyakarta',
+            'foto' => 'https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Budaya Jawa',
+            'deskripsi' => 'Pusat budaya Kesultanan Yogyakarta yang masih menjadi bagian kehidupan masyarakat.'
+        ],
+        [
+            'id' => 'malioboro',
+            'nama' => 'Jalan Malioboro',
+            'lokasi' => 'Kota Yogyakarta',
+            'foto' => 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=800&q=80',
+            'tag' => 'Wisata Kota',
+            'deskripsi' => 'Kawasan ikonik untuk menikmati suasana kota, belanja, dan kuliner khas Yogyakarta.'
+        ]
+    ]
+];
+
+// Bali tetap menggunakan data asli yang sudah tersedia.
+if ($id_destinasi !== 2) {
+    $popular_places = $popular_places_data[$id_destinasi] ?? [];
+}
+
+
+// ==========================================================================
+// 3. DATA REKOMENDASI PENGINAPAN (RECOMMENDED STAYS)
+// ==========================================================================
+$recommended_stays = [
+    [
+        'id'        => 'bambu-indah',
+        'nama'      => 'Bambu Indah Eco Luxury Resort',
+        'lokasi'    => 'Sayan, Ubud - Bali',
+        'jenis'     => 'Eco Luxury Resort & Villa',
+        'harga'     => 'Rp 2.850.000',
+        'periode'   => '/ malam',
+        'foto'      => 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
+        'fasilitas' => 'Natural Pool • Valley View • Arsitektur Bambu Alami'
+    ],
+    [
+        'id'        => 'seminyak-resort',
+        'nama'      => 'The Seminyak Beach Resort & Spa',
+        'lokasi'    => 'Seminyak Beach, Badung - Bali',
+        'jenis'     => 'Beachfront Luxury Resort',
+        'harga'     => 'Rp 3.200.000',
+        'periode'   => '/ malam',
+        'foto'      => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+        'fasilitas' => 'Infinity Pool Tepi Pantai • Sunset Deck • Spa Kelas Dunia'
+    ],
+    [
+        'id'        => 'munduk-plantation',
+        'nama'      => 'Munduk Moding Nature Resort',
+        'lokasi'    => 'Munduk, Buleleng - Bali',
+        'jenis'     => 'Mountain Eco Lodge & Villa',
+        'harga'     => 'Rp 1.950.000',
+        'periode'   => '/ malam',
+        'foto'      => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
+        'fasilitas' => 'Cloud Infinity Pool • Kebun Kopi Organik • Udara Sejuk'
+    ]
+];
+
+// ==========================================================================
+// 4. DATA KULINER LOKAL (LOCAL CULINARY)
+// ==========================================================================
+$local_culinary = [
+    [
+        'id'        => 'bebek-betutu',
+        'nama'      => 'Bebek Betutu & Sambal Matah',
+        'jenis'     => 'Kuliner Tradisional Khas Bali',
+        'lokasi'    => 'Gianyar & Ubud, Bali',
+        'harga'     => 'Rp 45.000 - Rp 110.000',
+        'foto'      => 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
+        'deskripsi' => 'Olahan bebek empuk yang dibalut racikan bumbu base genep dan dimasak dengan sekam daun pisang selama berjam-jam hingga rempahnya meresap sempurna.'
+    ],
+    [
+        'id'        => 'sop-ikan-sanur',
+        'nama'      => 'Sop Ikan Laut Segar & Nasi Campur',
+        'jenis'     => 'Kuliner Legendaris Pesisir',
+        'lokasi'    => 'Pantai Sanur, Denpasar',
+        'harga'     => 'Rp 55.000 / porsi',
+        'foto'      => 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',
+        'deskripsi' => 'Sop ikan kuah bening asam pedas dengan potongan belimbing wuluh segar, disajikan bersama ikan laut goreng krispi dan sambal terasi khas.'
+    ],
+    [
+        'id'        => 'sate-lilit',
+        'nama'      => 'Sate Lilit Ikan & Lawar Bali',
+        'jenis'     => 'Makanan Tradisional Autentik',
+        'lokasi'    => 'Pasar Senggol Gianyar & Klungkung',
+        'harga'     => 'Rp 25.000 - Rp 50.000',
+        'foto'      => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
+        'deskripsi' => 'Daging ikan cincang berpadu kelapa parut dan rempah wangi yang dililitkan pada batang serai segar, dibakar di atas arang batok kelapa.'
+    ]
+];
+
+// ==========================================================================
+// 5. DATA AKTIVITAS WISATA (THINGS TO DO)
+// ==========================================================================
+$things_to_do = [
+    [
+        'icon'      => 'bi-water',
+        'judul'     => 'Snorkeling & Menyelam Bersama Manta Ray',
+        'lokasi'    => 'Manta Point & Crystal Bay, Nusa Penida',
+        'durasi'    => 'Tur 1 Hari',
+        'deskripsi' => 'Pengalaman magis berenang di air laut sejernih kristal bersama kawanan ikan pari manta raksasa dan terumbu karang tropis terlindungi.'
+    ],
+    [
+        'icon'      => 'bi-stars',
+        'judul'     => 'Menyaksikan Tari Kecak Sunset di Tebing Uluwatu',
+        'lokasi'    => 'Panggung Terbuka Pura Uluwatu',
+        'durasi'    => 'Sore (17:30 - 19:00)',
+        'deskripsi' => 'Pementasan seni tari sakral kolosal berlatar senja Samudra Hindia yang melantunkan kisah epik Ramayana dengan paduan suara vokal dinamis.'
+    ],
+    [
+        'icon'      => 'bi-sun',
+        'judul'     => 'Sunrise Trekking Puncak Gunung Batur',
+        'lokasi'    => 'Kintamani, Bangli',
+        'durasi'    => 'Dini Hari (03:00 - 08:30)',
+        'deskripsi' => 'Pendakian fajar di kaldera vulkanik purba untuk menikmati panorama matahari terbit spektakuler di atas lautan awan dan Danau Batur.'
+    ],
+    [
+        'icon'      => 'bi-compass',
+        'judul'     => 'Arung Jeram Menyusuri Lembah Sungai Ayung',
+        'lokasi'    => 'Sungai Ayung, Ubud',
+        'durasi'    => 'Setengah Hari',
+        'deskripsi' => 'Petualangan seru mendayung perahu karet melintasi jeram alami dengan pemandangan relief pahatan batu tebing dan hutan rimba yang asri.'
+    ]
+];
+
+// ==========================================================================
+// 6. DATA INFORMASI PERJALANAN (TRAVEL INFORMATION)
+// ==========================================================================
+$travel_info = [
+    'biaya' => [
+        'title' => 'Estimasi Biaya Harian',
+        'icon'  => 'bi-cash-coin',
+        'items' => [
+            'Backpacker / Hemat: Rp 350.000 - Rp 600.000 / hari (homestay, kuliner lokal, sewa motor)',
+            'Menengah / Keluarga: Rp 900.000 - Rp 1.800.000 / hari (hotel bintang 3-4, rental mobil)',
+            'Mewah / Resort: Rp 2.500.000+ / hari (private villa, fine dining, tur privat eksklusif)'
+        ]
+    ],
+    'transportasi' => [
+        'title' => 'Pilihan Transportasi',
+        'icon'  => 'bi-car-front',
+        'items' => [
+            'Sewa Sepeda Motor: Rp 70.000 - Rp 120.000 / hari (sangat efisien untuk pasangan & solo traveler)',
+            'Rental Mobil + Supir Lokal: Rp 500.000 - Rp 750.000 / hari (sangat nyaman untuk wisata keluarga)',
+            'Taksi & Transportasi Online: Tersedia luas di area Denpasar, Kuta, Seminyak, Canggu, dan Ubud'
+        ]
+    ],
+    'tips' => [
+        'title' => 'Tips Perjalanan Penting',
+        'icon'  => 'bi-shield-check',
+        'items' => [
+            'Kenakan pakaian sopan (sarung dan selendang) saat memasuki area suci pura peribadatan',
+            'Hormati sesajen (canang sari) yang diletakkan di trotoar atau depan pintu masuk',
+            'Siapkan uang tunai kecil untuk tiket masuk retribusi wisata, donasi pura, dan parkir'
+        ]
+    ],
+    'musim' => [
+        'title' => 'Waktu Kunjungan Terbaik',
+        'icon'  => 'bi-calendar-check',
+        'items' => [
+            'Musim Cerah (April - Oktober): Terbaik untuk aktivitas pantai, snorkeling, dan jalan-jalan luar ruangan',
+            'Musim Hujan (November - Maret): Suasana lebih tenang, sawah sangat hijau, dan harga akomodasi lebih hemat',
+            'Bulan Terbaik: Mei, Juni, dan September menawarkan cuaca paling cerah tanpa kepadatan tinggi'
+        ]
+    ]
+];
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jelajah Bali — Wisata, Penginapan, Kuliner & Travel Guide | JelajahNusa</title>
+  <meta name="description" content="Panduan lengkap wisata Bali: tempat wisata populer di Ubud, Uluwatu, Tanah Lot, rekomendasi eco-resort, kuliner khas, dan tips perjalanan di JelajahNusa.">
+  <meta name="keywords" content="Wisata Bali, Liburan Bali, Ubud, Uluwatu, Tanah Lot, Nusa Penida, Hotel Bali, Kuliner Bali, JelajahNusa">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom CSS: Base Style & Detail Destinasi -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/detail-destinasi.css">
+</head>
+<body>
+
+  <!-- ======================================================================
+       1. NAVBAR (Konsisten dengan Homepage JelajahNusa)
+       ====================================================================== -->
+  <nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container">
+      
+      <!-- Brand Logo & Tagline -->
+      <a class="navbar-brand" href="../index.php">
+        <div class="brand-leaf-icon">
+          <i class="bi bi-compass"></i>
+        </div>
+        <div class="brand-text-block">
+          <span class="brand-title">JelajahNusa</span>
+          <span class="brand-tagline-sub">Discover Indonesia, Your Way</span>
+        </div>
+      </a>
+
+      <!-- Mobile Toggler -->
+      <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <!-- Menus & Action -->
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.php#beranda">Beranda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="../index.php#destinasi">Jelajahi Wisata</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.php#kategori">Kategori</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.php#rekomendasi">Rekomendasi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="rencana-perjalanan.php">Travel Planner</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.php#tentang">Tentang Kami</a>
+          </li>
+        </ul>
+
+        <!-- Action Buttons (Favorit, Masuk, Daftar) -->
+        <div class="d-flex align-items-center gap-2">
+          
+          <!-- Tombol Favorit -->
+          <button type="button" class="nav-fav-pill" data-bs-toggle="modal" data-bs-target="#favoritesModal" id="navFavBtn" title="Destinasi Favorit Saya" aria-label="Favorit">
+            <i class="bi bi-heart-fill text-danger"></i>
+            <span class="d-none d-xl-inline">Favorit</span>
+            <span class="nav-fav-badge" id="navFavCount">0</span>
+          </button>
+
+          <!-- Tombol Masuk -->
+          <button type="button" class="nav-auth-btn-login" data-bs-toggle="modal" data-bs-target="#authModal" id="navLoginBtn">
+            Masuk
+          </button>
+
+          <!-- Tombol Daftar -->
+          <button type="button" class="btn btn-forest btn-sm-nature" data-bs-toggle="modal" data-bs-target="#authModal" id="navRegisterBtn">
+            <i class="bi bi-person-plus"></i>
+            <span>Daftar</span>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ======================================================================
+       2. DESTINATION HERO SECTION
+       ====================================================================== -->
+  <header class="detail-hero-section">
+    <div class="detail-hero-bg" style="background-image: url('<?php echo htmlspecialchars($destinasi['hero_image']); ?>');"></div>
+    <div class="detail-hero-overlay"></div>
+
+    <div class="container position-relative">
+      <div class="detail-hero-content">
+        
+        <!-- Breadcrumb Navigation -->
+        <div class="detail-breadcrumb">
+          <a href="../index.php"><i class="bi bi-house-door me-1"></i>Beranda</a>
+          <span>/</span>
+          <a href="../index.php#destinasi">Destinasi</a>
+          <span>/</span>
+          <span class="text-white"><?php echo htmlspecialchars($destinasi['nama']); ?></span>
+        </div>
+
+        <!-- Meta Pills -->
+        <div class="detail-meta-pills">
+          <span class="detail-meta-pill">
+            <i class="bi bi-geo-alt text-success"></i>
+            <?php echo htmlspecialchars($destinasi['wilayah']); ?>
+          </span>
+          <span class="detail-meta-pill">
+            <i class="bi bi-collection text-success"></i>
+            <?php echo htmlspecialchars($destinasi['kategori']); ?>
+          </span>
+          <span class="detail-meta-pill">
+            <i class="bi bi-star-fill text-warning"></i>
+            <?php echo number_format($destinasi['rating'], 1); ?> (<?php echo number_format($destinasi['total_ulasan']); ?> ulasan)
+          </span>
+        </div>
+
+        <!-- Headline & Description -->
+        <h1 class="detail-hero-title">
+          <?php echo htmlspecialchars($destinasi['nama']); ?>
+        </h1>
+        <p class="detail-hero-desc">
+          <?php echo htmlspecialchars($destinasi['tagline']); ?>
+        </p>
+
+        <!-- Action Buttons: Simpan Favorit & Tambahkan ke Trip -->
+        <div class="detail-hero-actions">
+          
+          <!-- Tombol Simpan Favorit (Terhubung dengan LocalStorage script.js) -->
+          <button type="button" 
+                  class="btn-detail-fav btn-card-fav" 
+                  data-id="<?php echo htmlspecialchars($destinasi['id']); ?>"
+                  data-nama="<?php echo htmlspecialchars($destinasi['nama']); ?>"
+                  data-lokasi="<?php echo htmlspecialchars($destinasi['wilayah']); ?>"
+                  data-foto="<?php echo htmlspecialchars($destinasi['hero_image']); ?>"
+                  id="detailHeroFavBtn">
+            <i class="bi bi-heart"></i>
+            <span class="detail-fav-text">Simpan Favorit</span>
+          </button>
+
+          <!-- Tombol Tambahkan ke Trip -->
+          <button type="button" 
+                  class="btn btn-hero-solid btn-add-to-trip-trigger" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#addToTripModal"
+                  data-nama="Bali, Indonesia"
+                  data-lokasi="Kepulauan Sunda Kecil, Indonesia"
+                  data-kategori="Destinasi"
+                  data-foto="<?php echo htmlspecialchars($destinasi['hero_image']); ?>"
+                  id="btnAddToTripHero">
+            <i class="bi bi-calendar2-plus"></i>
+            <span>Tambahkan ke Trip</span>
+          </button>
+
+          <!-- Tombol Kembali ke Beranda -->
+          <a href="../index.php#destinasi" class="btn btn-hero-glass">
+            <i class="bi bi-arrow-left"></i>
+            <span>Jelajahi Lainnya</span>
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       3. ABOUT DESTINATION & DAYA TARIK UTAMA
+       ====================================================================== -->
+  <section class="section-detail-about">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        
+        <!-- Left: Full Description & Best Time to Visit -->
+        <div class="col-lg-6">
+          <span class="section-label section-label-forest">
+            <i class="bi bi-info-circle"></i> Tentang Destinasi
+          </span>
+          <h2 class="section-title mb-3">Pesona Abadi Zamrud Dewata</h2>
+          <p class="text-muted lead mb-4" style="font-size: 1.05rem;">
+            <?php echo htmlspecialchars($destinasi['deskripsi']); ?>
+          </p>
+
+          <!-- Best Time to Visit Box -->
+          <div class="best-time-box">
+            <span class="best-time-badge">
+              <i class="bi bi-brightness-high"></i> Waktu Terbaik Berkunjung
+            </span>
+            <h5 class="fw-bold text-dark mb-1"><?php echo htmlspecialchars($destinasi['waktu_terbaik']['musim']); ?></h5>
+            <p class="text-muted small mb-2"><?php echo htmlspecialchars($destinasi['waktu_terbaik']['cuaca']); ?></p>
+            <div class="p-2 rounded bg-light border text-muted small">
+              <i class="bi bi-lightbulb text-success me-1"></i>
+              <strong>Saran Lokal:</strong> <?php echo htmlspecialchars($destinasi['waktu_terbaik']['tips']); ?>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 4 Daya Tarik Utama Cards -->
+        <div class="col-lg-6">
+          <div class="about-card-box">
+            <h4 class="fw-bold text-dark mb-4">Daya Tarik Utama Bali</h4>
+            
+            <?php foreach ($destinasi['daya_tarik'] as $daya): ?>
+              <div class="highlight-item">
+                <div class="highlight-icon-wrap">
+                  <i class="bi <?php echo htmlspecialchars($daya['icon']); ?>"></i>
+                </div>
+                <div>
+                  <h4 class="highlight-title"><?php echo htmlspecialchars($daya['judul']); ?></h4>
+                  <p class="text-muted small mb-0"><?php echo htmlspecialchars($daya['desc']); ?></p>
+                </div>
+              </div>
+            <?php endforeach; ?>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       4. POPULAR PLACES (Minimal 4 Tempat: Ubud, Tanah Lot, Uluwatu, Nusa Penida)
+       ====================================================================== -->
+  <section class="section-detail-places">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-5">
+        <span class="section-label">
+          <i class="bi bi-geo-alt"></i> Objek Wisata Ikonik
+        </span>
+        <h2 class="section-title">Tempat Wisata Populer di Bali</h2>
+        <p class="section-subtitle">
+          Jelajahi keindahan sudut-sudut paling memikat, mulai dari kesejukan hutan Ubud hingga tebing samudra yang dramatis.
+        </p>
+      </div>
+
+      <!-- Places Grid (4 Cards) -->
+      <div class="row g-4">
+        <?php foreach ($popular_places as $place): ?>
+          <div class="col-lg-3 col-md-6">
+            <div class="place-card">
+              
+              <div class="place-img-wrap">
+                <img src="<?php echo htmlspecialchars($place['foto']); ?>" 
+                     alt="<?php echo htmlspecialchars($place['nama']); ?>" 
+                     class="place-img" 
+                     loading="lazy">
+                <span class="place-tag-badge">
+                  <?php echo htmlspecialchars($place['tag']); ?>
+                </span>
+              </div>
+
+              <div class="place-body">
+                <span class="place-location">
+                  <i class="bi bi-pin-map"></i>
+                  <?php echo htmlspecialchars($place['lokasi']); ?>
+                </span>
+
+                <h3 class="place-title">
+                  <?php echo htmlspecialchars($place['nama']); ?>
+                </h3>
+
+                <p class="place-desc">
+                  <?php echo htmlspecialchars($place['deskripsi']); ?>
+                </p>
+
+                <div class="pt-2">
+                  <button type="button" 
+                          class="btn btn-sm btn-outline-forest rounded-pill btn-add-to-trip-trigger"
+                          data-bs-toggle="modal" 
+                          data-bs-target="#addToTripModal"
+                          data-nama="<?php echo htmlspecialchars($place['nama']); ?>"
+                          data-lokasi="<?php echo htmlspecialchars($place['lokasi']); ?>"
+                          data-kategori="Destinasi"
+                          data-foto="<?php echo htmlspecialchars($place['foto']); ?>">
+                    <i class="bi bi-calendar-plus me-1"></i> Tambah ke Trip
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       5. RECOMMENDED STAYS (Minimal 3 Rekomendasi Penginapan)
+       ====================================================================== -->
+  <section class="section-detail-stays">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-5">
+        <span class="section-label">
+          <i class="bi bi-house-heart"></i> Tempat Menginap Pilihan
+        </span>
+        <h2 class="section-title">Rekomendasi Penginapan di Bali</h2>
+        <p class="section-subtitle">
+          Istirahat dengan nyaman di eco-resort ramah lingkungan, vila privat tepi pantai, dan penginapan sejuk pegunungan.
+        </p>
+      </div>
+
+      <!-- Stays Grid -->
+      <div class="row g-4">
+        <?php foreach ($recommended_stays as $stay): ?>
+          <div class="col-lg-4 col-md-6">
+            <div class="stay-card">
+              
+              <div class="stay-img-wrap">
+                <img src="<?php echo htmlspecialchars($stay['foto']); ?>" 
+                     alt="<?php echo htmlspecialchars($stay['nama']); ?>" 
+                     class="stay-img" 
+                     loading="lazy">
+                <span class="stay-type-badge">
+                  <?php echo htmlspecialchars($stay['jenis']); ?>
+                </span>
+              </div>
+
+              <div class="stay-body">
+                <span class="place-location mb-1">
+                  <i class="bi bi-geo-alt"></i>
+                  <?php echo htmlspecialchars($stay['lokasi']); ?>
+                </span>
+
+                <h3 class="place-title mb-2">
+                  <?php echo htmlspecialchars($stay['nama']); ?>
+                </h3>
+
+                <p class="text-muted small mb-3">
+                  <i class="bi bi-check2-circle text-success me-1"></i>
+                  <?php echo htmlspecialchars($stay['fasilitas']); ?>
+                </p>
+
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
+                  <div>
+                    <span class="text-muted small d-block">Estimasi Harga</span>
+                    <span class="stay-price-tag"><?php echo htmlspecialchars($stay['harga']); ?></span>
+                    <span class="text-muted small"><?php echo htmlspecialchars($stay['periode']); ?></span>
+                  </div>
+                  <button type="button" 
+                          class="btn btn-outline-forest btn-sm rounded-pill btn-add-to-trip-trigger"
+                          data-bs-toggle="modal" 
+                          data-bs-target="#addToTripModal"
+                          data-nama="<?php echo htmlspecialchars($stay['nama']); ?>"
+                          data-lokasi="<?php echo htmlspecialchars($stay['lokasi']); ?>"
+                          data-kategori="Penginapan"
+                          data-foto="<?php echo htmlspecialchars($stay['foto']); ?>">
+                    <i class="bi bi-calendar-plus me-1"></i> Tambah ke Trip
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       6. LOCAL CULINARY (Minimal 3 Rekomendasi Kuliner)
+       ====================================================================== -->
+  <section class="section-detail-culinary">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-5">
+        <span class="section-label">
+          <i class="bi bi-cup-hot"></i> Wisata Kuliner Nusantara
+        </span>
+        <h2 class="section-title">Kuliner Khas Autentik Bali</h2>
+        <p class="section-subtitle">
+          Rasakan kekayaan rempah tradisional pulau dewata dari racikan resep warisan leluhur hingga olahan laut pesisir.
+        </p>
+      </div>
+
+      <!-- Culinary Grid -->
+      <div class="row g-4">
+        <?php foreach ($local_culinary as $cul): ?>
+          <div class="col-lg-4 col-md-6">
+            <div class="culinary-card">
+              
+              <div class="culinary-img-wrap">
+                <img src="<?php echo htmlspecialchars($cul['foto']); ?>" 
+                     alt="<?php echo htmlspecialchars($cul['nama']); ?>" 
+                     class="culinary-img" 
+                     loading="lazy">
+                <span class="stay-type-badge">
+                  <?php echo htmlspecialchars($cul['jenis']); ?>
+                </span>
+              </div>
+
+              <div class="culinary-body">
+                <span class="place-location mb-1">
+                  <i class="bi bi-geo-alt"></i>
+                  <?php echo htmlspecialchars($cul['lokasi']); ?>
+                </span>
+
+                <h3 class="place-title mb-2">
+                  <?php echo htmlspecialchars($cul['nama']); ?>
+                </h3>
+
+                <p class="place-desc mb-3">
+                  <?php echo htmlspecialchars($cul['deskripsi']); ?>
+                </p>
+
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
+                  <div>
+                    <span class="text-muted small d-block">Kisaran Harga</span>
+                    <strong class="text-dark" style="font-family: var(--font-heading);"><?php echo htmlspecialchars($cul['harga']); ?></strong>
+                  </div>
+                  <button type="button" 
+                          class="btn btn-outline-forest btn-sm rounded-pill btn-add-to-trip-trigger"
+                          data-bs-toggle="modal" 
+                          data-bs-target="#addToTripModal"
+                          data-nama="<?php echo htmlspecialchars($cul['nama']); ?>"
+                          data-lokasi="<?php echo htmlspecialchars($cul['lokasi']); ?>"
+                          data-kategori="Kuliner"
+                          data-foto="<?php echo htmlspecialchars($cul['foto']); ?>">
+                    <i class="bi bi-calendar-plus me-1"></i> Tambah ke Trip
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       7. THINGS TO DO (Aktivitas Wisata)
+       ====================================================================== -->
+  <section class="section-detail-activities">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-5">
+        <span class="section-label">
+          <i class="bi bi-compass"></i> Aktivitas Menarik
+        </span>
+        <h2 class="section-title">Aktivitas & Pengalaman Berkesan</h2>
+        <p class="section-subtitle">
+          Koleksi pengalaman liburan yang wajib dicoba untuk menyempurnakan cerita petualanganmu di Bali.
+        </p>
+      </div>
+
+      <!-- Activities Grid -->
+      <div class="row g-4">
+        <?php foreach ($things_to_do as $act): ?>
+          <div class="col-lg-3 col-md-6">
+            <div class="activity-card">
+              
+              <div class="activity-icon-bubble">
+                <i class="bi <?php echo htmlspecialchars($act['icon']); ?>"></i>
+              </div>
+
+              <span class="text-muted small mb-1">
+                <i class="bi bi-clock me-1"></i><?php echo htmlspecialchars($act['durasi']); ?>
+              </span>
+
+              <h4 class="activity-title"><?php echo htmlspecialchars($act['judul']); ?></h4>
+
+              <p class="activity-desc"><?php echo htmlspecialchars($act['deskripsi']); ?></p>
+
+              <div class="mt-auto pt-2">
+                <span class="text-muted small">
+                  <i class="bi bi-geo-alt me-1 text-success"></i><?php echo htmlspecialchars($act['lokasi']); ?>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       8. TRAVEL INFORMATION (Informasi Penting Sebelum Berkunjung)
+       ====================================================================== -->
+  <section class="section-detail-info">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-5">
+        <span class="section-label">
+          <i class="bi bi-journal-check"></i> Panduan Perjalanan
+        </span>
+        <h2 class="section-title">Informasi Praktis Wisata Bali</h2>
+        <p class="section-subtitle">
+          Semua hal esensial yang perlu kamu ketahui seputar estimasi biaya, transportasi, serta etika berkunjung.
+        </p>
+      </div>
+
+      <!-- Information Grid (4 Cards) -->
+      <div class="row g-4">
+        
+        <!-- Estimasi Biaya -->
+        <div class="col-lg-6">
+          <div class="info-card">
+            <div class="info-card-header">
+              <div class="info-icon">
+                <i class="bi <?php echo htmlspecialchars($travel_info['biaya']['icon']); ?>"></i>
+              </div>
+              <h4 class="fw-bold text-dark mb-0"><?php echo htmlspecialchars($travel_info['biaya']['title']); ?></h4>
+            </div>
+            <ul class="info-list">
+              <?php foreach ($travel_info['biaya']['items'] as $item): ?>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span><?php echo htmlspecialchars($item); ?></span>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Transportasi -->
+        <div class="col-lg-6">
+          <div class="info-card">
+            <div class="info-card-header">
+              <div class="info-icon">
+                <i class="bi <?php echo htmlspecialchars($travel_info['transportasi']['icon']); ?>"></i>
+              </div>
+              <h4 class="fw-bold text-dark mb-0"><?php echo htmlspecialchars($travel_info['transportasi']['title']); ?></h4>
+            </div>
+            <ul class="info-list">
+              <?php foreach ($travel_info['transportasi']['items'] as $item): ?>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span><?php echo htmlspecialchars($item); ?></span>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tips Perjalanan -->
+        <div class="col-lg-6">
+          <div class="info-card">
+            <div class="info-card-header">
+              <div class="info-icon">
+                <i class="bi <?php echo htmlspecialchars($travel_info['tips']['icon']); ?>"></i>
+              </div>
+              <h4 class="fw-bold text-dark mb-0"><?php echo htmlspecialchars($travel_info['tips']['title']); ?></h4>
+            </div>
+            <ul class="info-list">
+              <?php foreach ($travel_info['tips']['items'] as $item): ?>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span><?php echo htmlspecialchars($item); ?></span>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Waktu Berkunjung -->
+        <div class="col-lg-6">
+          <div class="info-card">
+            <div class="info-card-header">
+              <div class="info-icon">
+                <i class="bi <?php echo htmlspecialchars($travel_info['musim']['icon']); ?>"></i>
+              </div>
+              <h4 class="fw-bold text-dark mb-0"><?php echo htmlspecialchars($travel_info['musim']['title']); ?></h4>
+            </div>
+            <ul class="info-list">
+              <?php foreach ($travel_info['musim']['items'] as $item): ?>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span><?php echo htmlspecialchars($item); ?></span>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       9. CREATE YOUR TRIP SECTION
+       ====================================================================== -->
+  <section class="section-detail-cta">
+    <div class="container">
+      <div class="detail-cta-card">
+        <span class="section-label" style="background-color: rgba(247, 247, 242, 0.15); color: var(--c-beige);">
+          <i class="bi bi-calendar2-heart"></i> Itinerary Builder
+        </span>
+        <h2 class="text-white fw-bold mb-3 fs-1">
+          Siap Menyusun Perjalanan Impianmu ke Bali?
+        </h2>
+        <p class="text-white-50 mx-auto mb-4 lead" style="max-width: 680px;">
+          Kumpulkan destinasi favorit, tempat menginap terbaik, kuliner autentik, dan aktivitas wisata di atas ke dalam satu rencana perjalanan yang fleksibel.
+        </p>
+
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <!-- Tombol Tambahkan ke Rencana Perjalanan -->
+          <button type="button" 
+                  class="btn btn-hero-solid px-4 py-3" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#plannerModal">
+            <i class="bi bi-plus-circle me-1"></i>
+            <span>Tambahkan ke Rencana Perjalanan</span>
+          </button>
+
+          <!-- Kembali ke Beranda -->
+          <a href="../index.php" class="btn btn-hero-glass px-4 py-3">
+            <i class="bi bi-house-door me-1"></i>
+            <span>Kembali ke Beranda</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       10. FOOTER (Konsisten dengan Homepage JelajahNusa)
+       ====================================================================== -->
+  <footer class="custom-footer">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Brand & Mission -->
+        <div class="col-lg-4 col-md-6">
+          <a href="../index.php" class="footer-brand-title">
+            <div class="brand-leaf-icon" style="background-color: var(--c-sage); color: var(--c-dark-forest);">
+              <i class="bi bi-compass"></i>
+            </div>
+            <span>JelajahNusa</span>
+          </a>
+          <div class="footer-tagline">Discover Indonesia, Your Way</div>
+          <p class="footer-desc">
+            Platform digital travel guide & travel planner nusantara. Membantu menemukan destinasi terbaik, penginapan estetik, kuliner autentik, dan merancang itinerary perjalanan impianmu di Indonesia.
+          </p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-btn" title="Instagram" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="footer-social-btn" title="YouTube" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="footer-social-btn" title="TikTok" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+            <a href="#" class="footer-social-btn" title="Facebook" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          </div>
+        </div>
+
+        <!-- Navigasi Website -->
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-col-title">Navigasi</h4>
+          <ul class="footer-link-list">
+            <li><a href="../index.php#beranda">Beranda</a></li>
+            <li><a href="../index.php#destinasi">Jelajahi Wisata</a></li>
+            <li><a href="../index.php#kategori">Kategori</a></li>
+            <li><a href="../index.php#rekomendasi">Rekomendasi</a></li>
+            <li><a href="rencana-perjalanan.php">Travel Planner</a></li>
+            <li><a href="../index.php#tentang">Tentang Kami</a></li>
+          </ul>
+        </div>
+
+        <!-- Rekomendasi Destinasi Populer -->
+        <div class="col-lg-3 col-md-6 col-6">
+          <h4 class="footer-col-title">Destinasi Terpopuler</h4>
+          <ul class="footer-link-list">
+            <li><a href="detail-destinasi.php" class="text-white fw-bold">Pulau Bali</a></li>
+            <li><a href="../index.php#destinasi">Raja Ampat</a></li>
+            <li><a href="../index.php#destinasi">Gunung Bromo</a></li>
+            <li><a href="../index.php#destinasi">Labuan Bajo</a></li>
+            <li><a href="../index.php#destinasi">Danau Toba</a></li>
+          </ul>
+        </div>
+
+        <!-- Kontak & Buletin -->
+        <div class="col-lg-3 col-md-6">
+          <h4 class="footer-col-title">Informasi Kontak</h4>
+          <div class="footer-contact-item">
+            <i class="bi bi-geo-alt"></i>
+            <span>Ubud - Bali & Jakarta Pusat, Indonesia</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="bi bi-envelope"></i>
+            <span>halo@jelajahnusa.id</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="bi bi-whatsapp"></i>
+            <span>+62 812-3456-7890</span>
+          </div>
+
+          <!-- Newsletter Form -->
+          <form id="newsletterForm" class="mt-3">
+            <div class="input-group">
+              <input type="email" class="form-control form-control-sm" placeholder="Email Anda..." style="background-color: rgba(232, 230, 217, 0.1); border-color: rgba(232, 230, 217, 0.2); color: #fff;" required>
+              <button class="btn btn-forest btn-sm" type="submit">
+                <i class="bi bi-send"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Copyright Bar -->
+      <div class="footer-bottom">
+        <div>
+          &copy; <?php echo date('Y'); ?> <strong>JelajahNusa</strong>. Seluruh Hak Cipta Dilindungi. Discover Indonesia, Your Way.
+        </div>
+        <div class="d-flex gap-3">
+          <a href="#" class="text-decoration-none text-white-50 small">Privasi</a>
+          <span class="text-white-50">•</span>
+          <a href="#" class="text-decoration-none text-white-50 small">Syarat & Ketentuan</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       BACK TO TOP BUTTON
+       ====================================================================== -->
+  <button id="backToTopBtn" class="back-to-top" title="Kembali ke atas" aria-label="Kembali ke atas">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- ======================================================================
+       MODAL: TRAVEL PLANNER BUILDER (INTERAKTIF DENGAN PRESET BALI)
+       ====================================================================== -->
+  <div class="modal fade" id="plannerModal" tabindex="-1" aria-labelledby="plannerModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="d-flex align-items-center gap-2">
+            <div class="brand-leaf-icon" style="width: 32px; height: 32px; font-size: 1rem;">
+              <i class="bi bi-calendar2-plus"></i>
+            </div>
+            <h5 class="fw-bold text-dark mb-0" id="plannerModalTitle">Tambahkan Bali ke Rencana Perjalanan</h5>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <p class="text-muted small mb-4">
+            Susun rencana liburan impian ke Bali dengan rekomendasi destinasi, penginapan, dan kuliner terpadu.
+          </p>
+
+          <form id="plannerBuilderForm">
+            <!-- Destinasi Pilihan (Default: Bali) -->
+            <div class="mb-3">
+              <label for="planDestSelect" class="form-label small fw-bold text-dark">Destinasi Utama</label>
+              <select id="planDestSelect" class="form-select" required>
+                <option value="Bali" selected>Pulau Bali (Ubud, Uluwatu & Pantai)</option>
+                <option value="Labuan Bajo">Labuan Bajo (Nusa Tenggara Timur)</option>
+                <option value="Raja Ampat">Raja Ampat (Papua Barat Daya)</option>
+                <option value="Gunung Bromo">Gunung Bromo (Jawa Timur)</option>
+                <option value="Danau Toba">Danau Toba (Sumatera Utara)</option>
+                <option value="Yogyakarta">Yogyakarta & Candi</option>
+              </select>
+            </div>
+
+            <!-- Durasi Hari -->
+            <div class="mb-3">
+              <label for="planDaysInput" class="form-label small fw-bold text-dark">Durasi Perjalanan (Hari)</label>
+              <select id="planDaysInput" class="form-select" required>
+                <option value="3">3 Hari 2 Malam (Liburan Singkat)</option>
+                <option value="4" selected>4 Hari 3 Malam (Rekomendasi Terbaik)</option>
+                <option value="5">5 Hari 4 Malam (Eksplorasi Lengkap)</option>
+                <option value="7">7 Hari (Ekowisata Santai)</option>
+              </select>
+            </div>
+
+            <!-- Tipe Wisatawan -->
+            <div class="mb-4">
+              <label for="planTypeSelect" class="form-label small fw-bold text-dark">Kategori Traveler</label>
+              <select id="planTypeSelect" class="form-select" required>
+                <option value="Pasangan & Keluarga" selected>Pasangan & Keluarga</option>
+                <option value="Solo Traveler">Solo Traveler (Mandiri & Santai)</option>
+                <option value="Teman & Grup">Teman & Kelompok Traveler</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-forest w-100 py-2">
+              <i class="bi bi-magic me-1"></i> Simpan ke Rencana Perjalanan
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL: DESTINASI FAVORIT SAYA
+       ====================================================================== -->
+  <div class="modal fade" id="favoritesModal" tabindex="-1" aria-labelledby="favoritesModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-heart-fill text-danger fs-5"></i>
+            <h5 class="fw-bold text-dark mb-0" id="favoritesModalTitle">Destinasi Favorit Saya</h5>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          
+          <!-- Empty State -->
+          <div id="favoritesEmptyState" class="text-center py-4">
+            <i class="bi bi-heart text-muted fs-1 d-block mb-3"></i>
+            <h6 class="fw-bold text-dark">Belum Ada Favorit</h6>
+            <p class="text-muted small">Klik tombol "Simpan Favorit" untuk menyimpan destinasi ini ke daftar favoritmu.</p>
+          </div>
+
+          <!-- List of Favorites (Rendered by JS) -->
+          <div id="favoritesListContainer"></div>
+
+        </div>
+        <div class="modal-footer bg-white d-flex justify-content-between">
+          <a href="favorit.php" class="btn btn-forest rounded-pill btn-sm px-3">
+            <i class="bi bi-grid me-1"></i> Buka Halaman Favorit Lengkap
+          </a>
+          <button type="button" class="btn btn-outline-secondary rounded-pill px-4 btn-sm" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL: LOGIN & DAFTAR (AUTHENTICATION)
+       ====================================================================== -->
+  <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        
+        <div class="modal-header border-bottom-0 pb-0">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-4 pt-0">
+          <div class="text-center mb-4">
+            <div class="brand-leaf-icon mx-auto mb-2">
+              <i class="bi bi-compass"></i>
+            </div>
+            <h4 class="fw-bold text-dark mb-1" id="authModalTitle">Masuk ke JelajahNusa</h4>
+            <p class="text-muted small">Discover Indonesia, Your Way.</p>
+          </div>
+
+          <!-- Tab Masuk / Daftar -->
+          <div class="d-flex bg-white p-1 rounded-pill border mb-4">
+            <button class="btn btn-forest flex-fill rounded-pill py-1 small fw-bold" id="tabLoginBtn" type="button">
+              Masuk
+            </button>
+            <button class="btn btn-link text-muted text-decoration-none flex-fill rounded-pill py-1 small fw-bold" id="tabRegisterBtn" type="button">
+              Daftar
+            </button>
+          </div>
+
+          <!-- Form Masuk -->
+          <form id="loginForm">
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label small fw-bold text-dark">Alamat Email</label>
+              <input type="email" class="form-control" id="loginEmail" placeholder="nama@email.com" required>
+            </div>
+            <div class="mb-3">
+              <label for="loginPassword" class="form-label small fw-bold text-dark">Kata Sandi</label>
+              <input type="password" class="form-control" id="loginPassword" placeholder="••••••••" required>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rememberMe">
+                <label class="form-check-label small text-muted" for="rememberMe">Ingat saya</label>
+              </div>
+              <a href="#" class="small text-decoration-none text-muted" onclick="alert('Silakan hubungi administrator untuk bantuan pemulihan akun.')">Lupa sandi?</a>
+            </div>
+            <button type="submit" class="btn btn-forest w-100 py-2">
+              Masuk ke Akun
+            </button>
+            <div class="text-center mt-3">
+              <span class="small text-muted">Belum punya akun? <a href="#" id="switchToRegister" class="text-success fw-bold text-decoration-none">Daftar sekarang</a></span>
+            </div>
+          </form>
+
+          <!-- Form Daftar -->
+          <form id="registerForm" class="d-none">
+            <div class="mb-3">
+              <label for="regName" class="form-label small fw-bold text-dark">Nama Lengkap</label>
+              <input type="text" class="form-control" id="regName" placeholder="Nama Anda" required>
+            </div>
+            <div class="mb-3">
+              <label for="regEmail" class="form-label small fw-bold text-dark">Alamat Email</label>
+              <input type="email" class="form-control" id="regEmail" placeholder="nama@email.com" required>
+            </div>
+            <div class="mb-3">
+              <label for="regPassword" class="form-label small fw-bold text-dark">Kata Sandi</label>
+              <input type="password" class="form-control" id="regPassword" placeholder="Minimal 8 karakter" required>
+            </div>
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" id="termsCheck" checked required>
+              <label class="form-check-label small text-muted" for="termsCheck">
+                Saya menyetujui Ketentuan Penggunaan JelajahNusa.
+              </label>
+            </div>
+            <button type="submit" class="btn btn-forest w-100 py-2">
+              Daftar Akun Baru
+            </button>
+            <div class="text-center mt-3">
+              <span class="small text-muted">Sudah punya akun? <a href="#" id="switchToLogin" class="text-success fw-bold text-decoration-none">Masuk di sini</a></span>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5.3 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Custom Nature-Inspired JavaScript -->
+  <script src="../assets/js/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1662 @@
+/* ==========================================================================
+   JelajahNusa - Nature-Inspired, Aesthetic, Minimalist Travel Guide & Planner
+   Design System & Color Palette:
+   - Forest Green : #345B49
+   - Sage Green   : #A8B99A
+   - Soft Beige   : #E8E6D9
+   - Off White    : #F7F7F2
+   - Muted Green  : #52665A
+   - Dark Forest  : #29352D
+   Typography:
+   - Headings : 'Plus Jakarta Sans', sans-serif
+   - Body     : 'Inter', sans-serif
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Colors */
+  --c-forest: #345B49;
+  --c-sage: #A8B99A;
+  --c-beige: #E8E6D9;
+  --c-offwhite: #F7F7F2;
+  --c-muted: #52665A;
+  --c-dark-forest: #29352D;
+  
+  --c-surface: #FFFFFF;
+  --c-border: #E8E6D9;
+  --c-border-subtle: #ECEAE0;
+  
+  --c-text-main: #29352D;
+  --c-text-muted: #52665A;
+  --c-text-light: #7E9085;
+  
+  /* Fonts */
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  
+  /* Elevation */
+  --shadow-subtle: 0 2px 12px rgba(41, 53, 45, 0.04);
+  --shadow-card: 0 8px 24px rgba(41, 53, 45, 0.06);
+  --shadow-hover: 0 16px 36px rgba(41, 53, 45, 0.1);
+  
+  --transition: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ==========================================================================
+   Base & Reset
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--c-offwhite);
+  color: var(--c-text-main);
+  line-height: 1.65;
+  font-size: 0.96rem;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Typography & Utilities
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--c-dark-forest);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+p {
+  color: var(--c-text-muted);
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background-color: var(--c-beige);
+  color: var(--c-forest);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.section-label-forest {
+  background-color: rgba(52, 91, 73, 0.1);
+  color: var(--c-forest);
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--c-dark-forest);
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  color: var(--c-text-muted);
+  font-size: 1.05rem;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Buttons (Minimalist, Nature-Inspired)
+   ========================================================================== */
+.btn-forest {
+  background-color: var(--c-forest);
+  color: var(--c-offwhite);
+  border: 1px solid var(--c-forest);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-forest:hover {
+  background-color: var(--c-dark-forest);
+  color: var(--c-offwhite);
+  border-color: var(--c-dark-forest);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(41, 53, 45, 0.15);
+}
+
+.btn-outline-forest {
+  background-color: transparent;
+  color: var(--c-forest);
+  border: 1.5px solid var(--c-forest);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 9px 20px;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-outline-forest:hover {
+  background-color: var(--c-forest);
+  color: var(--c-offwhite);
+  transform: translateY(-2px);
+}
+
+.btn-hero-glass {
+  background-color: rgba(247, 247, 242, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #FFFFFF;
+  border: 1px solid rgba(247, 247, 242, 0.35);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.94rem;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-hero-glass:hover {
+  background-color: rgba(247, 247, 242, 0.3);
+  color: #FFFFFF;
+  border-color: rgba(247, 247, 242, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-hero-solid {
+  background-color: var(--c-offwhite);
+  color: var(--c-dark-forest);
+  border: 1px solid var(--c-offwhite);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.94rem;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.btn-hero-solid:hover {
+  background-color: #FFFFFF;
+  color: var(--c-forest);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-sm-nature {
+  padding: 7px 18px;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   1. NAVBAR
+   ========================================================================== */
+.custom-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+  padding: 16px 0;
+  transition: var(--transition);
+  background-color: transparent;
+}
+
+.custom-navbar.scrolled {
+  background-color: rgba(247, 247, 242, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--c-border);
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Brand */
+/* ============================================================
+   BRAND / LOGO — JelajahNusa Navbar
+   ============================================================ */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+  padding: 0;
+}
+
+/* Logo horizontal SVG (versi terang — untuk navbar transparan) */
+.brand-logo-img {
+  height: 56px;
+  width: auto;
+  max-width: 260px;
+  display: block;
+  transition: var(--transition);
+  /* Logo terang (putih) tampil di navbar transparan */
+  content: url('../images/logo-horizontal.svg');
+}
+
+/* Saat navbar scroll (background terang) → ganti ke versi gelap */
+.custom-navbar.scrolled .brand-logo-img {
+  content: url('../images/logo-horizontal-dark.svg');
+}
+
+/* ============================================================
+   BRAND LEAF ICON — Dipertahankan untuk komponen lain
+   (modal auth, empty state, dll.) yang masih memakai class ini
+   ============================================================ */
+.brand-leaf-icon {
+  width: 44px;
+  height: 44px;
+  background-color: transparent;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+/* Ikon SVG di dalam brand-leaf-icon */
+.brand-leaf-icon img.brand-icon-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.brand-text-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.28rem;
+  color: #FFFFFF;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  transition: var(--transition);
+}
+
+.brand-tagline-sub {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: var(--transition);
+}
+
+.custom-navbar.scrolled .brand-title {
+  color: var(--c-dark-forest);
+}
+
+.custom-navbar.scrolled .brand-tagline-sub {
+  color: var(--c-muted);
+}
+
+/* Nav items */
+.navbar-nav .nav-link {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  padding: 8px 12px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.custom-navbar.scrolled .navbar-nav .nav-link {
+  color: var(--c-dark-forest);
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #FFFFFF;
+}
+
+.custom-navbar.scrolled .navbar-nav .nav-link:hover,
+.custom-navbar.scrolled .navbar-nav .nav-link.active {
+  color: var(--c-forest);
+  font-weight: 600;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: var(--c-sage);
+  transition: var(--transition);
+  border-radius: 2px;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+  width: 18px;
+}
+
+.custom-navbar.scrolled .navbar-nav .nav-link::after {
+  background-color: var(--c-forest);
+}
+
+/* Navbar Action Buttons (Masuk & Daftar & Favorit) */
+.nav-auth-btn-login {
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.custom-navbar.scrolled .nav-auth-btn-login {
+  color: var(--c-dark-forest);
+}
+
+.nav-auth-btn-login:hover {
+  color: var(--c-sage);
+}
+
+.custom-navbar.scrolled .nav-auth-btn-login:hover {
+  color: var(--c-forest);
+}
+
+.nav-fav-pill {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  font-size: 0.84rem;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.custom-navbar.scrolled .nav-fav-pill {
+  background: var(--c-beige);
+  border-color: var(--c-border);
+  color: var(--c-dark-forest);
+}
+
+.nav-fav-pill:hover {
+  background: var(--c-forest);
+  color: #FFFFFF;
+  border-color: var(--c-forest);
+}
+
+.nav-fav-badge {
+  background-color: var(--c-forest);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+}
+
+.custom-navbar.scrolled .nav-fav-badge {
+  background-color: var(--c-dark-forest);
+  color: #FFFFFF;
+}
+
+/* Mobile Toggler */
+.custom-toggler {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+}
+
+.custom-navbar.scrolled .custom-toggler {
+  border-color: var(--c-border);
+  color: var(--c-dark-forest);
+}
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: var(--c-surface);
+    padding: 22px;
+    border-radius: var(--radius-md);
+    margin-top: 14px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--c-border);
+  }
+  .navbar-nav .nav-link {
+    color: var(--c-dark-forest) !important;
+  }
+  .nav-auth-btn-login {
+    color: var(--c-dark-forest) !important;
+    padding: 8px 0;
+  }
+}
+
+/* ==========================================================================
+   2. HERO SECTION
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: 94vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--c-dark-forest);
+  padding-top: 130px;
+  padding-bottom: 90px;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center 30%;
+  filter: brightness(0.92);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(41, 53, 45, 0.72) 0%,
+    rgba(41, 53, 45, 0.78) 60%,
+    rgba(41, 53, 45, 0.95) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: #FFFFFF;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(247, 247, 242, 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(247, 247, 242, 0.25);
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--c-beige);
+  margin-bottom: 24px;
+}
+
+.hero-badge i {
+  color: var(--c-sage);
+}
+
+.hero-title {
+  font-size: 3.25rem;
+  font-weight: 800;
+  line-height: 1.18;
+  color: #FFFFFF;
+  margin-bottom: 22px;
+  letter-spacing: -0.03em;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--c-beige);
+  text-decoration: underline;
+  text-decoration-color: var(--c-sage);
+  text-underline-offset: 6px;
+}
+
+.hero-desc {
+  font-size: 1.15rem;
+  color: rgba(247, 247, 242, 0.9);
+  max-width: 720px;
+  margin: 0 auto 38px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+/* Minimalist Search Bar */
+.hero-search-container {
+  max-width: 840px;
+  margin: 0 auto;
+  background: rgba(247, 247, 242, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--c-beige);
+  border-radius: var(--radius-full);
+  padding: 8px 10px 8px 24px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.hero-search-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-search-input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.hero-search-icon {
+  color: var(--c-forest);
+  font-size: 1.15rem;
+}
+
+.hero-search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--c-dark-forest);
+  font-weight: 500;
+}
+
+.hero-search-input::placeholder {
+  color: var(--c-text-light);
+}
+
+.hero-search-divider {
+  width: 1px;
+  height: 28px;
+  background-color: var(--c-border);
+}
+
+.hero-search-select {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--c-muted);
+  font-weight: 500;
+  cursor: pointer;
+  padding-right: 8px;
+}
+
+@media (max-width: 767.98px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .hero-desc {
+    font-size: 1rem;
+  }
+  .hero-search-container {
+    border-radius: var(--radius-md);
+    padding: 16px;
+  }
+  .hero-search-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .hero-search-divider {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   3. KATEGORI WISATA SECTION (Nature-Inspired & Clean)
+   ========================================================================== */
+.section-kategori {
+  padding: 90px 0 60px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.nature-category-card {
+  position: relative;
+  height: 280px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--c-border);
+  box-shadow: var(--shadow-subtle);
+  transition: var(--transition);
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nature-category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--c-sage);
+}
+
+.category-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nature-category-card:hover .category-card-bg {
+  transform: scale(1.08);
+}
+
+.category-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(41, 53, 45, 0.25) 0%,
+    rgba(41, 53, 45, 0.65) 50%,
+    rgba(41, 53, 45, 0.92) 100%
+  );
+  transition: var(--transition);
+}
+
+.nature-category-card:hover .category-card-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(41, 53, 45, 0.35) 0%,
+    rgba(52, 91, 73, 0.7) 50%,
+    rgba(41, 53, 45, 0.95) 100%
+  );
+}
+
+.category-card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 22px;
+  color: #FFFFFF;
+  z-index: 5;
+}
+
+.category-icon-bubble {
+  width: 44px;
+  height: 44px;
+  background-color: rgba(247, 247, 242, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(247, 247, 242, 0.35);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: var(--c-beige);
+  margin-bottom: 12px;
+  transition: var(--transition);
+}
+
+.nature-category-card:hover .category-icon-bubble {
+  background-color: var(--c-forest);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.category-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.category-card-desc {
+  font-size: 0.82rem;
+  color: rgba(247, 247, 242, 0.85);
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.category-card-count {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--c-sage);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ==========================================================================
+   4. DESTINASI WISATA SECTION
+   ========================================================================== */
+.section-destinasi {
+  padding: 90px 0 80px;
+  background-color: var(--c-offwhite);
+}
+
+.destination-card {
+  background-color: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  box-shadow: var(--shadow-subtle);
+  position: relative;
+}
+
+.destination-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--c-sage);
+}
+
+.destination-img-box {
+  position: relative;
+  height: 230px;
+  overflow: hidden;
+  background-color: var(--c-beige);
+}
+
+.destination-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.destination-card:hover .destination-img {
+  transform: scale(1.05);
+}
+
+.destination-category-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background-color: rgba(41, 53, 45, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.03em;
+}
+
+/* Favorite Button on Card */
+.btn-card-fav {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--c-border);
+  color: var(--c-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 10;
+}
+
+.btn-card-fav:hover {
+  background-color: #FFFFFF;
+  color: #c94a4a;
+  transform: scale(1.1);
+}
+
+.btn-card-fav.active {
+  background-color: #FFFFFF;
+  color: #c94a4a;
+  border-color: #e5a4a4;
+}
+
+.destination-content {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.destination-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.destination-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  color: var(--c-muted);
+  font-weight: 500;
+}
+
+.destination-location i {
+  color: var(--c-forest);
+}
+
+.destination-rating-inline {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.destination-rating-inline i {
+  color: var(--c-forest);
+}
+
+.destination-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  margin-bottom: 8px;
+}
+
+.destination-summary {
+  font-size: 0.9rem;
+  color: var(--c-text-muted);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.destination-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--c-border-subtle);
+}
+
+.destination-tag-item {
+  background-color: var(--c-offwhite);
+  color: var(--c-muted);
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--c-border);
+  font-weight: 500;
+}
+
+.btn-detail-link {
+  font-family: var(--font-heading);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--c-forest);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+  background-color: rgba(52, 91, 73, 0.08);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-detail-link:hover {
+  background-color: var(--c-forest);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   5. REKOMENDASI PERJALANAN (Stay, Culinary, Experiences)
+   ========================================================================== */
+.section-rekomendasi {
+  padding: 90px 0;
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.rekomendasi-nav {
+  display: inline-flex;
+  background-color: var(--c-offwhite);
+  padding: 5px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--c-border);
+  margin-bottom: 40px;
+}
+
+.rekomendasi-tab-btn {
+  border: none;
+  background: transparent;
+  padding: 8px 24px;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--c-muted);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rekomendasi-tab-btn.active {
+  background-color: var(--c-forest);
+  color: var(--c-offwhite);
+  box-shadow: 0 4px 12px rgba(41, 53, 45, 0.12);
+}
+
+.recommendation-card {
+  background-color: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.recommendation-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--c-sage);
+}
+
+.rec-img-wrap {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background-color: var(--c-beige);
+}
+
+.rec-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.recommendation-card:hover .rec-img {
+  transform: scale(1.05);
+}
+
+.rec-badge-type {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: var(--c-surface);
+  color: var(--c-forest);
+  border: 1px solid var(--c-border);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rec-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.rec-location {
+  font-size: 0.8rem;
+  color: var(--c-muted);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.rec-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  margin-bottom: 8px;
+}
+
+.rec-desc {
+  font-size: 0.88rem;
+  color: var(--c-text-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.rec-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--c-border-subtle);
+  font-size: 0.84rem;
+}
+
+.rec-highlight {
+  font-weight: 600;
+  color: var(--c-forest);
+  font-family: var(--font-heading);
+}
+
+/* ==========================================================================
+   6. TRAVEL PLANNER SECTION
+   ========================================================================== */
+.section-planner {
+  padding: 95px 0;
+  background-color: var(--c-offwhite);
+  position: relative;
+}
+
+.planner-card-mockup {
+  background-color: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.planner-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--c-border);
+  margin-bottom: 20px;
+}
+
+.planner-trip-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.planner-trip-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background-color: rgba(52, 91, 73, 0.1);
+  color: var(--c-forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.planner-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background-color: var(--c-offwhite);
+  border: 1px solid var(--c-border);
+  transition: var(--transition);
+}
+
+.timeline-item:hover {
+  background-color: #FFFFFF;
+  border-color: var(--c-sage);
+}
+
+.timeline-badge {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: var(--radius-xs);
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.timeline-badge.badge-stay {
+  background-color: rgba(52, 91, 73, 0.12);
+  color: var(--c-forest);
+}
+
+.timeline-badge.badge-culinary {
+  background-color: rgba(168, 185, 154, 0.3);
+  color: var(--c-dark-forest);
+}
+
+.timeline-badge.badge-exp {
+  background-color: rgba(82, 102, 90, 0.14);
+  color: var(--c-dark-forest);
+}
+
+.timeline-details {
+  flex: 1;
+}
+
+.timeline-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  margin-bottom: 2px;
+}
+
+.timeline-meta {
+  font-size: 0.8rem;
+  color: var(--c-text-muted);
+}
+
+.planner-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.planner-feature-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--c-beige);
+  color: var(--c-forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   7. TRAVEL INSPIRATION (Editorial Layout)
+   ========================================================================== */
+.section-inspiration {
+  padding: 95px 0;
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--c-border);
+}
+
+.editorial-card {
+  background-color: var(--c-offwhite);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.editorial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--c-sage);
+}
+
+.editorial-img-wrap {
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+
+.editorial-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.editorial-card:hover .editorial-img {
+  transform: scale(1.05);
+}
+
+.editorial-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background-color: rgba(41, 53, 45, 0.8);
+  backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.editorial-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.editorial-meta {
+  font-size: 0.78rem;
+  color: var(--c-text-light);
+  margin-bottom: 8px;
+  display: flex;
+  gap: 12px;
+}
+
+.editorial-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+
+.editorial-excerpt {
+  font-size: 0.9rem;
+  color: var(--c-text-muted);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.editorial-link {
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--c-forest);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.editorial-link:hover {
+  color: var(--c-dark-forest);
+  gap: 10px;
+}
+
+/* ==========================================================================
+   8. ABOUT SECTION
+   ========================================================================== */
+.section-about {
+  padding: 90px 0;
+  background-color: var(--c-offwhite);
+  border-top: 1px solid var(--c-border);
+}
+
+.about-quote-box {
+  background-color: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-subtle);
+}
+
+/* ==========================================================================
+   9. FOOTER
+   ========================================================================== */
+.custom-footer {
+  background-color: var(--c-dark-forest);
+  color: var(--c-beige);
+  padding-top: 80px;
+  padding-bottom: 30px;
+  border-top: 1px solid rgba(232, 230, 217, 0.12);
+}
+
+/* Footer brand — logo SVG horizontal digunakan langsung */
+.footer-brand-title {
+  display: block;
+  margin-bottom: 12px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.footer-brand-logo {
+  height: 52px;
+  width: auto;
+  max-width: 240px;
+  display: block;
+  /* Logo horizontal terang untuk footer gelap */
+  content: url('../images/logo-horizontal.svg');
+}
+
+.footer-tagline {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--c-sage);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.footer-desc {
+  font-size: 0.9rem;
+  color: rgba(232, 230, 217, 0.75);
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+.footer-col-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.footer-col-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background-color: var(--c-sage);
+}
+
+.footer-link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-link-list li {
+  margin-bottom: 10px;
+}
+
+.footer-link-list a {
+  color: rgba(232, 230, 217, 0.75);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.footer-link-list a:hover {
+  color: #FFFFFF;
+  padding-left: 4px;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: rgba(232, 230, 217, 0.8);
+  margin-bottom: 12px;
+}
+
+.footer-contact-item i {
+  color: var(--c-sage);
+  margin-top: 3px;
+}
+
+.footer-social-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.footer-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: rgba(232, 230, 217, 0.1);
+  color: var(--c-beige);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-social-btn:hover {
+  background-color: var(--c-forest);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(232, 230, 217, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.84rem;
+  color: rgba(232, 230, 217, 0.6);
+}
+
+/* ==========================================================================
+   10. Modals, Toast & Back to Top
+   ========================================================================== */
+.modal-content {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--c-border);
+  background-color: var(--c-offwhite);
+  box-shadow: 0 20px 48px rgba(41, 53, 45, 0.2);
+  overflow: hidden;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--c-border);
+  background-color: #FFFFFF;
+  padding: 18px 24px;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--c-border);
+  background-color: #FFFFFF;
+  padding: 16px 24px;
+}
+
+.favorite-item-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  background-color: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  margin-bottom: 10px;
+}
+
+.favorite-item-img {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Toast Container */
+.nature-toast-box {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 1090;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nature-toast {
+  background-color: var(--c-dark-forest);
+  color: var(--c-offwhite);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(232, 230, 217, 0.2);
+  animation: slideInToast 0.3s ease;
+}
+
+@keyframes slideInToast {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   NOTIFIKASI LOGIN DIPERLUKAN (Favorit Auth Guard)
+   ============================================================ */
+.fav-login-required-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1100;
+  background-color: #FFFFFF;
+  color: var(--c-dark-forest);
+  border: 1.5px solid var(--c-sage);
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.14);
+  max-width: 420px;
+  animation: slideInToast 0.3s ease;
+}
+
+.fav-login-required-toast i {
+  color: var(--c-forest);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 576px) {
+  .fav-login-required-toast {
+    right: 12px;
+    left: 12px;
+    max-width: none;
+    bottom: 16px;
+  }
+}
+
+/* Back To Top */
+.back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--c-forest);
+  color: var(--c-offwhite);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(41, 53, 45, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.back-to-top.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top:hover {
+  background-color: var(--c-dark-forest);
+  transform: translateY(-3px);
+}

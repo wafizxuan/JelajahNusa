@@ -1,0 +1,571 @@
+/* ==========================================================================
+   JelajahNusa - Travel Planner (Rencana Perjalanan)
+   File: assets/css/rencana-perjalanan.css
+   Konsep: Nature-Inspired, Aesthetic, Clean, Minimalist
+   Palet Warna:
+   - Forest Green : #345B49
+   - Sage Green   : #A8B99A
+   - Soft Beige   : #E8E6D9
+   - Off White    : #F7F7F2
+   - Muted Green  : #52665A
+   - Dark Forest  : #29352D
+   ========================================================================== */
+
+/* 1. PLANNER HERO BANNER */
+.planner-hero-section {
+  position: relative;
+  background: linear-gradient(135deg, #29352D 0%, #345B49 60%, #446654 100%);
+  color: #FFFFFF;
+  padding: 60px 0 50px;
+  overflow: hidden;
+}
+
+.planner-hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(rgba(168, 185, 154, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.planner-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.planner-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 14px;
+}
+
+.planner-breadcrumb a {
+  color: #A8B99A;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.planner-breadcrumb a:hover {
+  color: #FFFFFF;
+}
+
+.planner-hero-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  color: #FFFFFF;
+}
+
+.planner-hero-desc {
+  font-size: 1.05rem;
+  color: rgba(247, 247, 242, 0.88);
+  max-width: 680px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* 2. TRIP CONTROL BAR / TOOLBAR */
+.trip-control-bar {
+  background-color: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 18px 24px;
+  margin-top: -30px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(41, 53, 45, 0.08);
+}
+
+.trip-selector-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--c-text-muted);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.trip-select-input {
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--c-dark-forest);
+  background-color: var(--c-offwhite);
+  transition: var(--transition);
+}
+
+.trip-select-input:focus {
+  border-color: var(--c-forest);
+  box-shadow: 0 0 0 3px rgba(52, 91, 73, 0.15);
+  background-color: #FFFFFF;
+}
+
+/* 3. TRIP SUMMARY CARD */
+.trip-summary-card {
+  background: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.trip-summary-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: var(--c-forest);
+}
+
+.trip-title-main {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.65rem;
+  color: var(--c-dark-forest);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.trip-meta-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.trip-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.trip-meta-badge.badge-date {
+  background-color: rgba(52, 91, 73, 0.08);
+  color: var(--c-forest);
+  border: 1px solid rgba(52, 91, 73, 0.18);
+}
+
+.trip-meta-badge.badge-duration {
+  background-color: rgba(168, 185, 154, 0.22);
+  color: var(--c-dark-forest);
+  border: 1px solid rgba(168, 185, 154, 0.4);
+}
+
+.trip-meta-badge.badge-category {
+  background-color: var(--c-offwhite);
+  color: var(--c-muted);
+  border: 1px solid var(--c-border);
+}
+
+.trip-notes-box {
+  background-color: var(--c-offwhite);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: 0.92rem;
+  color: var(--c-text-muted);
+  border-left: 3px solid var(--c-sage);
+}
+
+/* 4. DAY FILTER TABS */
+.day-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+  scrollbar-width: thin;
+}
+
+.day-filter-btn {
+  white-space: nowrap;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--c-border);
+  background: #FFFFFF;
+  color: var(--c-text-muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.day-filter-btn:hover {
+  border-color: var(--c-forest);
+  color: var(--c-forest);
+  background-color: var(--c-offwhite);
+}
+
+.day-filter-btn.active {
+  background-color: var(--c-forest);
+  color: #FFFFFF;
+  border-color: var(--c-forest);
+  box-shadow: 0 4px 12px rgba(52, 91, 73, 0.25);
+}
+
+/* 5. DAY GROUP CARD & TIMELINE */
+.day-group-card {
+  background: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-subtle);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.day-group-card:hover {
+  box-shadow: var(--shadow-card);
+}
+
+.day-header {
+  background: var(--c-offwhite);
+  border-bottom: 1px solid var(--c-border);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.day-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.day-number-pill {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background-color: var(--c-forest);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  line-height: 1.1;
+  box-shadow: 0 4px 10px rgba(52, 91, 73, 0.2);
+}
+
+.day-number-pill small {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--c-sage);
+}
+
+.day-number-pill span {
+  font-size: 1.25rem;
+}
+
+.day-title-text {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--c-dark-forest);
+  margin-bottom: 2px;
+}
+
+.day-date-text {
+  font-size: 0.84rem;
+  color: var(--c-text-muted);
+}
+
+.day-body {
+  padding: 24px;
+}
+
+/* 6. TIMELINE ITEMS IN A DAY */
+.day-timeline-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.day-timeline-list::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 20px;
+  width: 2px;
+  background: repeating-linear-gradient(to bottom, var(--c-sage) 0, var(--c-sage) 4px, transparent 4px, transparent 8px);
+  z-index: 1;
+}
+
+.itinerary-item-row {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  z-index: 2;
+}
+
+.item-node-marker {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2.5px solid var(--c-forest);
+  color: var(--c-forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(41, 53, 45, 0.1);
+  transition: var(--transition);
+}
+
+.itinerary-item-row:hover .item-node-marker {
+  background: var(--c-forest);
+  color: #FFFFFF;
+  transform: scale(1.08);
+}
+
+.item-card-box {
+  flex-grow: 1;
+  background: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.itinerary-item-row:hover .item-card-box {
+  border-color: var(--c-sage);
+  box-shadow: var(--shadow-subtle);
+}
+
+.item-info-col {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-grow: 1;
+  min-width: 260px;
+}
+
+.item-thumbnail {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--c-border);
+}
+
+.item-details {
+  flex-grow: 1;
+}
+
+.item-category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.badge-cat-destinasi {
+  background-color: rgba(52, 91, 73, 0.12);
+  color: var(--c-forest);
+}
+
+.badge-cat-stay {
+  background-color: rgba(168, 185, 154, 0.3);
+  color: var(--c-dark-forest);
+}
+
+.badge-cat-culinary {
+  background-color: rgba(82, 102, 90, 0.15);
+  color: var(--c-muted);
+}
+
+.badge-cat-activity {
+  background-color: rgba(41, 53, 45, 0.08);
+  color: var(--c-dark-forest);
+}
+
+.item-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--c-dark-forest);
+  margin-bottom: 3px;
+}
+
+.item-location-meta {
+  font-size: 0.84rem;
+  color: var(--c-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.item-note-text {
+  font-size: 0.82rem;
+  color: var(--c-text-light);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.item-time-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--c-offwhite);
+  border: 1px solid var(--c-border);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--c-dark-forest);
+}
+
+.btn-remove-item {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+  background: transparent;
+  color: #dc3545;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.btn-remove-item:hover {
+  background: #dc3545;
+  color: #FFFFFF;
+  border-color: #dc3545;
+}
+
+/* 7. EMPTY DAY & EMPTY PLANNER STATES */
+.day-empty-notice {
+  text-align: center;
+  padding: 36px 20px;
+  background-color: var(--c-offwhite);
+  border-radius: var(--radius-md);
+  border: 1.5px dashed var(--c-border);
+}
+
+.day-empty-icon {
+  font-size: 2.2rem;
+  color: var(--c-sage);
+  margin-bottom: 8px;
+}
+
+.planner-empty-hero {
+  background: #FFFFFF;
+  border: 2px dashed var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 60px 24px;
+  text-align: center;
+  margin: 40px 0;
+}
+
+.planner-empty-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--c-offwhite);
+  color: var(--c-forest);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* 8. MODAL FORM REFINEMENT */
+.planner-form-label {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  margin-bottom: 6px;
+}
+
+.planner-form-control {
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 0.92rem;
+  background-color: #FFFFFF;
+  transition: var(--transition);
+}
+
+.planner-form-control:focus {
+  border-color: var(--c-forest);
+  box-shadow: 0 0 0 3px rgba(52, 91, 73, 0.15);
+}
+
+/* 9. PRINT / EXPORT STYLES */
+@media print {
+  .custom-navbar,
+  .trip-control-bar,
+  .day-filter-bar,
+  .btn-remove-item,
+  .btn-forest,
+  .btn-outline-forest,
+  footer,
+  #backToTopBtn {
+    display: none !important;
+  }
+  
+  .planner-hero-section {
+    background: none !important;
+    color: #000000 !important;
+    padding: 20px 0 !important;
+  }
+  
+  .planner-hero-title {
+    color: #000000 !important;
+  }
+  
+  .day-group-card {
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+  }
+}

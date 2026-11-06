@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="JelajahNusa icon">
+  <defs>
+    <linearGradient id="liForest" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A7C5F"/>
+      <stop offset="100%" stop-color="#1E4035"/>
+    </linearGradient>
+    <linearGradient id="liSage" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5C8B6E"/>
+      <stop offset="100%" stop-color="#2E6652"/>
+    </linearGradient>
+    <linearGradient id="liGold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F0C46A"/>
+      <stop offset="100%" stop-color="#D4923A"/>
+    </linearGradient>
+    <linearGradient id="liDeep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A5C47"/>
+      <stop offset="100%" stop-color="#142E26"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sayap atas -->
+  <path fill="url(#liForest)"
+    d="M 20 95 C 28 60, 55 40, 85 50 C 100 55, 112 68, 130 66 C 145 64, 158 52, 175 40 C 168 62, 155 80, 135 88 C 116 95, 98 86, 83 75 C 64 60, 42 58, 20 95 Z"/>
+  <!-- Sayap bawah -->
+  <path fill="url(#liSage)"
+    d="M 28 108 C 50 94, 68 100, 84 116 C 98 130, 112 140, 133 130 C 116 150, 92 158, 70 148 C 50 138, 38 122, 28 108 Z"/>
+  <!-- Ombak bawah -->
+  <path fill="url(#liDeep)"
+    d="M 64 142 C 82 155, 106 158, 128 145 C 144 135, 156 118, 170 108 C 163 132, 148 154, 126 165 C 100 178, 68 170, 54 152 C 47 142, 50 128, 60 122 C 57 132, 58 138, 64 142 Z"/>
+  <!-- Ruang negatif -->
+  <path fill="#F7F5EE"
+    d="M 38 118 C 58 112, 70 124, 82 136 C 94 148, 108 150, 122 142 C 107 160, 84 160, 68 148 C 56 138, 48 128, 38 118 Z"
+    opacity="0.92"/>
+  <!-- Paruh -->
+  <path fill="#C8883A" d="M 173 40 L 186 32 L 178 48 Z"/>
+  <!-- Pin lokasi emas -->
+  <path fill="url(#liGold)"
+    d="M 100 8 C 87 8, 76 19, 76 32 C 76 50, 100 72, 100 72 C 100 72, 124 50, 124 32 C 124 19, 113 8, 100 8 Z"/>
+  <circle cx="100" cy="31" r="9" fill="#F7F5EE"/>
+</svg>

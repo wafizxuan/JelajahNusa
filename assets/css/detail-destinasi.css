@@ -1,0 +1,565 @@
+/* ==========================================================================
+   JelajahNusa - Detail Destinasi (Bali)
+   Nature-Inspired, Aesthetic, Minimalist, Clean
+   Palette:
+   - Forest Green : #345B49
+   - Sage Green   : #A8B99A
+   - Soft Beige   : #E8E6D9
+   - Off White    : #F7F7F2
+   - Muted Green  : #52665A
+   - Dark Forest  : #29352D
+   ========================================================================== */
+
+/* Breadcrumb */
+.detail-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: rgba(247, 247, 242, 0.75);
+  margin-bottom: 20px;
+}
+
+.detail-breadcrumb a {
+  color: var(--c-beige);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.detail-breadcrumb a:hover {
+  color: #FFFFFF;
+}
+
+/* Hero Section */
+.detail-hero-section {
+  position: relative;
+  min-height: 72vh;
+  display: flex;
+  align-items: flex-end;
+  padding-top: 130px;
+  padding-bottom: 70px;
+  background-color: var(--c-dark-forest);
+  overflow: hidden;
+}
+
+.detail-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center 38%;
+  filter: brightness(0.92);
+}
+
+.detail-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(41, 53, 45, 0.6) 0%,
+    rgba(41, 53, 45, 0.8) 60%,
+    rgba(41, 53, 45, 0.96) 100%
+  );
+}
+
+.detail-hero-content {
+  position: relative;
+  z-index: 10;
+  color: #FFFFFF;
+  width: 100%;
+}
+
+.detail-hero-title {
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+  letter-spacing: -0.03em;
+}
+
+.detail-meta-pills {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.detail-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(247, 247, 242, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(247, 247, 242, 0.25);
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+}
+
+.detail-hero-desc {
+  font-size: 1.12rem;
+  color: rgba(247, 247, 242, 0.9);
+  max-width: 780px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.detail-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-detail-fav {
+  background-color: rgba(247, 247, 242, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(247, 247, 242, 0.35);
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 10px 24px;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.btn-detail-fav:hover {
+  background-color: #FFFFFF;
+  color: #c94a4a;
+  border-color: #FFFFFF;
+}
+
+.btn-detail-fav.active {
+  background-color: #FFFFFF;
+  color: #c94a4a;
+  border-color: #FFFFFF;
+}
+
+/* About & Highlights */
+.section-detail-about {
+  padding: 85px 0 70px;
+  background-color: #FFFFFF;
+}
+
+.about-card-box {
+  background-color: var(--c-offwhite);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  height: 100%;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.highlight-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background-color: rgba(52, 91, 73, 0.1);
+  color: var(--c-forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.highlight-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  margin-bottom: 4px;
+}
+
+.best-time-box {
+  background-color: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.best-time-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--c-beige);
+  color: var(--c-forest);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 12px;
+}
+
+/* Popular Places */
+.section-detail-places {
+  padding: 85px 0;
+  background-color: var(--c-offwhite);
+}
+
+.place-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.place-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--c-sage);
+}
+
+.place-img-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background-color: var(--c-beige);
+}
+
+.place-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.place-card:hover .place-img {
+  transform: scale(1.06);
+}
+
+.place-tag-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background-color: rgba(41, 53, 45, 0.78);
+  backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.place-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.place-location {
+  font-size: 0.8rem;
+  color: var(--c-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.place-title {
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  margin-bottom: 8px;
+}
+
+.place-desc {
+  font-size: 0.9rem;
+  color: var(--c-text-muted);
+  line-height: 1.55;
+}
+
+/* Stays Cards */
+.section-detail-stays {
+  padding: 85px 0;
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--c-border);
+}
+
+.stay-card {
+  background-color: var(--c-offwhite);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.stay-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--c-sage);
+}
+
+.stay-img-wrap {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+}
+
+.stay-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.stay-card:hover .stay-img {
+  transform: scale(1.05);
+}
+
+.stay-type-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: #FFFFFF;
+  color: var(--c-forest);
+  border: 1px solid var(--c-border);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.stay-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.stay-price-tag {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--c-forest);
+}
+
+/* Culinary Cards */
+.section-detail-culinary {
+  padding: 85px 0;
+  background-color: var(--c-offwhite);
+  border-top: 1px solid var(--c-border);
+}
+
+.culinary-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.culinary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--c-sage);
+}
+
+.culinary-img-wrap {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.culinary-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.culinary-card:hover .culinary-img {
+  transform: scale(1.05);
+}
+
+.culinary-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Things to Do */
+.section-detail-activities {
+  padding: 85px 0;
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--c-border);
+}
+
+.activity-card {
+  background-color: var(--c-offwhite);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 26px;
+  height: 100%;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--c-sage);
+}
+
+.activity-icon-bubble {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background-color: var(--c-beige);
+  color: var(--c-forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 18px;
+}
+
+.activity-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--c-dark-forest);
+  margin-bottom: 8px;
+}
+
+.activity-desc {
+  font-size: 0.9rem;
+  color: var(--c-text-muted);
+  line-height: 1.55;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+/* Travel Information */
+.section-detail-info {
+  padding: 85px 0;
+  background-color: var(--c-offwhite);
+  border-top: 1px solid var(--c-border);
+}
+
+.info-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  height: 100%;
+}
+
+.info-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.info-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgba(52, 91, 73, 0.1);
+  color: var(--c-forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-list li {
+  font-size: 0.88rem;
+  color: var(--c-text-muted);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.info-list li i {
+  color: var(--c-forest);
+  margin-top: 3px;
+  font-size: 0.95rem;
+}
+
+/* Create Your Trip Banner */
+.section-detail-cta {
+  padding: 80px 0;
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--c-border);
+}
+
+.detail-cta-card {
+  background-color: var(--c-dark-forest);
+  color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 56px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-cta-card::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(168, 185, 154, 0.25) 0%, rgba(168, 185, 154, 0) 70%);
+  border-radius: 50%;
+}
+
+@media (max-width: 767.98px) {
+  .detail-hero-title {
+    font-size: 2.3rem;
+  }
+  .detail-hero-desc {
+    font-size: 1rem;
+  }
+  .about-card-box {
+    padding: 24px;
+  }
+  .detail-cta-card {
+    padding: 40px 20px;
+  }
+}

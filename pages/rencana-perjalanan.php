@@ -1,0 +1,658 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Proteksi Hak Akses: Hanya pengguna yang sudah masuk (User) yang dapat mengakses halaman Travel Planner
+if (!isset($_SESSION['user'])) {
+    header('Location: ../index.php?auth=login&redirect=pages/rencana-perjalanan.php');
+    exit;
+}
+
+$auth_base_url = '../auth/';
+
+/**
+ * JelajahNusa - Halaman Rencana Perjalanan (Travel Planner)
+ * Lokasi: pages/rencana-perjalanan.php
+ * Konsep: Nature-Inspired, Aesthetic, Minimalist, Clean
+ * Palet Warna: Forest Green (#345B49), Sage Green (#A8B99A), Soft Beige (#E8E6D9), Off White (#F7F7F2), Dark Forest (#29352D)
+ */
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Planner — Rencana Perjalanan Nusantara | JelajahNusa</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+  <meta name="jn-auth-status" content="<?php echo isset($_SESSION['user']) ? 'true' : 'false'; ?>">
+  <meta name="description" content="Rancang dan kelompokkan rencana perjalanan liburan impianmu di Indonesia per hari. Tambahkan destinasi, penginapan, dan kuliner favorit dengan mudah.">
+  <meta name="keywords" content="Travel Planner Indonesia, Rencana Perjalanan, Itinerary Bali, Itinerary Wisata, JelajahNusa">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom CSS: Base Style, Detail Destinasi, & Travel Planner -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/detail-destinasi.css">
+  <link rel="stylesheet" href="../assets/css/rencana-perjalanan.css">
+</head>
+<body class="bg-body-nature">
+
+  <!-- ======================================================================
+       1. NAVBAR (Konsisten dengan Homepage & Halaman Lainnya)
+       ====================================================================== -->
+  <nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container">
+      
+      <!-- Brand Logo -->
+      <a class="navbar-brand" href="../index.php" aria-label="JelajahNusa — Kembali ke Beranda">
+        <img class="brand-logo-img"
+          src="../assets/images/logo-horizontal.svg"
+          alt="JelajahNusa — Discover Indonesia, Your Way"
+          width="240" height="56">
+      </a>
+
+      <!-- Mobile Toggler -->
+      <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <!-- Menus & Action -->
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.php#beranda">Beranda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.php#destinasi">Jelajahi Wisata</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.php#kategori">Kategori</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.php#rekomendasi">Rekomendasi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active fw-bold" href="rencana-perjalanan.php">Travel Planner</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.php#tentang">Tentang Kami</a>
+          </li>
+        </ul>
+
+        <!-- Action Buttons (Favorit, Masuk, Daftar) -->
+        <div class="d-flex align-items-center gap-2">
+          
+          <!-- Tombol Favorit -->
+          <a href="favorit.php" class="nav-fav-pill" id="navFavBtn" title="Destinasi Favorit Saya" aria-label="Favorit">
+            <i class="bi bi-heart-fill text-danger"></i>
+            <span class="d-none d-xl-inline">Favorit</span>
+            <span class="nav-fav-badge" id="navFavCount">0</span>
+          </a>
+
+          <!-- Tombol Masuk & Daftar / Profil Sesi -->
+          <?php if (isset($_SESSION['user'])): ?>
+            <div class="dropdown">
+              <button class="btn btn-outline-forest btn-sm rounded-pill dropdown-toggle d-flex align-items-center gap-2 px-3 py-1" type="button" id="userMenuBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle text-success"></i>
+                <span class="fw-bold"><?php echo htmlspecialchars($_SESSION['user']['name']); ?></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userMenuBtn" style="border-radius: var(--radius-md);">
+                <li><span class="dropdown-item-text text-muted small"><i class="bi bi-envelope me-2"></i><?php echo htmlspecialchars($_SESSION['user']['email']); ?></span></li>
+                <?php if (($_SESSION['user']['role'] ?? '') === 'admin'): ?>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item text-success fw-bold small" href="../admin/"><i class="bi bi-speedometer2 me-2"></i>Dashboard Admin</a></li>
+                <?php endif; ?>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <a class="dropdown-item fw-semibold" href="profil.php" style="color:var(--c-dark-forest);">
+                    <i class="bi bi-person-gear me-2"></i>Pengaturan Akun
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="<?php echo $auth_base_url; ?>logout.php" id="navLogoutBtn"><i class="bi bi-box-arrow-right me-2"></i>Keluar</a></li>
+              </ul>
+            </div>
+          <?php else: ?>
+            <!-- Tombol Masuk -->
+            <button type="button" class="nav-auth-btn-login" data-bs-toggle="modal" data-bs-target="#authModal" id="navLoginBtn">
+              Masuk
+            </button>
+
+            <!-- Tombol Daftar -->
+            <button type="button" class="btn btn-forest btn-sm-nature" data-bs-toggle="modal" data-bs-target="#authModal" id="navRegisterBtn">
+              <i class="bi bi-person-plus"></i>
+              <span>Daftar</span>
+            </button>
+          <?php endif; ?>
+
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ======================================================================
+       2. PLANNER HERO BANNER
+       ====================================================================== -->
+  <header class="planner-hero-section">
+    <div class="container planner-hero-content">
+      
+      <!-- Breadcrumb -->
+      <div class="planner-breadcrumb">
+        <a href="../index.php"><i class="bi bi-house-door me-1"></i>Beranda</a>
+        <span>/</span>
+        <span class="text-white">Travel Planner</span>
+      </div>
+
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <span class="badge bg-light text-success fw-bold px-3 py-2 rounded-pill mb-2">
+            <i class="bi bi-calendar2-range me-1"></i> Rencana Perjalanan Mandiri
+          </span>
+          <h1 class="planner-hero-title">
+            Susun Rencana Liburanmu
+          </h1>
+          <p class="planner-hero-desc">
+            Kelompokkan destinasi pilihanmu berdasarkan hari perjalanan, atur waktu kunjungan, dan nikmati liburan yang terencana serta bermakna bersama JelajahNusa.
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <button type="button" class="btn btn-hero-solid px-4 py-2" id="btnCreateTrip">
+    <i class="bi bi-plus-circle me-1"></i> Buat Rencana Baru
+</button>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       3. TRIP CONTROL BAR / TOOLBAR
+       ====================================================================== -->
+  <div class="container">
+    <div class="trip-control-bar">
+      <div class="row align-items-center g-3">
+        
+        <!-- Trip Selector Dropdown -->
+        <div class="col-lg-5 col-md-6">
+          <label for="plannerTripSelect" class="trip-selector-label">
+            <i class="bi bi-journal-bookmark me-1 text-success"></i> Rencana Perjalanan Aktif:
+          </label>
+          <select id="plannerTripSelect" class="form-select trip-select-input">
+            <!-- Populated dynamically by script.js -->
+          </select>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="col-lg-7 col-md-6 text-md-end d-flex flex-wrap align-items-center justify-content-md-end gap-2 pt-2 pt-md-0">
+          <button type="button" class="btn btn-forest btn-sm rounded-pill px-3 py-2" data-bs-toggle="modal" data-bs-target="#addTripItemModal" id="btnOpenAddItemModal">
+            <i class="bi bi-plus-lg me-1"></i> Tambah Destinasi
+          </button>
+          
+          <button type="button" class="btn btn-outline-forest btn-sm rounded-pill px-3 py-2" id="btnPrintTripBtn" title="Cetak atau Simpan PDF">
+            <i class="bi bi-printer me-1"></i> Cetak / PDF
+          </button>
+
+          <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3 py-2 border-0" id="btnDeleteCurrentTrip" title="Hapus Rencana Ini">
+            <i class="bi bi-trash3 me-1"></i> Hapus Trip
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       4. MAIN PLANNER CONTENT AREA
+       ====================================================================== -->
+  <main class="container py-5" id="plannerMainContainer">
+    
+    <!-- 4.1 Trip Summary Card (Rendered by JS) -->
+    <div id="tripSummaryContainer"></div>
+
+    <!-- 4.2 Day Filter Bar (Semua Hari, Hari 1, Hari 2, dst.) -->
+    <div class="day-filter-bar" id="dayFilterTabs">
+      <!-- Populated dynamically by script.js -->
+    </div>
+
+    <!-- 4.3 Day-by-Day Timeline List (Rendered by JS) -->
+    <div id="dayItineraryContainer" class="mt-2"></div>
+
+    <!-- 4.4 Empty State Container (If no trips exist) -->
+    <div id="plannerEmptyState" class="planner-empty-hero d-none">
+      <div class="planner-empty-icon">
+        <i class="bi bi-map"></i>
+      </div>
+      <h3 class="fw-bold text-dark mb-2">Belum Ada Rencana Perjalanan</h3>
+      <p class="text-muted mx-auto mb-4" style="max-width: 500px;">
+        Mulai petualanganmu sekarang! Buat rencana perjalanan baru dan tentukan destinasi, hotel, serta kuliner yang ingin kamu kunjungi di setiap harinya.
+      </p>
+      <div class="d-flex justify-content-center gap-2 flex-wrap">
+        <button type="button" class="btn btn-forest px-4 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#createTripModal">
+          <i class="bi bi-plus-circle me-1"></i> Buat Rencana Perjalanan Pertama
+        </button>
+        <a href="../index.php#destinasi" class="btn btn-outline-forest px-4 py-2 rounded-pill">
+          <i class="bi bi-compass me-1"></i> Jelajahi Destinasi
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ======================================================================
+       MODAL 1: BUAT RENCANA PERJALANAN BARU
+       ====================================================================== -->
+  <div class="modal fade" id="createTripModal" tabindex="-1" aria-labelledby="createTripModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg" style="border-radius: var(--radius-lg);">
+        
+        <div class="modal-header border-bottom-0 pb-0">
+          <div class="d-flex align-items-center gap-2">
+            <div class="brand-leaf-icon" style="width: 36px; height: 36px; font-size: 1rem;">
+              <i class="bi bi-calendar-plus"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold text-dark mb-0" id="createTripModalTitle">Buat Rencana Perjalanan Baru</h5>
+              <span class="text-muted small">Atur jadwal liburan impianmu</span>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-4">
+          <form id="createTripForm">
+            
+            <!-- Nama Perjalanan -->
+            <div class="mb-3">
+              <label for="tripNameInput" class="planner-form-label">
+                Nama Perjalanan <span class="text-danger">*</span>
+              </label>
+              <input type="text" class="form-control planner-form-control" id="tripNameInput" placeholder="Contoh: Liburan Eksplorasi Bali 2026" required>
+            </div>
+
+            <!-- Destinasi Utama -->
+            <div class="mb-3">
+              <label for="tripDestSelect" class="planner-form-label">
+                Destinasi / Wilayah Utama <span class="text-danger">*</span>
+              </label>
+              <select id="tripDestSelect" class="form-select planner-form-control" required>
+                <option value="Bali, Indonesia" selected>Bali, Indonesia</option>
+                <option value="Labuan Bajo & Komodo">Labuan Bajo & Komodo (NTT)</option>
+                <option value="Raja Ampat, Papua Barat">Raja Ampat (Papua Barat)</option>
+                <option value="Gunung Bromo & Semeru">Gunung Bromo (Jawa Timur)</option>
+                <option value="Danau Toba, Sumatera Utara">Danau Toba (Sumatera Utara)</option>
+                <option value="Yogyakarta & Candi">Yogyakarta & Candi</option>
+                <option value="Destinasi Lainnya">Destinasi Lainnya...</option>
+              </select>
+            </div>
+
+            <!-- Tanggal Keberangkatan & Kepulangan -->
+            <div class="row g-3 mb-3">
+              <div class="col-sm-6">
+                <label for="tripStartDateInput" class="planner-form-label">
+                  Tanggal Berangkat <span class="text-danger">*</span>
+                </label>
+                <input type="date" class="form-control planner-form-control" id="tripStartDateInput" required>
+              </div>
+              <div class="col-sm-6">
+                <label for="tripEndDateInput" class="planner-form-label">
+                  Tanggal Pulang <span class="text-danger">*</span>
+                </label>
+                <input type="date" class="form-control planner-form-control" id="tripEndDateInput" required>
+              </div>
+            </div>
+
+            <!-- Kategori Traveler -->
+            <div class="mb-3">
+              <label for="tripCategorySelect" class="planner-form-label">
+                Kategori Traveler
+              </label>
+              <select id="tripCategorySelect" class="form-select planner-form-control">
+                <option value="Pasangan & Keluarga" selected>Pasangan & Keluarga</option>
+                <option value="Solo Traveler">Solo Traveler (Mandiri)</option>
+                <option value="Teman & Grup">Teman & Kelompok Traveler</option>
+              </select>
+            </div>
+
+            <!-- Catatan Liburan -->
+            <div class="mb-4">
+              <label for="tripNotesInput" class="planner-form-label">
+                Catatan / Harapan Perjalanan (Opsional)
+              </label>
+              <textarea class="form-control planner-form-control" id="tripNotesInput" rows="2" placeholder="Contoh: Fokus ke alam Ubud dan sunset tebing Uluwatu..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-forest w-100 py-2 rounded-pill fw-bold">
+              <i class="bi bi-check2-circle me-1"></i> Simpan & Buat Jadwal Harian
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL 2: TAMBAH DESTINASI / ITEM KE RENCANA PERJALANAN
+       ====================================================================== -->
+  <div class="modal fade" id="addTripItemModal" tabindex="-1" aria-labelledby="addTripItemModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg" style="border-radius: var(--radius-lg);">
+        
+        <div class="modal-header border-bottom-0 pb-0">
+          <div class="d-flex align-items-center gap-2">
+            <div class="brand-leaf-icon" style="width: 36px; height: 36px; font-size: 1rem;">
+              <i class="bi bi-geo-alt-fill"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold text-dark mb-0" id="addTripItemModalTitle">Tambah Item ke Rencana</h5>
+              <span class="text-muted small">Kelompokkan ke hari yang kamu inginkan</span>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-4">
+          <form id="addTripItemForm">
+            
+            <!-- Target Hari -->
+            <div class="mb-3">
+              <label for="itemDaySelect" class="planner-form-label">
+                Pilih Hari Perjalanan <span class="text-danger">*</span>
+              </label>
+              <select id="itemDaySelect" class="form-select planner-form-control" required>
+                <!-- Populated by JS based on current trip days -->
+              </select>
+            </div>
+
+            <!-- Kategori Item -->
+            <div class="mb-3">
+              <label for="itemCategorySelect" class="planner-form-label">
+                Kategori Item <span class="text-danger">*</span>
+              </label>
+              <select id="itemCategorySelect" class="form-select planner-form-control" required>
+                <option value="Destinasi" selected>📍 Destinasi Wisata</option>
+                <option value="Penginapan">🏡 Penginapan / Hotel / Villa</option>
+                <option value="Kuliner">🍽️ Restoran & Kuliner Lokal</option>
+                <option value="Aktivitas">🛶 Aktivitas Bahari / Alam</option>
+              </select>
+            </div>
+
+            <!-- Nama Tempat / Aktivitas -->
+            <div class="mb-3">
+              <label for="itemNameInput" class="planner-form-label">
+                Nama Tempat atau Aktivitas <span class="text-danger">*</span>
+              </label>
+              <input type="text" class="form-control planner-form-control" id="itemNameInput" placeholder="Contoh: Pura Tanah Lot / Bebek Betutu" required>
+            </div>
+
+            <!-- Lokasi & Waktu Kunjungan -->
+            <div class="row g-3 mb-3">
+              <div class="col-sm-7">
+                <label for="itemLocationInput" class="planner-form-label">
+                  Lokasi / Alamat
+                </label>
+                <input type="text" class="form-control planner-form-control" id="itemLocationInput" placeholder="Contoh: Tabanan, Bali">
+              </div>
+              <div class="col-sm-5">
+                <label for="itemTimeInput" class="planner-form-label">
+                  Waktu / Jam
+                </label>
+                <input type="text" class="form-control planner-form-control" id="itemTimeInput" placeholder="Contoh: 16:30">
+              </div>
+            </div>
+
+            <!-- Foto URL (Opsional) -->
+            <div class="mb-3">
+              <label for="itemPhotoInput" class="planner-form-label">
+                URL Foto (Opsional)
+              </label>
+              <input type="url" class="form-control planner-form-control" id="itemPhotoInput" placeholder="https://images.unsplash.com/...">
+            </div>
+
+            <!-- Catatan / Tips -->
+            <div class="mb-4">
+              <label for="itemNoteInput" class="planner-form-label">
+                Catatan / Tips Tambahan
+              </label>
+              <input type="text" class="form-control planner-form-control" id="itemNoteInput" placeholder="Contoh: Datang sebelum matahari terbenam untuk foto terbaik">
+            </div>
+
+            <button type="submit" class="btn btn-forest w-100 py-2 rounded-pill fw-bold">
+              <i class="bi bi-plus-circle me-1"></i> Tambahkan ke Jadwal Hari Ini
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL 3: DESTINASI FAVORIT SAYA (KONSISTEN)
+       ====================================================================== -->
+  <div class="modal fade" id="favoritesModal" tabindex="-1" aria-labelledby="favoritesModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow" style="border-radius: var(--radius-lg);">
+        <div class="modal-header">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-heart-fill text-danger fs-5"></i>
+            <h5 class="fw-bold text-dark mb-0" id="favoritesModalTitle">Destinasi Favorit Saya</h5>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div id="favoritesEmptyState" class="text-center py-4 d-none">
+            <i class="bi bi-heartbreak text-muted fs-1 mb-2 d-block"></i>
+            <h6 class="fw-bold text-dark">Belum Ada Favorit</h6>
+            <p class="text-muted small">Simpan destinasi favoritmu dengan mengklik ikon hati di kartu wisata.</p>
+          </div>
+          <div id="favoritesListContainer"></div>
+        </div>
+        <div class="modal-footer bg-white d-flex justify-content-between">
+          <a href="favorit.php" class="btn btn-forest rounded-pill btn-sm px-3">
+            <i class="bi bi-grid me-1"></i> Buka Halaman Favorit Lengkap
+          </a>
+          <button type="button" class="btn btn-outline-secondary rounded-pill px-4 btn-sm" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL 4: LOGIN & DAFTAR (AUTHENTICATION)
+       ====================================================================== -->
+  <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow" style="border-radius: var(--radius-lg);">
+        <div class="modal-header border-bottom-0 pb-0">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4 pt-0">
+          <div class="text-center mb-4">
+            <div class="brand-leaf-icon mx-auto mb-2" style="width: 52px; height: 52px; padding: 4px;">
+              <img src="../assets/images/logo-icon.svg" alt="JelajahNusa" class="brand-icon-svg">
+            </div>
+            <h4 class="fw-bold text-dark mb-1" id="authModalTitle">Masuk ke JelajahNusa</h4>
+            <p class="text-muted small">Discover Indonesia, Your Way.</p>
+          </div>
+
+          <div class="d-flex bg-white p-1 rounded-pill border mb-4">
+            <button class="btn btn-forest flex-fill rounded-pill py-1 small fw-bold" id="tabLoginBtn" type="button">
+              Masuk
+            </button>
+            <button class="btn btn-link text-muted text-decoration-none flex-fill rounded-pill py-1 small fw-bold" id="tabRegisterBtn" type="button">
+              Daftar
+            </button>
+          </div>
+
+          <!-- Alert Pesan Feedback Autentikasi -->
+          <div id="authAlert" class="alert alert-danger d-none py-2 px-3 small rounded-3 mb-3" role="alert"></div>
+
+          <!-- Form Masuk -->
+          <form id="loginForm" method="POST" action="../auth/login.php">
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label small fw-bold text-dark">Alamat Email</label>
+              <input type="email" class="form-control" id="loginEmail" name="email" placeholder="nama@email.com" required autocomplete="email">
+            </div>
+            <div class="mb-3">
+              <label for="loginPassword" class="form-label small fw-bold text-dark">Kata Sandi</label>
+              <input type="password" class="form-control" id="loginPassword" name="password" placeholder="••••••••" required autocomplete="current-password">
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rememberMe" name="remember">
+                <label class="form-check-label small text-muted" for="rememberMe">Ingat saya</label>
+              </div>
+              <a href="#" class="small text-decoration-none text-muted" onclick="alert('Silakan hubungi administrator untuk bantuan pemulihan akun.')">Lupa sandi?</a>
+            </div>
+            <button type="submit" class="btn btn-forest w-100 py-2 rounded-pill">
+              Masuk ke Akun
+            </button>
+            <div class="text-center mt-3">
+              <span class="small text-muted">Belum punya akun? <a href="#" id="switchToRegister" class="text-success fw-bold text-decoration-none">Daftar sekarang</a></span>
+            </div>
+          </form>
+
+          <!-- Form Daftar -->
+          <form id="registerForm" class="d-none" method="POST" action="../auth/register.php">
+            <div class="mb-3">
+              <label for="regName" class="form-label small fw-bold text-dark">Nama Lengkap</label>
+              <input type="text" class="form-control" id="regName" name="name" placeholder="Nama Anda" required autocomplete="name">
+            </div>
+            <div class="mb-3">
+              <label for="regEmail" class="form-label small fw-bold text-dark">Alamat Email</label>
+              <input type="email" class="form-control" id="regEmail" name="email" placeholder="nama@email.com" required autocomplete="email">
+            </div>
+            <div class="mb-3">
+              <label for="regPassword" class="form-label small fw-bold text-dark">Kata Sandi</label>
+              <input type="password" class="form-control" id="regPassword" name="password" placeholder="Minimal 8 karakter" required minlength="8" autocomplete="new-password">
+            </div>
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" id="termsCheck" name="terms" checked required>
+              <label class="form-check-label small text-muted" for="termsCheck">
+                Saya menyetujui Ketentuan Penggunaan JelajahNusa.
+              </label>
+            </div>
+            <button type="submit" class="btn btn-forest w-100 py-2 rounded-pill">
+              Daftar Akun Baru
+            </button>
+            <div class="text-center mt-3">
+              <span class="small text-muted">Sudah punya akun? <a href="#" id="switchToLogin" class="text-success fw-bold text-decoration-none">Masuk di sini</a></span>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       5. FOOTER
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4 mb-5">
+        
+        <div class="col-lg-4 col-md-6">
+          <a href="../index.php" class="footer-brand-title" aria-label="JelajahNusa — Discover Indonesia, Your Way">
+            <img class="footer-brand-logo"
+              src="../assets/images/logo-horizontal.svg"
+              alt="JelajahNusa"
+              width="200" height="52">
+          </a>
+          <p class="footer-desc">
+            Platform digital panduan wisata dan perencana perjalanan nusantara terkurasi, berlandaskan prinsip keberlanjutan dan keaslian budaya Indonesia.
+          </p>
+          <div class="footer-social-links">
+            <a href="#" class="social-icon-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-icon-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-icon-btn" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="social-icon-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 col-6">
+          <h5 class="footer-heading">Navigasi</h5>
+          <ul class="footer-menu">
+            <li><a href="../index.php#beranda">Beranda</a></li>
+            <li><a href="../index.php#destinasi">Destinasi</a></li>
+            <li><a href="../index.php#kategori">Kategori</a></li>
+            <li><a href="../index.php#rekomendasi">Rekomendasi</a></li>
+            <li><a href="rencana-perjalanan.php">Travel Planner</a></li>
+            <li><a href="favorit.php">Favorit Saya</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-6">
+          <h5 class="footer-heading">Destinasi Populer</h5>
+          <ul class="footer-menu">
+            <li><a href="detail-destinasi.php">Pulau Bali</a></li>
+            <li><a href="../index.php#destinasi">Labuan Bajo</a></li>
+            <li><a href="../index.php#destinasi">Raja Ampat</a></li>
+            <li><a href="../index.php#destinasi">Gunung Bromo</a></li>
+            <li><a href="../index.php#destinasi">Danau Toba</a></li>
+            <li><a href="../index.php#destinasi">Yogyakarta</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-heading">Kontak & Bantuan</h5>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="bi bi-geo-alt-fill text-success"></i>
+              <span>Gedung Pariwisata Nusantara, Jl. Merdeka Alam No. 45, Jakarta</span>
+            </li>
+            <li>
+              <i class="bi bi-envelope-fill text-success"></i>
+              <span>halo@jelajahnusa.id</span>
+            </li>
+            <li>
+              <i class="bi bi-telephone-fill text-success"></i>
+              <span>+62 21 5567 8900</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+            <span class="copyright-text">
+              © <?php echo date('Y'); ?> <strong>JelajahNusa</strong>. Seluruh hak cipta dilindungi undang-undang.
+            </span>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <div class="footer-bottom-links">
+              <a href="#">Kebijakan Privasi</a>
+              <span>•</span>
+              <a href="#">Syarat & Ketentuan</a>
+              <span>•</span>
+              <a href="#">Bantuan Wisatawan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Custom Nature-Inspired JavaScript -->
+  <script src="../assets/js/script.js"></script>
+
+</body>
+</html>

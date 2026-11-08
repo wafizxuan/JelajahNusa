@@ -58,11 +58,11 @@ try {
         } else {
             $stmt = $pdo->prepare(" 
                 INSERT INTO destination_reviews (destination_id, user_id, rating, review_text, status)
-                VALUES (:destination_id, :user_id, :rating, :review_text, 'pending')
+                VALUES (:destination_id, :user_id, :rating, :review_text, 'approved')
                 ON DUPLICATE KEY UPDATE
                     rating = :updated_rating,
                     review_text = :updated_text,
-                    status = 'pending'
+                    status = IF(status = 'hidden', 'hidden', 'approved')
             ");
             $stmt->execute([
                 'destination_id' => $destinationId,
@@ -72,7 +72,7 @@ try {
                 'updated_rating' => $rating,
                 'updated_text' => $reviewText,
             ]);
-            $_SESSION['review_flash'] = ['type' => 'success', 'message' => 'Ulasan tersimpan dan menunggu persetujuan admin.'];
+            $_SESSION['review_flash'] = ['type' => 'success', 'message' => 'Ulasan berhasil dipublikasikan.'];
         }
     } elseif ($action === 'delete') {
         $stmt = $pdo->prepare('DELETE FROM destination_reviews WHERE destination_id = :destination_id AND user_id = :user_id');

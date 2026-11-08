@@ -53,7 +53,7 @@ try {
             LEFT JOIN (
                 SELECT destination_id, AVG(rating) AS rating, COUNT(*) AS total_ulasan
                 FROM destination_reviews
-                WHERE status = 'approved'
+                WHERE status <> 'hidden'
                 GROUP BY destination_id
             ) review_summary ON review_summary.destination_id = d.id
             ORDER BY d.id ASC");

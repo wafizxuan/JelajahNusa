@@ -22,10 +22,10 @@ JelajahNusa adalah aplikasi web travel guide dan travel planner untuk menemukan 
 ### Admin
 
 - Masuk ke dashboard administrator.
-- Melihat ringkasan jumlah pengguna, destinasi, dan ulasan menunggu moderasi.
+- Melihat ringkasan jumlah pengguna, destinasi, dan ulasan publik.
 - Menambah, mengubah, dan menghapus destinasi.
 - Mengelola pengguna terdaftar.
-- Menyetujui atau menyembunyikan ulasan pengguna.
+- Menyembunyikan atau menghapus ulasan pengguna.
 
 ## Teknologi
 
@@ -173,8 +173,8 @@ Direktori dan file cadangan berakhiran `.bak`, `.bak2`, atau serupa tidak diguna
 3. Daftar akun atau masuk melalui modal autentikasi.
 4. Simpan destinasi sebagai favorit.
 5. Susun rencana perjalanan dan tambahkan item sesuai hari kunjungan.
-6. Kirim ulasan. Ulasan akan tersedia di tampilan publik setelah disetujui admin.
-7. Admin dapat memantau dan memoderasi ulasan melalui dashboard admin.
+6. Kirim ulasan. Ulasan langsung tersedia di tampilan publik.
+7. Admin dapat memantau, menyembunyikan, atau menghapus ulasan melalui dashboard admin.
 
 ## Database dan API
 

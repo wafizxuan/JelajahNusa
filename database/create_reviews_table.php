@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS destination_reviews (
     user_id INT NOT NULL,
     rating TINYINT UNSIGNED NOT NULL,
     review_text TEXT NOT NULL,
-    status ENUM('pending', 'approved', 'hidden') NOT NULL DEFAULT 'pending',
+    status ENUM('pending', 'approved', 'hidden') NOT NULL DEFAULT 'approved',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
@@ -35,6 +35,9 @@ SQL;
 
 try {
     $pdo->exec($sql);
+    $pdo->exec("ALTER TABLE destination_reviews MODIFY status ENUM('pending', 'approved', 'hidden') NOT NULL DEFAULT 'approved'");
+    // Publikasi ulasan lama yang masih menunggu persetujuan; ulasan hidden tetap disembunyikan.
+    $pdo->exec("UPDATE destination_reviews SET status = 'approved' WHERE status = 'pending'");
     echo "Tabel destination_reviews siap digunakan.\n";
 } catch (PDOException $e) {
     error_log('[Reviews Migration Error] ' . $e->getMessage());

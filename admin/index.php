@@ -30,9 +30,9 @@ if ($total_destinasi === 0 && isset($all_destinasi) && is_array($all_destinasi))
     $total_destinasi = count($all_destinasi);
 }
 
-$pending_reviews = 0;
+$total_reviews = 0;
 try {
-  $pending_reviews = (int)$pdo->query("SELECT COUNT(*) FROM destination_reviews WHERE status = 'pending'")->fetchColumn();
+  $total_reviews = (int)$pdo->query("SELECT COUNT(*) FROM destination_reviews WHERE status <> 'hidden'")->fetchColumn();
 } catch (PDOException $e) {
   error_log('[Admin Reviews Count Error] ' . $e->getMessage());
 }
@@ -393,9 +393,9 @@ try {
         <div class="col-md-6 col-xl-4">
           <div class="stat-card d-flex align-items-center justify-content-between">
             <div>
-              <span class="text-muted small fw-bold text-uppercase">Ulasan Menunggu</span>
-              <h2 class="fw-bold text-dark mb-0 mt-1"><?php echo $pending_reviews; ?></h2>
-              <a class="text-success small fw-semibold" href="reviews.php">Buka moderasi <i class="bi bi-arrow-right"></i></a>
+              <span class="text-muted small fw-bold text-uppercase">Ulasan Publik</span>
+              <h2 class="fw-bold text-dark mb-0 mt-1"><?php echo $total_reviews; ?></h2>
+              <a class="text-success small fw-semibold" href="reviews.php">Kelola ulasan <i class="bi bi-arrow-right"></i></a>
             </div>
             <div class="stat-icon" style="background: rgba(255, 193, 7, 0.14); color: #8a6500;">
               <i class="bi bi-chat-square-text"></i>
@@ -436,10 +436,10 @@ try {
               </div>
               <div>
                 <h5 class="fw-bold text-dark mb-0">Moderasi Ulasan</h5>
-                <span class="text-muted small">Atur persetujuan publikasi</span>
+                <span class="text-muted small">Kelola ulasan pengguna</span>
               </div>
             </div>
-            <p class="text-muted small mb-4">Tinjau ulasan pengguna dan setujui atau sembunyikan tanpa mengubah isi maupun rating.</p>
+            <p class="text-muted small mb-4">Tinjau ulasan pengguna dan sembunyikan atau hapus konten yang tidak sesuai.</p>
             <a href="reviews.php" class="btn btn-outline-success btn-sm rounded-pill px-3 py-2 fw-semibold text-decoration-none">
               <i class="bi bi-arrow-right-circle me-1"></i> Buka Moderasi Ulasan
             </a>

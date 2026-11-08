@@ -148,7 +148,7 @@ $destinasi_fallback = [
 $destinasi_wisata = [];
 try {
     if (isset($pdo)) {
-        $stmt = $pdo->query("SELECT d.id, d.card_nama AS nama, d.card_lokasi AS lokasi, d.card_kategori AS kategori, d.card_kategori_id AS kategori_id, review_summary.rating, COALESCE(review_summary.total_ulasan, 0) AS total_ulasan, d.card_image AS foto, d.card_deskripsi AS deskripsi, d.card_tags AS tags, d.card_highlights AS highlights FROM destinations d LEFT JOIN (SELECT destination_id, AVG(rating) AS rating, COUNT(*) AS total_ulasan FROM destination_reviews WHERE status = 'approved' GROUP BY destination_id) review_summary ON review_summary.destination_id = d.id ORDER BY d.id ASC");
+        $stmt = $pdo->query("SELECT d.id, d.card_nama AS nama, d.card_lokasi AS lokasi, d.card_kategori AS kategori, d.card_kategori_id AS kategori_id, review_summary.rating, COALESCE(review_summary.total_ulasan, 0) AS total_ulasan, d.card_image AS foto, d.card_deskripsi AS deskripsi, d.card_tags AS tags, d.card_highlights AS highlights FROM destinations d LEFT JOIN (SELECT destination_id, AVG(rating) AS rating, COUNT(*) AS total_ulasan FROM destination_reviews WHERE status <> 'hidden' GROUP BY destination_id) review_summary ON review_summary.destination_id = d.id ORDER BY d.id ASC");
         $dbRows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($dbRows)) {
             foreach ($dbRows as $row) {

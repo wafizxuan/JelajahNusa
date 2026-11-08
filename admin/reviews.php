@@ -1,6 +1,6 @@
 <?php
 /**
- * Moderasi ulasan pengguna. Admin hanya dapat mengubah status publikasi.
+ * Moderasi ulasan pengguna: sembunyikan atau hapus ulasan.
  */
 
 require_once __DIR__ . '/auth_check.php';
@@ -16,22 +16,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $reviewId = filter_var($_POST['review_id'] ?? null, FILTER_VALIDATE_INT, [
         'options' => ['min_range' => 1]
     ]);
-    $statusByAction = [
-        'approve' => 'approved',
-        'hide' => 'hidden',
-    ];
     $action = $_POST['action'] ?? '';
-
-    if (!$reviewId || !isset($statusByAction[$action])) {
+    if (!$reviewId || !in_array($action, ['hide', 'delete'], true)) {
         $_SESSION['flash_error'] = 'Aksi moderasi tidak valid.';
     } else {
         try {
-            $stmt = $pdo->prepare('UPDATE destination_reviews SET status = :status WHERE id = :id');
-            $stmt->execute(['status' => $statusByAction[$action], 'id' => $reviewId]);
-            $_SESSION['flash_success'] = 'Status ulasan berhasil diperbarui.';
+            if ($action === 'hide') {
+                $stmt = $pdo->prepare("UPDATE destination_reviews SET status = 'hidden' WHERE id = :id");
+                $stmt->execute(['id' => $reviewId]);
+                $_SESSION['flash_success'] = 'Ulasan berhasil disembunyikan.';
+            } else {
+                $stmt = $pdo->prepare('DELETE FROM destination_reviews WHERE id = :id');
+                $stmt->execute(['id' => $reviewId]);
+                $_SESSION['flash_success'] = 'Ulasan berhasil dihapus.';
+            }
         } catch (PDOException $e) {
             error_log('[Admin Review Moderation Error] ' . $e->getMessage());
-            $_SESSION['flash_error'] = 'Status ulasan belum dapat diperbarui.';
+            $_SESSION['flash_error'] = 'Ulasan belum dapat diproses.';
         }
     }
 
@@ -41,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $reviews = [];
 try {
-    $stmt = $pdo->query("SELECT r.id, r.rating, r.review_text, r.status, r.created_at, u.name AS user_name, d.card_nama AS destination_name FROM destination_reviews r JOIN users u ON u.id = r.user_id JOIN destinations d ON d.id = r.destination_id ORDER BY FIELD(r.status, 'pending', 'approved', 'hidden'), r.created_at DESC");
+    $stmt = $pdo->query("SELECT r.id, r.rating, r.review_text, r.status, r.created_at, u.name AS user_name, d.card_nama AS destination_name FROM destination_reviews r JOIN users u ON u.id = r.user_id JOIN destinations d ON d.id = r.destination_id ORDER BY r.created_at DESC");
     $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     error_log('[Admin Reviews Query Error] ' . $e->getMessage());
@@ -86,7 +87,7 @@ $adminUser = $_SESSION['user'];
       <div>
         <p class="text-success small text-uppercase fw-bold mb-1">Konten Pengguna</p>
         <h1 class="h3 fw-bold mb-1">Moderasi Ulasan</h1>
-        <p class="text-muted mb-0">Setujui atau sembunyikan ulasan. Isi dan rating pengguna tidak dapat diubah dari halaman ini.</p>
+        <p class="text-muted mb-0">Ulasan langsung tampil secara publik. Sembunyikan atau hapus ulasan yang tidak sesuai.</p>
       </div>
       <span class="badge text-bg-light border"><?php echo count($reviews); ?> ulasan</span>
     </header>
@@ -108,8 +109,8 @@ $adminUser = $_SESSION['user'];
               <?php echo htmlspecialchars(date('d M Y', strtotime($review['created_at'])), ENT_QUOTES, 'UTF-8'); ?>
             </div>
           </div>
-          <span class="badge <?php echo $review['status'] === 'approved' ? 'text-bg-success' : ($review['status'] === 'hidden' ? 'text-bg-secondary' : 'text-bg-warning'); ?>">
-            <?php echo htmlspecialchars($review['status'], ENT_QUOTES, 'UTF-8'); ?>
+          <span class="badge <?php echo $review['status'] === 'hidden' ? 'text-bg-secondary' : 'text-bg-success'; ?>">
+            <?php echo $review['status'] === 'hidden' ? 'Disembunyikan' : 'Publik'; ?>
           </span>
         </div>
         <div class="text-warning my-2" aria-label="Rating <?php echo (int)$review['rating']; ?> dari 5">
@@ -118,14 +119,6 @@ $adminUser = $_SESSION['user'];
         </div>
         <p class="mb-3 text-break"><?php echo nl2br(htmlspecialchars($review['review_text'], ENT_QUOTES, 'UTF-8')); ?></p>
         <div class="d-flex gap-2">
-          <?php if ($review['status'] !== 'approved'): ?>
-          <form method="post">
-            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8'); ?>">
-            <input type="hidden" name="review_id" value="<?php echo (int)$review['id']; ?>">
-            <input type="hidden" name="action" value="approve">
-            <button type="submit" class="btn btn-success btn-sm"><i class="bi bi-check2 me-1"></i>Setujui</button>
-          </form>
-          <?php endif; ?>
           <?php if ($review['status'] !== 'hidden'): ?>
           <form method="post">
             <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8'); ?>">
@@ -134,6 +127,12 @@ $adminUser = $_SESSION['user'];
             <button type="submit" class="btn btn-outline-secondary btn-sm"><i class="bi bi-eye-slash me-1"></i>Sembunyikan</button>
           </form>
           <?php endif; ?>
+          <form method="post">
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8'); ?>">
+            <input type="hidden" name="review_id" value="<?php echo (int)$review['id']; ?>">
+            <input type="hidden" name="action" value="delete">
+            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Hapus ulasan ini secara permanen?');"><i class="bi bi-trash3 me-1"></i>Hapus</button>
+          </form>
         </div>
       </article>
       <?php endforeach; ?>

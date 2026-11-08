@@ -72,10 +72,10 @@ if (!$destinasi) {
 }
 
   $reviewSummary = ['rating' => null, 'total_ulasan' => 0];
-  $approvedReviews = [];
+  $publicReviews = [];
   $myReview = null;
   try {
-    $summaryStmt = $pdo->prepare("SELECT AVG(rating) AS rating, COUNT(*) AS total_ulasan FROM destination_reviews WHERE destination_id = :destination_id AND status = 'approved'");
+    $summaryStmt = $pdo->prepare("SELECT AVG(rating) AS rating, COUNT(*) AS total_ulasan FROM destination_reviews WHERE destination_id = :destination_id AND status <> 'hidden'");
     $summaryStmt->execute(['destination_id' => $id_destinasi]);
     $summary = $summaryStmt->fetch(PDO::FETCH_ASSOC);
     if ($summary && (int)$summary['total_ulasan'] > 0) {
@@ -85,9 +85,9 @@ if (!$destinasi) {
       ];
     }
 
-    $reviewsStmt = $pdo->prepare("SELECT r.rating, r.review_text, r.created_at, u.name FROM destination_reviews r JOIN users u ON u.id = r.user_id WHERE r.destination_id = :destination_id AND r.status = 'approved' ORDER BY r.created_at DESC");
+    $reviewsStmt = $pdo->prepare("SELECT r.rating, r.review_text, r.created_at, u.name FROM destination_reviews r JOIN users u ON u.id = r.user_id WHERE r.destination_id = :destination_id AND r.status <> 'hidden' ORDER BY r.created_at DESC");
     $reviewsStmt->execute(['destination_id' => $id_destinasi]);
-    $approvedReviews = $reviewsStmt->fetchAll(PDO::FETCH_ASSOC);
+    $publicReviews = $reviewsStmt->fetchAll(PDO::FETCH_ASSOC);
 
     if (!empty($_SESSION['user']['id'])) {
       if (empty($_SESSION['csrf_review'])) {

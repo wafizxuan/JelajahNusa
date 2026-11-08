@@ -30,8 +30,8 @@
         <div class="bg-white border rounded-3 p-4">
           <?php if (!empty($_SESSION['user']['id'])): ?>
           <h3 class="h5 fw-bold mb-3"><?php echo $myReview ? 'Ubah ulasan Anda' : 'Tulis ulasan'; ?></h3>
-          <?php if ($myReview && $myReview['status'] !== 'approved'): ?>
-            <p class="small text-muted">Ulasan Anda berstatus <?php echo $myReview['status'] === 'hidden' ? 'disembunyikan' : 'menunggu persetujuan'; ?>. Perubahan baru akan ditinjau kembali.</p>
+          <?php if ($myReview && $myReview['status'] === 'hidden'): ?>
+            <p class="small text-muted">Ulasan Anda disembunyikan oleh admin dan tidak ditampilkan secara publik.</p>
           <?php endif; ?>
           <form method="post" action="../auth/reviews.php">
             <input type="hidden" name="action" value="save">
@@ -71,11 +71,11 @@
 
       <div class="col-lg-7">
         <h3 class="h5 fw-bold mb-3">Ulasan yang ditampilkan</h3>
-        <?php if (empty($approvedReviews)): ?>
+        <?php if (empty($publicReviews)): ?>
         <div class="bg-white border rounded-3 p-4 text-center text-muted">Belum tersedia</div>
         <?php else: ?>
         <div class="row g-3">
-          <?php foreach ($approvedReviews as $review): ?>
+          <?php foreach ($publicReviews as $review): ?>
           <div class="col-12">
             <article class="bg-white border rounded-3 p-3">
               <div class="d-flex justify-content-between gap-3">

@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
             if ($destName) {
                 $delStmt = $pdo->prepare("DELETE FROM destinations WHERE id = ?");
                 $delStmt->execute([$deleteId]);
-                $_SESSION['flash_success'] = 'Destinasi "' . $destName . '" berhasil dihapus dari database.';
+                $_SESSION['flash_success'] = 'Destinasi berhasil dihapus!';
             } else {
                 $_SESSION['flash_error'] = 'Destinasi dengan ID tersebut tidak ditemukan.';
             }
@@ -47,7 +47,16 @@ $destinasi_list = [];
 $is_from_db = false;
 try {
     if (isset($pdo)) {
-        $stmt = $pdo->query("SELECT id, slug, hero_image, card_image, nama, card_nama, wilayah, provinsi, kategori, card_kategori, rating, card_rating FROM destinations ORDER BY id ASC");
+        $stmt = $pdo->query("SELECT d.id, d.slug, d.hero_image, d.card_image, d.nama, d.card_nama, d.wilayah, d.provinsi, d.kategori, d.card_kategori,
+            review_summary.rating AS approved_rating, review_summary.total_ulasan
+            FROM destinations d
+            LEFT JOIN (
+                SELECT destination_id, AVG(rating) AS rating, COUNT(*) AS total_ulasan
+                FROM destination_reviews
+                WHERE status = 'approved'
+                GROUP BY destination_id
+            ) review_summary ON review_summary.destination_id = d.id
+            ORDER BY d.id ASC");
         $destinasi_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($destinasi_list)) {
             $is_from_db = true;
@@ -233,6 +242,26 @@ $csrf_token = generateCsrfToken();
       background-color: var(--c-forest);
       color: #fff;
     }
+    #destTable th,
+    #destTable td {
+      vertical-align: middle;
+    }
+    #destTable th:nth-child(1),
+    #destTable td:nth-child(1) {
+      width: 56px;
+    }
+    #destTable th:nth-child(5),
+    #destTable td:nth-child(5) {
+      width: 150px;
+    }
+    #destTable th:last-child,
+    #destTable td:last-child {
+      width: 128px;
+    }
+    .rating-summary {
+      white-space: nowrap;
+      font-size: 0.8rem;
+    }
   </style>
 </head>
 <body>
@@ -325,7 +354,7 @@ $csrf_token = generateCsrfToken();
       <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
         <div>
           <h4 class="fw-bold text-dark mb-1">Daftar Destinasi Wisata</h4>
-          <p class="text-muted small mb-0">Kelola dan perbarui seluruh destinasi unggulan nusantara secara langsung di MySQL.</p>
+          <p class="text-muted small mb-0">Kelola dan perbarui seluruh destinasi unggulan nusantara.</p>
         </div>
         <a href="destinasi_tambah.php" class="btn btn-forest btn-sm rounded-pill px-3 py-2 fw-semibold text-decoration-none shadow-sm">
           <i class="bi bi-plus-circle me-1"></i> Tambah Destinasi Baru
@@ -337,7 +366,6 @@ $csrf_token = generateCsrfToken();
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
           <div class="d-flex align-items-center gap-2">
             <h6 class="fw-bold text-dark mb-0">Destinasi Aktif (<span id="destCountBadge"><?php echo $total_destinasi; ?></span>)</h6>
-            <span class="badge bg-success bg-opacity-10 text-success small"><i class="bi bi-database-check me-1"></i>MySQL Live</span>
           </div>
           <div class="d-flex gap-2 align-items-center">
             <div class="input-group input-group-sm" style="max-width: 280px;">
@@ -356,14 +384,13 @@ $csrf_token = generateCsrfToken();
                 <th>Wilayah / Provinsi</th>
                 <th>Kategori</th>
                 <th>Rating</th>
-                <th>Status</th>
                 <th class="text-end" style="width: 140px;">Aksi</th>
               </tr>
             </thead>
             <tbody>
               <?php if (empty($destinasi_list)): ?>
                 <tr>
-                  <td colspan="7" class="text-center py-4 text-muted small">Belum ada data destinasi di database.</td>
+                  <td colspan="6" class="text-center py-4 text-muted small">Belum ada data destinasi.</td>
                 </tr>
               <?php else: ?>
                 <?php foreach ($destinasi_list as $d): ?>
@@ -380,12 +407,15 @@ $csrf_token = generateCsrfToken();
                     </td>
                     <td class="small text-muted"><?php echo htmlspecialchars($d['wilayah']); ?></td>
                     <td><span class="badge bg-success bg-opacity-10 text-success rounded-pill small"><?php echo htmlspecialchars($d['kategori']); ?></span></td>
-                    <td class="small fw-semibold text-warning"><i class="bi bi-star-fill me-1"></i><?php echo number_format($d['rating'], 1); ?></td>
                     <td>
-                      <?php if ($is_from_db): ?>
-                        <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 small"><i class="bi bi-database-check me-1"></i>Tersimpan di MySQL</span>
+                      <?php $reviewCount = (int)($d['total_ulasan'] ?? 0); ?>
+                      <?php if ($reviewCount > 0): ?>
+                        <div class="rating-summary text-warning fw-semibold">
+                          <i class="bi bi-star-fill me-1"></i><?php echo number_format((float)$d['approved_rating'], 1); ?>
+                          <span class="text-muted fw-normal">(<?php echo $reviewCount; ?> ulasan)</span>
+                        </div>
                       <?php else: ?>
-                        <span class="badge bg-light text-secondary border small">Statis (Fallback)</span>
+                        <span class="text-muted small">Belum ada ulasan</span>
                       <?php endif; ?>
                     </td>
                     <td class="text-end">

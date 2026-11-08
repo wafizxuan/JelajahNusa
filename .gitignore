@@ -1,0 +1,16 @@
+# Konfigurasi API key — jangan commit file ini
+config/places_api.php
+
+# File environment lokal
+.env
+*.env
+
+# File backup admin
+admin/*.bak*
+pages/*.bak*
+*.bak
+*.bak_*
+
+# PHP error log
+*.log
+php_error.log

@@ -215,8 +215,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $provinsi       = trim($_POST['provinsi'] ?? '');
     $wilayah        = trim($_POST['wilayah'] ?? '');
     $kategori       = trim($_POST['kategori'] ?? '');
-    $rating         = (float)($_POST['rating'] ?? 5.0);
-    $total_ulasan   = (int)($_POST['total_ulasan'] ?? 0);
+    $rating         = null;   // Hanya bisa diperbarui via Google Places API — tidak dari POST
+    $total_ulasan   = null;   // Hanya bisa diperbarui via Google Places API — tidak dari POST
     $hero_image     = trim($_POST['hero_image'] ?? '');
     $tagline        = trim($_POST['tagline'] ?? '');
     $deskripsi      = trim($_POST['deskripsi'] ?? '');
@@ -226,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $card_lokasi    = trim($_POST['card_lokasi'] ?? '');
     $card_kategori  = trim($_POST['card_kategori'] ?? '');
     $card_kategori_id = trim($_POST['card_kategori_id'] ?? 'alam');
-    $card_rating    = (float)($_POST['card_rating'] ?? 5.0);
+    $card_rating    = null;   // Hanya bisa diperbarui via Google Places API — tidak dari POST
     $card_image     = trim($_POST['card_image'] ?? '');
     $card_deskripsi = trim($_POST['card_deskripsi'] ?? '');
     $card_tags_raw  = trim($_POST['card_tags'] ?? '');
@@ -304,10 +304,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = "INSERT INTO destinations (
                 slug, nama, provinsi, wilayah, kategori, rating, total_ulasan, hero_image, tagline, deskripsi, about_heading,
                 card_nama, card_lokasi, card_kategori, card_kategori_id, card_rating, card_image, card_deskripsi, card_tags, card_highlights,
+                google_place_id,
                 daya_tarik, waktu_terbaik, popular_places, recommended_stays, local_culinary, things_to_do, travel_info
             ) VALUES (
                 :slug, :nama, :provinsi, :wilayah, :kategori, :rating, :total_ulasan, :hero_image, :tagline, :deskripsi, :about_heading,
                 :card_nama, :card_lokasi, :card_kategori, :card_kategori_id, :card_rating, :card_image, :card_deskripsi, :card_tags, :card_highlights,
+                :google_place_id,
                 :daya_tarik, :waktu_terbaik, :popular_places, :recommended_stays, :local_culinary, :things_to_do, :travel_info
             )";
 
@@ -333,6 +335,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':card_deskripsi'   => $card_deskripsi,
                 ':card_tags'        => $card_tags,
                 ':card_highlights'  => $card_highlights,
+                ':google_place_id'  => trim($_POST['google_place_id'] ?? '') ?: null,
                 ':daya_tarik'       => $validatedJson['daya_tarik'],
                 ':waktu_terbaik'    => $waktu_terbaik,
                 ':popular_places'   => $validatedJson['popular_places'],
@@ -343,7 +346,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
 
             $newId = (int)$pdo->lastInsertId();
-            $_SESSION['flash_success'] = 'Destinasi baru "' . htmlspecialchars($nama) . '" (ID #' . $newId . ') berhasil ditambahkan ke database!';
+            $_SESSION['flash_success'] = 'Destinasi berhasil ditambahkan!';
             header('Location: destinasi.php');
             exit;
 
@@ -647,12 +650,22 @@ $csrf_token = generateCsrfToken();
               <input type="text" class="form-control" id="kategori" name="kategori" value="<?php echo htmlspecialchars($formData['kategori'] ?? 'Wisata Bahari & Alam'); ?>" placeholder="Contoh: Wisata Bahari & Alam" required>
             </div>
             <div class="col-md-3">
-              <label for="rating" class="form-label small fw-bold text-dark">Rating Detail (1.0 - 5.0)</label>
-              <input type="number" step="0.1" min="1.0" max="5.0" class="form-control" id="rating" name="rating" value="<?php echo htmlspecialchars($formData['rating'] ?? '4.9'); ?>" required>
+              <label for="rating" class="form-label small fw-bold text-dark">
+                Rating
+                <span class="badge bg-secondary ms-1" style="font-size:.65rem;">Otomatis via Google Maps</span>
+              </label>
+              <input type="text" class="form-control bg-light text-muted" id="rating" name="rating"
+                     value="Belum tersedia" readonly tabindex="-1"
+                     title="Rating diambil otomatis dari Google Maps setelah Place ID dipilih.">
             </div>
             <div class="col-md-3">
-              <label for="total_ulasan" class="form-label small fw-bold text-dark">Total Ulasan</label>
-              <input type="number" min="0" class="form-control" id="total_ulasan" name="total_ulasan" value="<?php echo htmlspecialchars($formData['total_ulasan'] ?? '1250'); ?>" required>
+              <label for="total_ulasan" class="form-label small fw-bold text-dark">
+                Total Ulasan
+                <span class="badge bg-secondary ms-1" style="font-size:.65rem;">Otomatis via Google Maps</span>
+              </label>
+              <input type="text" class="form-control bg-light text-muted" id="total_ulasan" name="total_ulasan"
+                     value="Belum tersedia" readonly tabindex="-1"
+                     title="Jumlah ulasan diambil otomatis dari Google Maps.">
             </div>
             <div class="col-md-6">
               <label for="hero_image" class="form-label small fw-bold text-dark">URL Hero Image (1920px) <span class="text-danger">*</span></label>
@@ -701,8 +714,12 @@ $csrf_token = generateCsrfToken();
               </select>
             </div>
             <div class="col-md-4">
-              <label for="card_rating" class="form-label small fw-bold text-dark">Rating Kartu</label>
-              <input type="number" step="0.1" min="1.0" max="5.0" class="form-control" id="card_rating" name="card_rating" value="<?php echo htmlspecialchars($formData['card_rating'] ?? '4.9'); ?>">
+              <label for="card_rating" class="form-label small fw-bold text-dark">
+                Rating Kartu
+                <span class="badge bg-secondary ms-1" style="font-size:.65rem;">Otomatis via Google Maps</span>
+              </label>
+              <input type="text" class="form-control bg-light text-muted" id="card_rating" name="card_rating"
+                     value="Belum tersedia" readonly tabindex="-1">
             </div>
             <div class="col-md-4">
               <label for="card_image" class="form-label small fw-bold text-dark">URL Gambar Kartu (800px)</label>
@@ -826,6 +843,8 @@ $csrf_token = generateCsrfToken();
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- JSON Form Builder: form visual menggantikan textarea JSON -->
   <script src="json-form-builder.js"></script>
+  <!-- Google Place Picker -->
+  <script src="google-place-picker.js"></script>
   <script>
     // Auto slug generator jika slug belum diisi manual
     const namaInput = document.getElementById('nama');

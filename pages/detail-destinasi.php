@@ -71,6 +71,41 @@ if (!$destinasi) {
     exit;
 }
 
+  $reviewSummary = ['rating' => null, 'total_ulasan' => 0];
+  $approvedReviews = [];
+  $myReview = null;
+  try {
+    $summaryStmt = $pdo->prepare("SELECT AVG(rating) AS rating, COUNT(*) AS total_ulasan FROM destination_reviews WHERE destination_id = :destination_id AND status = 'approved'");
+    $summaryStmt->execute(['destination_id' => $id_destinasi]);
+    $summary = $summaryStmt->fetch(PDO::FETCH_ASSOC);
+    if ($summary && (int)$summary['total_ulasan'] > 0) {
+      $reviewSummary = [
+        'rating' => (float)$summary['rating'],
+        'total_ulasan' => (int)$summary['total_ulasan'],
+      ];
+    }
+
+    $reviewsStmt = $pdo->prepare("SELECT r.rating, r.review_text, r.created_at, u.name FROM destination_reviews r JOIN users u ON u.id = r.user_id WHERE r.destination_id = :destination_id AND r.status = 'approved' ORDER BY r.created_at DESC");
+    $reviewsStmt->execute(['destination_id' => $id_destinasi]);
+    $approvedReviews = $reviewsStmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!empty($_SESSION['user']['id'])) {
+      if (empty($_SESSION['csrf_review'])) {
+        $_SESSION['csrf_review'] = bin2hex(random_bytes(32));
+      }
+      $myReviewStmt = $pdo->prepare('SELECT rating, review_text, status FROM destination_reviews WHERE destination_id = :destination_id AND user_id = :user_id LIMIT 1');
+      $myReviewStmt->execute([
+        'destination_id' => $id_destinasi,
+        'user_id' => (int)$_SESSION['user']['id'],
+      ]);
+      $myReview = $myReviewStmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+  } catch (Throwable $e) {
+    error_log('[Destination Reviews Query Error] ' . $e->getMessage());
+  }
+  $reviewFlash = $_SESSION['review_flash'] ?? null;
+  unset($_SESSION['review_flash']);
+
 // Data destinasi aktif
 $popular_places    = $destinasi['popular_places'];
 $recommended_stays = $destinasi['recommended_stays'];
@@ -230,8 +265,14 @@ $travel_info       = $destinasi['travel_info'];
             <?php echo htmlspecialchars($destinasi['kategori']); ?>
           </span>
           <span class="detail-meta-pill">
-            <i class="bi bi-star-fill text-warning"></i>
-            <?php echo number_format($destinasi['rating'], 1); ?> (<?php echo number_format($destinasi['total_ulasan']); ?> ulasan)
+            <?php if ($reviewSummary['rating'] !== null): ?>
+              <i class="bi bi-star-fill text-warning"></i>
+              <?php echo number_format($reviewSummary['rating'], 1); ?>
+              (<?php echo number_format($reviewSummary['total_ulasan']); ?> ulasan)
+            <?php else: ?>
+              <i class="bi bi-star text-white-50"></i>
+              <span class="text-white-50 small">Belum tersedia</span>
+            <?php endif; ?>
           </span>
         </div>
 
@@ -711,10 +752,14 @@ $travel_info       = $destinasi['travel_info'];
   </section>
 
   <!-- ======================================================================
-       9. CREATE YOUR TRIP SECTION
+       9. RATING & ULASAN INTERNAL
+       ====================================================================== -->
+<?php require __DIR__ . '/review-section.php'; ?>
+
+  <!-- ======================================================================
+       10. CREATE YOUR TRIP SECTION
        ====================================================================== -->
   <section class="section-detail-cta">
-    <div class="container">
       <div class="detail-cta-card">
         <span class="section-label" style="background-color: rgba(247, 247, 242, 0.15); color: var(--c-beige);">
           <i class="bi bi-calendar2-heart"></i> Itinerary Builder

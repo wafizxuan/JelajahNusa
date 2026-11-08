@@ -77,7 +77,7 @@ $destinasi_fallback = [
         'lokasi'      => 'Papua Barat Daya',
         'kategori'    => 'Wisata Pantai',
         'kategori_id' => 'pantai',
-        'rating'      => 4.9,
+        'rating'      => null,
         'foto'        => 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=800&q=80',
         'deskripsi'   => 'Gugusan pulau karst zamrud yang dikelilingi perairan toska sejernih kristal dengan keanekaragaman hayati laut terkaya di dunia.',
         'tags'        => ['Diving', 'Pianemo', 'Karst', 'Konservasi'],
@@ -89,7 +89,7 @@ $destinasi_fallback = [
         'lokasi'      => 'Bali',
         'kategori'    => 'Wisata Budaya',
         'kategori_id' => 'budaya',
-        'rating'      => 4.8,
+        'rating'      => null,
         'foto'        => 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',
         'deskripsi'   => 'Harmoni magis antara keteduhan terasering sawah Ubud, pesona pantai selancar dunia, dan keluhuran tradisi spiritual pura.',
         'tags'        => ['Ubud Sawah', 'Pura Luhur', 'Pantai', 'Seni Tari'],
@@ -101,7 +101,7 @@ $destinasi_fallback = [
         'lokasi'      => 'Jawa Timur',
         'kategori'    => 'Wisata Pegunungan',
         'kategori_id' => 'pegunungan',
-        'rating'      => 4.9,
+        'rating'      => null,
         'foto'        => 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80',
         'deskripsi'   => 'Bentang alam kaldera purba megah dengan panorama matahari terbit berkabut di atas hamparan lautan pasir vulkanik yang mistis.',
         'tags'        => ['Sunrise', 'Lautan Pasir', 'Kawah Bromo', 'Trekking'],
@@ -113,7 +113,7 @@ $destinasi_fallback = [
         'lokasi'      => 'Nusa Tenggara Timur',
         'kategori'    => 'Wisata Alam',
         'kategori_id' => 'alam',
-        'rating'      => 4.9,
+        'rating'      => null,
         'foto'        => 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80',
         'deskripsi'   => 'Pintu gerbang penjelajahan pulau-pulau savana dramatis, habitat purba Komodo Dragon, serta keindahan unik pantai Pink Beach.',
         'tags'        => ['Pulau Padar', 'Komodo', 'Pink Beach', 'Liveaboard'],
@@ -125,7 +125,7 @@ $destinasi_fallback = [
         'lokasi'      => 'Sumatera Utara',
         'kategori'    => 'Wisata Alam',
         'kategori_id' => 'alam',
-        'rating'      => 4.7,
+        'rating'      => null,
         'foto'        => 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
         'deskripsi'   => 'Danau vulkanik raksasa yang tenang di tengah perbukitan hijau pinus, kaya akan warisan tradisi leluhur suku Batak di Pulau Samosir.',
         'tags'        => ['Geopark', 'Pulau Samosir', 'Budaya Batak', 'Kaldera'],
@@ -137,7 +137,7 @@ $destinasi_fallback = [
         'lokasi'      => 'D.I. Yogyakarta',
         'kategori'    => 'Wisata Budaya',
         'kategori_id' => 'budaya',
-        'rating'      => 4.8,
+        'rating'      => null,
         'foto'        => 'https://images.unsplash.com/photo-1584810359583-96fc3448beaa?auto=format&fit=crop&w=800&q=80',
         'deskripsi'   => 'Jantung kebudayaan Jawa yang anggun, rumah bagi mahakarya dunia Candi Prambanan & Borobudur serta kehangatan suasana kota seni.',
         'tags'        => ['Warisan Dunia', 'Candi Megah', 'Keraton', 'Kuliner Khas'],
@@ -148,7 +148,7 @@ $destinasi_fallback = [
 $destinasi_wisata = [];
 try {
     if (isset($pdo)) {
-        $stmt = $pdo->query("SELECT id, card_nama AS nama, card_lokasi AS lokasi, card_kategori AS kategori, card_kategori_id AS kategori_id, card_rating AS rating, card_image AS foto, card_deskripsi AS deskripsi, card_tags AS tags, card_highlights AS highlights FROM destinations ORDER BY id ASC");
+        $stmt = $pdo->query("SELECT d.id, d.card_nama AS nama, d.card_lokasi AS lokasi, d.card_kategori AS kategori, d.card_kategori_id AS kategori_id, review_summary.rating, COALESCE(review_summary.total_ulasan, 0) AS total_ulasan, d.card_image AS foto, d.card_deskripsi AS deskripsi, d.card_tags AS tags, d.card_highlights AS highlights FROM destinations d LEFT JOIN (SELECT destination_id, AVG(rating) AS rating, COUNT(*) AS total_ulasan FROM destination_reviews WHERE status = 'approved' GROUP BY destination_id) review_summary ON review_summary.destination_id = d.id ORDER BY d.id ASC");
         $dbRows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($dbRows)) {
             foreach ($dbRows as $row) {
@@ -622,10 +622,17 @@ $travel_inspirations = [
                     <i class="bi bi-geo-alt"></i>
                     <?php echo htmlspecialchars($dest['lokasi']); ?>
                   </span>
-                  <span class="destination-rating-inline">
+                  <?php if ($dest['rating'] !== null): ?>
+                  <span class="destination-rating-inline" title="Rating dari ulasan pengguna">
                     <i class="bi bi-star-fill text-warning"></i>
-                    <?php echo number_format($dest['rating'], 1); ?>
+                    <?php echo number_format((float)$dest['rating'], 1); ?>
+                    <span class="text-muted small">(<?php echo number_format((int)($dest['total_ulasan'] ?? 0)); ?>)</span>
                   </span>
+                  <?php else: ?>
+                  <span class="destination-rating-inline text-muted" style="font-size:0.75rem;" title="Belum tersedia">
+                    <i class="bi bi-star text-muted me-1"></i>Belum tersedia
+                  </span>
+                  <?php endif; ?>
                 </div>
 
                 <h3 class="destination-name">

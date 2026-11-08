@@ -29,6 +29,13 @@ try {
 if ($total_destinasi === 0 && isset($all_destinasi) && is_array($all_destinasi)) {
     $total_destinasi = count($all_destinasi);
 }
+
+$pending_reviews = 0;
+try {
+  $pending_reviews = (int)$pdo->query("SELECT COUNT(*) FROM destination_reviews WHERE status = 'pending'")->fetchColumn();
+} catch (PDOException $e) {
+  error_log('[Admin Reviews Count Error] ' . $e->getMessage());
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -269,6 +276,12 @@ if ($total_destinasi === 0 && isset($all_destinasi) && is_array($all_destinasi))
           <span>Manajemen Pengguna</span>
         </a>
       </li>
+      <li>
+        <a href="reviews.php" class="admin-menu-link">
+          <i class="bi bi-chat-square-text-fill"></i>
+          <span>Moderasi Ulasan</span>
+        </a>
+      </li>
     </ul>
 
     <div class="admin-footer-actions">
@@ -377,6 +390,19 @@ if ($total_destinasi === 0 && isset($all_destinasi) && is_array($all_destinasi))
           </div>
         </div>
 
+        <div class="col-md-6 col-xl-4">
+          <div class="stat-card d-flex align-items-center justify-content-between">
+            <div>
+              <span class="text-muted small fw-bold text-uppercase">Ulasan Menunggu</span>
+              <h2 class="fw-bold text-dark mb-0 mt-1"><?php echo $pending_reviews; ?></h2>
+              <a class="text-success small fw-semibold" href="reviews.php">Buka moderasi <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="stat-icon" style="background: rgba(255, 193, 7, 0.14); color: #8a6500;">
+              <i class="bi bi-chat-square-text"></i>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- Quick Action Cards -->
@@ -398,6 +424,24 @@ if ($total_destinasi === 0 && isset($all_destinasi) && is_array($all_destinasi))
             </p>
             <a href="destinasi.php" class="btn btn-outline-success btn-sm rounded-pill px-3 py-2 fw-semibold text-decoration-none">
               <i class="bi bi-arrow-right-circle me-1"></i> Buka Manajemen Destinasi
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="stat-card h-100">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="brand-icon-box" style="background: rgba(255, 193, 7, 0.14); color: #8a6500;">
+                <i class="bi bi-chat-square-text"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold text-dark mb-0">Moderasi Ulasan</h5>
+                <span class="text-muted small">Atur persetujuan publikasi</span>
+              </div>
+            </div>
+            <p class="text-muted small mb-4">Tinjau ulasan pengguna dan setujui atau sembunyikan tanpa mengubah isi maupun rating.</p>
+            <a href="reviews.php" class="btn btn-outline-success btn-sm rounded-pill px-3 py-2 fw-semibold text-decoration-none">
+              <i class="bi bi-arrow-right-circle me-1"></i> Buka Moderasi Ulasan
             </a>
           </div>
         </div>

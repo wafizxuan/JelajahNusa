@@ -27,10 +27,17 @@ try {
             d.card_nama   AS nama,
             d.card_lokasi AS lokasi,
             d.card_image  AS foto,
-            d.card_rating AS rating,
+            review_summary.rating,
+            COALESCE(review_summary.total_ulasan, 0) AS total_ulasan,
             uf.created_at
         FROM user_favorites uf
         JOIN destinations d ON d.id = uf.destination_id
+          LEFT JOIN (
+            SELECT destination_id, AVG(rating) AS rating, COUNT(*) AS total_ulasan
+            FROM destination_reviews
+            WHERE status = 'approved'
+            GROUP BY destination_id
+          ) review_summary ON review_summary.destination_id = d.id
         WHERE uf.user_id = :uid
         ORDER BY uf.created_at DESC
     ");
@@ -283,10 +290,15 @@ $totalFavorit = count($favorites);
                   <span class="destination-location">
                     <i class="bi bi-geo-alt"></i> <?php echo htmlspecialchars($fav['lokasi']); ?>
                   </span>
-                  <?php if (!empty($fav['rating'])): ?>
-                  <span class="destination-rating-inline">
+                  <?php if ($fav['rating'] !== null): ?>
+                  <span class="destination-rating-inline" title="Rating dari ulasan pengguna">
                     <i class="bi bi-star-fill text-warning"></i>
                     <?php echo number_format((float)$fav['rating'], 1); ?>
+                    <span class="text-muted small">(<?php echo number_format((int)$fav['total_ulasan']); ?>)</span>
+                  </span>
+                  <?php else: ?>
+                  <span class="destination-rating-inline text-muted" style="font-size:0.75rem;" title="Belum tersedia">
+                    <i class="bi bi-star text-muted me-1"></i>Belum tersedia
                   </span>
                   <?php endif; ?>
                 </div>

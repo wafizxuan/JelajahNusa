@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($nama)) $errors[] = 'Nama destinasi wajib diisi.';
     if (empty($provinsi)) $errors[] = 'Provinsi wajib diisi.';
     if (empty($wilayah)) $errors[] = 'Wilayah lengkap wajib diisi.';
-    if (empty($hero_image)) $errors[] = 'URL Hero Image wajib diisi.';
+    if (empty($hero_image)) $errors[] = 'URL gambar utama wajib diisi.';
     if (empty($deskripsi)) $errors[] = 'Deskripsi lengkap wajib diisi.';
 
     // Auto slugify jika dikosongkan
@@ -241,7 +241,8 @@ $csrf_token = generateCsrfToken();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Destinasi #<?php echo $destId; ?> — <?php echo htmlspecialchars($dest['nama']); ?> | JelajahNusa Admin</title>
+  <meta http-equiv="content-language" content="id">
+  <title>Ubah Destinasi #<?php echo $destId; ?> — <?php echo htmlspecialchars($dest['nama']); ?> | Administrator JelajahNusa</title>
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -405,19 +406,19 @@ $csrf_token = generateCsrfToken();
 
   <!-- Sidebar -->
   <aside class="admin-sidebar" id="adminSidebar">
-    <a href="index.php" class="admin-brand" aria-label="JelajahNusa Admin Panel">
+    <a href="index.php" class="admin-brand" aria-label="Panel Administrator JelajahNusa">
       <img class="admin-brand-logo"
         src="../assets/images/logo-horizontal.svg"
-        alt="JelajahNusa — Admin Panel"
+        alt="JelajahNusa — Panel Administrator"
         width="180" height="46">
-      <div class="text-white-50 small mt-1" style="font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding-left: 2px;">Admin Management</div>
+      <div class="text-white-50 small mt-1" style="font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding-left: 2px;">Pengelolaan Administrator</div>
     </a>
 
     <ul class="admin-menu-list">
       <li>
         <a href="index.php" class="admin-menu-link">
           <i class="bi bi-speedometer2"></i>
-          <span>Dashboard</span>
+          <span>Dasbor</span>
         </a>
       </li>
       <li>
@@ -436,7 +437,7 @@ $csrf_token = generateCsrfToken();
 
     <div class="p-3 border-top border-white border-opacity-10 d-flex flex-column gap-2">
       <a href="../index.php" class="btn btn-outline-light btn-sm rounded-pill py-2 w-100 text-decoration-none">
-        <i class="bi bi-globe2 me-1"></i> Kembali ke Website
+        <i class="bi bi-globe2 me-1"></i> Kembali ke Situs Web
       </a>
       <a href="../auth/logout.php" class="btn btn-danger btn-sm rounded-pill py-2 w-100 text-decoration-none" style="background: rgba(220, 53, 69, 0.2); border-color: rgba(220, 53, 69, 0.4); color: #ffb8b8;">
         <i class="bi bi-box-arrow-right me-1"></i> Keluar
@@ -448,13 +449,13 @@ $csrf_token = generateCsrfToken();
   <div class="admin-main">
     <header class="admin-topbar">
       <div class="d-flex align-items-center gap-3">
-        <button class="btn btn-link text-dark d-lg-none p-0 fs-4" type="button" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
+        <button class="btn btn-link text-dark d-lg-none p-0 fs-4" type="button" id="sidebarToggleBtn" aria-label="Buka atau tutup menu">
           <i class="bi bi-list"></i>
         </button>
         <div class="d-flex align-items-center gap-2">
           <a href="destinasi.php" class="text-muted text-decoration-none small"><i class="bi bi-arrow-left me-1"></i>Daftar Destinasi</a>
           <span class="text-muted">/</span>
-          <span class="fw-bold text-dark small">Edit Destinasi #<?php echo $destId; ?></span>
+          <span class="fw-bold text-dark small">Ubah Destinasi #<?php echo $destId; ?></span>
         </div>
       </div>
       <div class="d-flex align-items-center gap-2">
@@ -479,7 +480,7 @@ $csrf_token = generateCsrfToken();
               </ul>
             </div>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
         </div>
       <?php endif; ?>
 
@@ -493,14 +494,14 @@ $csrf_token = generateCsrfToken();
           <div>
             <div class="d-flex align-items-center gap-2 mb-1">
               <span class="badge bg-light text-dark border">ID #<?php echo $destId; ?></span>
-              <h4 class="fw-bold text-dark mb-0">Edit Destinasi: <?php echo htmlspecialchars($dest['nama']); ?></h4>
+              <h4 class="fw-bold text-dark mb-0">Ubah Destinasi: <?php echo htmlspecialchars($dest['nama']); ?></h4>
             </div>
-            <p class="text-muted small mb-0">Perbarui informasi destinasi ini di MySQL. Seluruh perubahan langsung tersinkronisasi ke website.</p>
+            <p class="text-muted small mb-0">Perbarui informasi destinasi ini di MySQL. Seluruh perubahan langsung tersinkronisasi ke situs web.</p>
           </div>
           <div class="d-flex gap-2">
             <a href="destinasi.php" class="btn btn-outline-secondary btn-sm rounded-pill px-3 py-2">Batal</a>
             <a href="../pages/detail-destinasi.php?id=<?php echo $destId; ?>" target="_blank" class="btn btn-outline-forest btn-sm rounded-pill px-3 py-2">
-              <i class="bi bi-eye me-1"></i> Preview Detail
+              <i class="bi bi-eye me-1"></i> Pratinjau Detail
             </a>
             <button type="submit" class="btn btn-forest btn-sm rounded-pill px-4 py-2 fw-semibold">
               <i class="bi bi-check2-circle me-1"></i> Simpan Perubahan
@@ -536,18 +537,18 @@ $csrf_token = generateCsrfToken();
             </div>
             <div class="col-md-3">
               <label for="rating" class="form-label small fw-bold text-dark">
-                Rating
-                <span class="badge bg-secondary ms-1" style="font-size:.65rem;">Otomatis via Google Maps</span>
+                Penilaian
+                <span class="badge bg-secondary ms-1" style="font-size:.65rem;">Otomatis melalui Google Maps</span>
               </label>
               <input type="text" class="form-control bg-light text-muted" id="rating" name="rating"
                      value="<?php echo $dest['rating'] !== null ? number_format((float)$dest['rating'], 1) : 'Belum tersedia'; ?>"
                      readonly tabindex="-1"
-                     title="Rating diambil otomatis dari Google Maps.">
+                     title="Penilaian diambil otomatis dari Google Maps.">
             </div>
             <div class="col-md-3">
               <label for="total_ulasan" class="form-label small fw-bold text-dark">
                 Total Ulasan
-                <span class="badge bg-secondary ms-1" style="font-size:.65rem;">Otomatis via Google Maps</span>
+                <span class="badge bg-secondary ms-1" style="font-size:.65rem;">Otomatis melalui Google Maps</span>
               </label>
               <input type="text" class="form-control bg-light text-muted" id="total_ulasan" name="total_ulasan"
                      value="<?php echo $dest['total_ulasan'] !== null ? number_format((int)$dest['total_ulasan']) : 'Belum tersedia'; ?>"
@@ -555,15 +556,15 @@ $csrf_token = generateCsrfToken();
                      title="Jumlah ulasan diambil otomatis dari Google Maps.">
             </div>
             <div class="col-md-6">
-              <label for="hero_image" class="form-label small fw-bold text-dark">URL Hero Image (1920px) <span class="text-danger">*</span></label>
+              <label for="hero_image" class="form-label small fw-bold text-dark">URL Gambar Utama (1920px) <span class="text-danger">*</span></label>
               <input type="url" class="form-control" id="hero_image" name="hero_image" value="<?php echo htmlspecialchars($formData['hero_image'] ?? ''); ?>" required>
             </div>
             <div class="col-12">
-              <label for="tagline" class="form-label small fw-bold text-dark">Tagline Inspiratif</label>
+              <label for="tagline" class="form-label small fw-bold text-dark">Slogan Inspiratif</label>
               <input type="text" class="form-control" id="tagline" name="tagline" value="<?php echo htmlspecialchars($formData['tagline'] ?? ''); ?>">
             </div>
             <div class="col-md-6">
-              <label for="about_heading" class="form-label small fw-bold text-dark">Heading Seksi Tentang Destinasi</label>
+              <label for="about_heading" class="form-label small fw-bold text-dark">Judul Bagian Tentang Destinasi</label>
               <input type="text" class="form-control" id="about_heading" name="about_heading" value="<?php echo htmlspecialchars($formData['about_heading'] ?? ''); ?>">
             </div>
             <div class="col-12">
@@ -576,7 +577,7 @@ $csrf_token = generateCsrfToken();
         <!-- 2. DATA KHUSUS KARTU BERANDA -->
         <div class="content-card">
           <span class="section-header-pill" style="background: rgba(168, 185, 154, 0.2);">
-            <i class="bi bi-grid-3x3-gap"></i> 2. Informasi Kartu Beranda (Homepage Card)
+            <i class="bi bi-grid-3x3-gap"></i> 2. Informasi Kartu Beranda
           </span>
           <div class="row g-3">
             <div class="col-md-4">
@@ -592,7 +593,7 @@ $csrf_token = generateCsrfToken();
               <input type="text" class="form-control" id="card_kategori" name="card_kategori" value="<?php echo htmlspecialchars($formData['card_kategori'] ?? ''); ?>">
             </div>
             <div class="col-md-4">
-              <label for="card_kategori_id" class="form-label small fw-bold text-dark">ID Kategori Filter Homepage</label>
+              <label for="card_kategori_id" class="form-label small fw-bold text-dark">ID Kategori Filter Beranda</label>
               <select class="form-select" id="card_kategori_id" name="card_kategori_id" required>
                 <option value="pantai" <?php echo (($formData['card_kategori_id'] ?? '') === 'pantai') ? 'selected' : ''; ?>>pantai (Wisata Pantai)</option>
                 <option value="budaya" <?php echo (($formData['card_kategori_id'] ?? '') === 'budaya') ? 'selected' : ''; ?>>budaya (Wisata Budaya)</option>
@@ -602,7 +603,7 @@ $csrf_token = generateCsrfToken();
             </div>
             <div class="col-md-4">
               <label for="card_rating" class="form-label small fw-bold text-dark">
-                Rating Kartu
+                Penilaian Kartu
                 <span class="badge bg-secondary ms-1" style="font-size:.65rem;">Otomatis via Google Maps</span>
               </label>
               <input type="text" class="form-control bg-light text-muted" id="card_rating" name="card_rating"

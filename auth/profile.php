@@ -37,7 +37,7 @@ function requireAuth(): int
 {
     if (!isset($_SESSION['user']['id']) || !is_int($_SESSION['user']['id'])) {
         jsonOut(['success' => false, 'auth' => false,
-                 'message' => 'Silakan login terlebih dahulu.'], 401);
+                 'message' => 'Silakan masuk terlebih dahulu.'], 401);
     }
     return (int) $_SESSION['user']['id'];
 }
@@ -146,7 +146,7 @@ if ($method === 'POST' && ($_POST['action'] ?? '') === 'change_password') {
 
     // Validasi kelengkapan
     if ($oldPass === '' || $newPass === '' || $confirmPass === '') {
-        jsonOut(['success' => false, 'message' => 'Semua field kata sandi wajib diisi.'], 422);
+        jsonOut(['success' => false, 'message' => 'Semua kolom kata sandi wajib diisi.'], 422);
     }
 
     // Validasi panjang password baru

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * JelajahNusa - Nature-Inspired Travel Guide & Planner
  * Frontend JavaScript Interactions
  */
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mockupTitle.textContent = `Rencana Liburan ${days} Hari: Eksplorasi ${destination}`;
       }
       if (mockupMeta) {
-        mockupMeta.textContent = `${days} Hari • Kategori: ${travelerType} • Rekomendasi Terpadu`;
+        mockupMeta.textContent = `${days} Hari • Kategori: ${formatTravelerCategory(travelerType)} • Rekomendasi Terpadu`;
       }
 
       // Close modal
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         plannerSection.scrollIntoView({ behavior: 'smooth' });
       }
 
-      showToast(`Itinerary untuk ${destination} (${days} Hari - ${travelerType}) berhasil diperbarui ke rencana perjalanan Anda!`);
+      showToast(`Jadwal perjalanan ke ${destination} selama ${days} hari untuk kategori ${formatTravelerCategory(travelerType)} berhasil diperbarui!`);
     });
   }
 
@@ -400,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
       emptyState.classList.remove('d-none');
       emptyState.innerHTML = `
         <i class="bi bi-lock text-muted fs-1 d-block mb-3"></i>
-        <h6 class="fw-bold text-dark">Login untuk Melihat Favorit</h6>
+        <h6 class="fw-bold text-dark">Masuk untuk Melihat Favorit</h6>
         <p class="text-muted small mb-3">Simpan dan lihat daftar destinasi favorit Anda dengan masuk ke akun JelajahNusa.</p>
         <button type="button" class="btn btn-forest btn-sm rounded-pill px-4"
           data-bs-dismiss="modal"
@@ -495,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast(data?.message || 'Gagal menambahkan favorit.');
       }
     } catch (_) {
-      showToast('Gagal menghubungi server. Cek koneksi Anda.');
+      showToast('Gagal terhubung ke server. Periksa koneksi internet Anda.');
     } finally {
       btn.disabled = false;
     }
@@ -554,7 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast(data?.message || 'Gagal menghapus favorit.');
       }
     } catch (_) {
-      showToast('Gagal menghubungi server. Cek koneksi Anda.');
+      showToast('Gagal terhubung ke server. Periksa koneksi internet Anda.');
     } finally {
       if (btn) btn.disabled = false;
     }
@@ -585,13 +585,13 @@ document.addEventListener('DOMContentLoaded', () => {
         note.className = 'fav-login-required-toast';
         note.innerHTML = `
           <i class="bi bi-lock-fill me-2"></i>
-          <span>Silakan <strong>login</strong> terlebih dahulu untuk menyimpan destinasi favorit.</span>
+          <span>Silakan <strong>masuk</strong> terlebih dahulu untuk menyimpan destinasi favorit.</span>
           <button type="button"
             class="btn btn-forest btn-sm rounded-pill ms-2 px-3"
             data-bs-toggle="modal"
             data-bs-target="#authModal"
             onclick="document.getElementById('fav-login-note')?.remove();">
-            Login
+            Masuk
           </button>
           <button type="button" class="btn-close btn-close-sm ms-2"
             aria-label="Tutup"
@@ -639,7 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (clearAllBtn) {
     clearAllBtn.addEventListener('click', async () => {
       if (!JN_LOGGED_IN) return;
-      if (!confirm('Apakah Anda yakin ingin menghapus seluruh destinasi dari daftar favorit?')) return;
+      if (!confirm('Yakin ingin menghapus semua destinasi dari daftar favorit?')) return;
 
       clearAllBtn.disabled = true;
       try {
@@ -661,7 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
           showToast(data?.message || 'Gagal mengosongkan daftar favorit.');
         }
       } catch (_) {
-        showToast('Gagal menghubungi server.');
+        showToast('Gagal terhubung ke server.');
       } finally {
         clearAllBtn.disabled = false;
       }
@@ -807,7 +807,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const redirectVal = urlParams.get('redirect') || '';
         let pageName = 'halaman yang Anda tuju';
         if (redirectVal.includes('favorit')) pageName = 'Destinasi Favorit';
-        else if (redirectVal.includes('rencana-perjalanan') || redirectVal.includes('planner')) pageName = 'Travel Planner';
+        else if (redirectVal.includes('rencana-perjalanan') || redirectVal.includes('planner')) pageName = 'Rencana Perjalanan';
 
         const alertEl = document.getElementById('authAlert');
         if (alertEl) {
@@ -827,7 +827,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tabRegister.className = 'btn btn-link text-muted text-decoration-none flex-fill rounded-pill py-1 small fw-bold';
       formLogin.classList.remove('d-none');
       formRegister.classList.add('d-none');
-      if (authModalTitle) authModalTitle.textContent = 'Masuk ke JelajahNusa';
+      if (authModalTitle) authModalTitle.innerHTML = 'Masuk ke <span translate="no" class="notranslate">JelajahNusa</span>';
     });
 
     tabRegister.addEventListener('click', () => {
@@ -836,7 +836,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tabLogin.className = 'btn btn-link text-muted text-decoration-none flex-fill rounded-pill py-1 small fw-bold';
       formRegister.classList.remove('d-none');
       formLogin.classList.add('d-none');
-      if (authModalTitle) authModalTitle.textContent = 'Daftar Akun JelajahNusa';
+      if (authModalTitle) authModalTitle.innerHTML = 'Daftar Akun <span translate="no" class="notranslate">JelajahNusa</span>';
     });
   }
 
@@ -922,7 +922,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }, 800);
         } else {
-          const errorMsg = (data && data.message) ? data.message : 'Gagal masuk. Periksa kembali email dan kata sandi Anda.';
+          const errorMsg = (data && data.message) ? data.message : 'Gagal masuk. Periksa kembali alamat email dan kata sandi Anda.';
           showAuthAlert(errorMsg, false);
           if (submitBtn) {
             submitBtn.disabled = false;
@@ -1107,6 +1107,15 @@ function getActiveDbTrip() {
   return dbTrips.find(t => String(t.id) === String(activeDbTripId)) || null;
 }
 
+function formatTravelerCategory(category) {
+  const labels = {
+    'Pasangan & Keluarga': 'Pasangan & Keluarga',
+    'Solo Traveler': 'Wisatawan Solo (Mandiri)',
+    'Teman & Grup': 'Teman & Kelompok',
+  };
+  return labels[category] || category;
+}
+
 // ── API calls ─────────────────────────────────────────────────────────────────
 async function apiGet(params) {
   const url = TRIPS_API + '?' + new URLSearchParams(params).toString();
@@ -1157,7 +1166,7 @@ function renderTripSummary() {
       <h3>${escHtml(trip.name)}</h3>
       <p><i class="bi bi-geo-alt"></i> ${escHtml(trip.destination)}</p>
       <p><i class="bi bi-calendar"></i> ${formatDateId(trip.start_date)} - ${formatDateId(trip.end_date)}</p>
-      <p><i class="bi bi-people"></i> ${escHtml(trip.category)}</p>
+      <p><i class="bi bi-people"></i> ${escHtml(formatTravelerCategory(trip.category))}</p>
       <p>${escHtml(String(trip.days))} Hari Perjalanan &nbsp;·&nbsp; ${escHtml(String(trip.item_count ?? 0))} Aktivitas</p>
     </div>`;
 }
@@ -1203,7 +1212,7 @@ async function renderDbItinerary() {
 
   const data = await apiGet({ action: 'get', trip_id: trip.id });
   if (!data || !data.success) {
-    dayItineraryContainer.innerHTML = '<p class="text-danger small text-center py-3">Gagal memuat itinerary.</p>';
+    dayItineraryContainer.innerHTML = '<p class="text-danger small text-center py-3">Gagal memuat jadwal perjalanan.</p>';
     return;
   }
 
@@ -1233,7 +1242,7 @@ async function renderDbItinerary() {
                   ${item.note       ? `<p class="small mb-0">${escHtml(item.note)}</p>` : ''}
                 </div>
                 <button type="button" class="btn btn-outline-danger btn-sm align-self-start flex-shrink-0"
-                        data-delete-db-item="${item.id}" title="Hapus item ini">
+                        data-delete-db-item="${item.id}" title="Hapus kegiatan ini">
                   <i class="bi bi-trash"></i>
                 </button>
               </div>
@@ -1245,14 +1254,14 @@ async function renderDbItinerary() {
   // Handler hapus item
   dayItineraryContainer.querySelectorAll('[data-delete-db-item]').forEach(btn => {
     btn.addEventListener('click', async () => {
-      if (!confirm('Yakin ingin menghapus aktivitas ini?')) return;
+      if (!confirm('Yakin ingin menghapus kegiatan ini?')) return;
       btn.disabled = true;
       const r = await apiPost({ action: 'delete_item', item_id: btn.dataset.deleteDbItem });
       if (r && r.success) {
-        showToast('Aktivitas berhasil dihapus.');
+        showToast('Kegiatan berhasil dihapus.');
         await refreshPlannerPage();
       } else {
-        showToast(r?.message || 'Gagal menghapus aktivitas.');
+        showToast(r?.message || 'Gagal menghapus kegiatan.');
         btn.disabled = false;
       }
     });
@@ -1366,12 +1375,12 @@ if (createTripForm) {
     const category  = document.getElementById('tripCategorySelect')?.value     || '';
     const notes     = document.getElementById('tripNotesInput')?.value.trim()  || '';
 
-    if (!name || !dest || !startDate || !endDate || !category) { alert('Mohon lengkapi semua data!'); return; }
+    if (!name || !dest || !startDate || !endDate || !category) { alert('Mohon lengkapi semua data.'); return; }
     const errStart = validateDateNotPast(startDate, 'Tanggal berangkat');
     if (errStart) { alert(errStart); return; }
     const errEnd = validateDateNotPast(endDate, 'Tanggal pulang');
     if (errEnd) { alert(errEnd); return; }
-    if (endDate < startDate) { alert('Tanggal pulang tidak boleh sebelum tanggal berangkat!'); return; }
+    if (endDate < startDate) { alert('Tanggal pulang tidak boleh sebelum tanggal berangkat.'); return; }
 
     const submitBtn = createTripForm.querySelector('button[type="submit"]');
     if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Menyimpan...'; }
@@ -1409,7 +1418,7 @@ if (itemForm) {
     const photo    = document.getElementById('itemPhotoInput')?.value.trim()    || '';
     const note     = document.getElementById('itemNoteInput')?.value.trim()     || '';
 
-    if (!name || !cat || !day) { alert('Nama aktivitas, kategori, dan hari wajib diisi!'); return; }
+    if (!name || !cat || !day) { alert('Nama kegiatan, kategori, dan hari wajib diisi.'); return; }
 
     const submitBtn = itemForm.querySelector('button[type="submit"]');
     if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Menyimpan...'; }
@@ -1425,9 +1434,9 @@ if (itemForm) {
       await renderDbItinerary();
       await loadDbTrips();
       renderTripSummary();
-      showToast('Aktivitas berhasil ditambahkan!');
+      showToast('Kegiatan berhasil ditambahkan!');
     } else {
-      alert(data?.message || 'Gagal menambahkan aktivitas.');
+      alert(data?.message || 'Gagal menambahkan kegiatan.');
     }
   });
 }
@@ -1443,12 +1452,12 @@ if (plannerBuilderForm) {
     const mockupTitle = document.getElementById('mockupTripTitle');
     const mockupMeta  = document.getElementById('mockupTripMeta');
     if (mockupTitle) mockupTitle.textContent = `Rencana Liburan ${days} Hari: Eksplorasi ${destination}`;
-    if (mockupMeta)  mockupMeta.textContent  = `${days} Hari • Kategori: ${travelerType} • Rekomendasi Terpadu`;
+    if (mockupMeta)  mockupMeta.textContent  = `${days} Hari • Kategori: ${formatTravelerCategory(travelerType)} • Rekomendasi Terpadu`;
     const modalEl = document.getElementById('plannerModal');
     if (modalEl) bootstrap.Modal.getInstance(modalEl)?.hide();
     const plannerSection = document.getElementById('planner');
     if (plannerSection) plannerSection.scrollIntoView({ behavior: 'smooth' });
-    showToast(`Itinerary untuk ${destination} (${days} Hari) berhasil diperbarui!`);
+    showToast(`Jadwal perjalanan ke ${destination} selama ${days} hari berhasil diperbarui!`);
   });
 }
 
@@ -1458,7 +1467,7 @@ if (btnDeleteTrip) {
   btnDeleteTrip.addEventListener('click', async () => {
     const trip = getActiveDbTrip();
     if (!trip) { alert('Belum ada rencana perjalanan yang dipilih.'); return; }
-    if (!confirm(`Yakin ingin menghapus rencana "${trip.name}" beserta seluruh aktivitasnya?`)) return;
+    if (!confirm(`Yakin ingin menghapus rencana "${trip.name}" beserta seluruh kegiatannya?`)) return;
 
     btnDeleteTrip.disabled = true;
     const data = await apiPost({ action: 'delete_trip', trip_id: trip.id });
@@ -1475,7 +1484,7 @@ if (btnDeleteTrip) {
   });
 }
 
-// ── Cetak itinerary ───────────────────────────────────────────────────────────
+// ── Cetak jadwal perjalanan ───────────────────────────────────────────────────
 const btnPrintTrip = document.getElementById('btnPrintTripBtn');
 if (btnPrintTrip) {
   btnPrintTrip.addEventListener('click', async () => {
@@ -1486,12 +1495,12 @@ if (btnPrintTrip) {
     const data = await apiGet({ action: 'get', trip_id: trip.id });
     btnPrintTrip.disabled = false;
 
-    if (!data || !data.success) { alert('Gagal mengambil data itinerary.'); return; }
+    if (!data || !data.success) { alert('Gagal mengambil data jadwal perjalanan.'); return; }
 
     const fullTrip = data.trip;
     const allItems = fullTrip.items || [];
     const printWindow = window.open('', '_blank');
-    if (!printWindow) { alert('Izinkan pop-up pada browser untuk mencetak itinerary.'); return; }
+    if (!printWindow) { alert('Izinkan jendela pop-up di peramban untuk mencetak jadwal perjalanan.'); return; }
 
     let itineraryHTML = '';
     for (let day = 1; day <= fullTrip.days; day++) {
@@ -1504,11 +1513,11 @@ if (btnPrintTrip) {
               ${item.time_visit ? `<p>Waktu: ${escHtml(item.time_visit)}</p>` : ''}
               ${item.note       ? `<p>Catatan: ${escHtml(item.note)}</p>` : ''}
             </div>`).join('')
-          : '<p>Belum ada aktivitas untuk hari ini.</p>'
+          : '<p>Belum ada kegiatan untuk hari ini.</p>'
         }</section>`;
     }
     printWindow.document.write(`<!DOCTYPE html><html lang="id"><head>
-      <meta charset="UTF-8"><title>Itinerary - ${escHtml(fullTrip.name)}</title>
+      <meta charset="UTF-8"><title>Jadwal Perjalanan - ${escHtml(fullTrip.name)}</title>
       <style>body{font-family:Arial,sans-serif;padding:30px;color:#29352D}h1{color:#345B49}
       h2{border-bottom:2px solid #A8B99A;padding-bottom:8px}
       .activity{padding:12px;margin-bottom:12px;border:1px solid #ddd;border-radius:8px}
@@ -1541,7 +1550,7 @@ if (btnAddTripItem) {
 // ==========================================
 
 /**
- * Handler modal "Tambahkan ke Trip" di halaman detail destinasi.
+ * Handler modal "Tambahkan ke Rencana" di halaman detail destinasi.
  * Tombol .btn-add-to-trip-trigger membuka modal ini.
  * Tab A: tambah ke trip yang sudah ada.
  * Tab B: buat trip baru sekaligus tambahkan item ke Hari 1.
@@ -1633,7 +1642,7 @@ async function loadAddToTripModal() {
     if (newForm)  newForm.classList.add('d-none');
     return;
   }
-  if (!data.success) { showAddToTripAlert('Gagal memuat daftar trip.'); return; }
+  if (!data.success) { showAddToTripAlert('Gagal memuat daftar rencana.'); return; }
 
   if (guestNew) guestNew.classList.add('d-none');
   if (newForm)  newForm.classList.remove('d-none');
@@ -1718,15 +1727,15 @@ if (addToExistingForm) {
       note,
     });
 
-    if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = '<i class="bi bi-plus-circle me-1"></i> Tambahkan ke Trip Ini'; }
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = '<i class="bi bi-plus-circle me-1"></i> Tambahkan ke Rencana Ini'; }
 
     if (data && data.success) {
       showAddToTripAlert(`✅ ${pendingItem.name} berhasil ditambahkan ke rencana perjalanan!`, true);
       addToExistingForm.reset();
-      showToast(`🗺️ ${pendingItem.name} ditambahkan ke Trip!`);
+      showToast(`🗺️ ${pendingItem.name} ditambahkan ke rencana perjalanan!`);
       setTimeout(() => { bootstrap.Modal.getInstance(addToTripModalEl)?.hide(); }, 1400);
     } else {
-      showAddToTripAlert(data?.message || 'Gagal menambahkan item ke trip.');
+      showAddToTripAlert(data?.message || 'Gagal menambahkan kegiatan ke rencana perjalanan.');
     }
   });
 }
@@ -1759,7 +1768,7 @@ if (createNewTripForm) {
     }
 
     const submitBtn = document.getElementById('createNewTripBtn');
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Membuat Trip...'; }
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Membuat Rencana...'; }
 
     const data = await tripsApiPost({
       action:        'create',
@@ -1776,15 +1785,15 @@ if (createNewTripForm) {
       item_day:      1,
     });
 
-    if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = '<i class="bi bi-check2-circle me-1"></i> Buat Trip & Tambahkan Item'; }
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = '<i class="bi bi-check2-circle me-1"></i> Buat Rencana & Tambahkan Kegiatan'; }
 
     if (data && data.success) {
-      showAddToTripAlert(`✅ Trip baru berhasil dibuat dan ${pendingItem.name} ditambahkan ke Hari 1!`, true);
+      showAddToTripAlert(`✅ Rencana baru berhasil dibuat dan ${pendingItem.name} ditambahkan ke Hari 1!`, true);
       createNewTripForm.reset();
-      showToast(`🗺️ Trip baru + ${pendingItem.name} berhasil disimpan!`);
+      showToast(`🗺️ Rencana baru dan ${pendingItem.name} berhasil disimpan!`);
       setTimeout(() => { bootstrap.Modal.getInstance(addToTripModalEl)?.hide(); }, 1600);
     } else {
-      showAddToTripAlert(data?.message || 'Gagal membuat trip baru.');
+      showAddToTripAlert(data?.message || 'Gagal membuat rencana baru.');
     }
   });
 }

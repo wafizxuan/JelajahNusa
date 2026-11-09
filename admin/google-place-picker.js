@@ -31,19 +31,19 @@
     panel.innerHTML = `
       <div class="section-header-pill" style="background:rgba(52,91,73,0.08);color:#345B49;">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 488 512" fill="currentColor" aria-hidden="true"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
-        Pencocokan Google Maps Place
+        Pencocokan Tempat di Google Maps
       </div>
 
       <p class="text-muted small mb-3">
-        Cari dan pilih tempat yang sesuai di Google Maps. Rating dan ulasan akan diambil otomatis dari Google.
-        Admin <strong>tidak bisa</strong> mengubah rating secara manual — hanya Google Maps yang menjadi sumber data.
+        Cari dan pilih tempat yang sesuai di Google Maps. Penilaian dan ulasan akan diambil otomatis dari Google.
+        Administrator <strong>tidak dapat</strong> mengubah penilaian secara manual — hanya Google Maps yang menjadi sumber data.
       </p>
 
-      <!-- Status Place ID saat ini -->
+      <!-- Status ID Google Maps saat ini -->
       <div id="gmp-current-status" class="alert ${currentPlaceId ? 'alert-success' : 'alert-secondary'} py-2 px-3 small mb-3 border-0 rounded-3">
         ${currentPlaceId
           ? `<i class="bi bi-check-circle-fill me-1"></i>Terhubung: <code>${currentPlaceId}</code>
-             <button type="button" id="gmp-clear-btn" class="btn btn-sm btn-link text-danger p-0 ms-2">Hapus asosiasi</button>`
+             <button type="button" id="gmp-clear-btn" class="btn btn-sm btn-link text-danger p-0 ms-2">Hapus tautan</button>`
           : `<i class="bi bi-info-circle me-1"></i>Belum terhubung dengan Google Maps.`}
       </div>
 
@@ -72,8 +72,8 @@
       <!-- Disabled notice -->
       <div id="gmp-disabled-notice" class="alert alert-warning py-2 px-3 small d-none border-0 rounded-3">
         <i class="bi bi-exclamation-triangle me-1"></i>
-        Google Places API belum dikonfigurasi. Isi <code>config/places_api.php</code> dan aktifkan <code>GOOGLE_PLACES_ENABLED = true</code>.
-        Pencocokan Place ID tetap bisa disimpan, tapi pencarian tidak tersedia.
+        API Places Google belum dikonfigurasi. Isi <code>config/places_api.php</code> dan aktifkan <code>GOOGLE_PLACES_ENABLED = true</code>.
+        ID Google Maps tetap bisa disimpan, tetapi pencarian tidak tersedia.
       </div>
 
       <!-- Hasil pencarian -->
@@ -172,7 +172,7 @@
     const clearBtn = document.getElementById('gmp-clear-btn');
     if (clearBtn) {
       clearBtn.addEventListener('click', () => {
-        if (!confirm('Hapus asosiasi Google Maps dari destinasi ini?')) return;
+        if (!confirm('Hapus tautan Google Maps dari destinasi ini?')) return;
         if (!destId) {
           // Mode tambah: cukup kosongkan hidden field
           updateHidden('');
@@ -234,7 +234,7 @@
       resultsEl.classList.add('d-none');
       document.getElementById('gmp-selected-name').textContent    = place.name;
       document.getElementById('gmp-selected-address').textContent = place.address || '';
-      document.getElementById('gmp-selected-rating').textContent  = place.rating ? `${place.rating} (${(place.user_ratings || 0).toLocaleString('id-ID')} ulasan)` : 'Belum ada rating';
+      document.getElementById('gmp-selected-rating').textContent  = place.rating ? `${place.rating} (${(place.user_ratings || 0).toLocaleString('id-ID')} ulasan)` : 'Belum ada penilaian';
       document.getElementById('gmp-selected-id').textContent      = place.place_id;
       selectedEl.classList.remove('d-none');
     }
@@ -252,7 +252,7 @@
             document.getElementById('gmp-current-status').className = 'alert alert-success py-2 px-3 small mb-3 border-0 rounded-3';
             document.getElementById('gmp-current-status').innerHTML = `<i class="bi bi-check-circle-fill me-1"></i>Terhubung: <code>${pid}</code>`;
             selectedEl.classList.add('d-none');
-            showNotif('✅ Place ID berhasil disimpan!');
+            showNotif('✅ ID Google Maps berhasil disimpan!');
           }
         });
       } else {
@@ -303,7 +303,7 @@
         if (d && d.success) {
           callback(true);
         } else {
-          alert(d?.message || 'Gagal menyimpan Place ID.');
+          alert(d?.message || 'Gagal menyimpan ID Google Maps.');
           callback(false);
         }
       });

@@ -45,7 +45,7 @@ $all_destinasi = [
         ],
         'waktu_terbaik' => [
             'musim' => 'Oktober - April (Kondisi Laut Tenang)',
-            'cuaca' => 'Angin teduh, jarak pandang (visibility) bawah laut mencapai 30 meter, sempurna untuk diving.',
+            'cuaca' => 'Angin teduh, jarak pandang bawah laut mencapai 30 meter, sempurna untuk menyelam.',
             'tips'  => 'Bulan November hingga Februari adalah momen emas untuk bertemu kawanan pari manta di Manta Sandy.'
         ],
         'popular_places' => [
@@ -87,27 +87,27 @@ $all_destinasi = [
                 'id'        => 'misool-resort',
                 'nama'      => 'Misool Eco Resort',
                 'lokasi'    => 'Kepulauan Misool Selatan',
-                'jenis'     => 'Private Island Eco Resort',
+                'jenis'     => 'Resor Ekologi Pulau Privat',
                 'harga'     => 'Rp 6.500.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
-                'fasilitas' => 'Water Cottage • Dive Center • Kawasan Konservasi Laut Privat'
+                'fasilitas' => 'Pondok di Atas Air • Pusat Selam • Kawasan Konservasi Laut Privat'
             ],
             [
                 'id'        => 'raja-ampat-dive-lodge',
                 'nama'      => 'Raja Ampat Dive Lodge',
                 'lokasi'    => 'Pulau Mansuar, Raja Ampat',
-                'jenis'     => 'Beachfront Dive Resort',
+                'jenis'     => 'Resor Selam Tepi Pantai',
                 'harga'     => 'Rp 2.800.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
-                'fasilitas' => 'Dermaga Pribadi • Sunset Terrace • Restoran Hidangan Laut'
+                'fasilitas' => 'Dermaga Pribadi • Teras Senja • Restoran Hidangan Laut'
             ],
             [
                 'id'        => 'arborek-homestay',
                 'nama'      => 'Lalosi Arborek Eco Homestay',
                 'lokasi'    => 'Desa Arborek, Selat Dampier',
-                'jenis'     => 'Overwater Traditional Homestay',
+                'jenis'     => 'Rumah Inap Tradisional di Atas Air',
                 'harga'     => 'Rp 650.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
@@ -146,21 +146,21 @@ $all_destinasi = [
         'things_to_do' => [
             [
                 'icon'      => 'bi-water',
-                'judul'     => 'Diving Kelas Dunia di Selat Dampier',
-                'lokasi'    => 'Cape Kri & Mioskon Island',
+                'judul'     => 'Menyelam Kelas Dunia di Selat Dampier',
+                'lokasi'    => 'Cape Kri & Pulau Mioskon',
                 'durasi'    => 'Tur 1 Hari',
                 'deskripsi' => 'Menyelam di titik dengan rekor spesies ikan terbanyak di dunia serta terumbu karang hidup aneka warna.'
             ],
             [
                 'icon'      => 'bi-compass',
-                'judul'     => 'Trekking Panorama ke Puncak Pianemo',
-                'lokasi'    => 'Pianemo Lookout, Kepulauan Fam',
+                'judul'     => 'Jelajah Panorama ke Puncak Pianemo',
+                'lokasi'    => 'Gardu Pandang Pianemo, Kepulauan Fam',
                 'durasi'    => '2 - 3 Jam',
                 'deskripsi' => 'Mendaki tangga kayu menuju gardu pandang teratas untuk menikmati bentang gugusan pulau karang zamrud.'
             ],
             [
                 'icon'      => 'bi-sun',
-                'judul'     => 'Eksplorasi Pasir Timbul & Snorkeling Pulau Mansuar',
+                'judul'     => 'Eksplorasi Pasir Timbul & Selam Permukaan di Pulau Mansuar',
                 'lokasi'    => 'Pasir Timbul Mansuar',
                 'durasi'    => 'Setengah Hari',
                 'deskripsi' => 'Berjalan santai di atas pasir putih timbul di tengah samudra toska dan berenang bersama biota laut dangkal.'
@@ -178,17 +178,17 @@ $all_destinasi = [
                 'title' => 'Estimasi Biaya Harian',
                 'icon'  => 'bi-cash-coin',
                 'items' => [
-                    'Backpacker / Homestay: Rp 750.000 - Rp 1.400.000 / hari (homestay lokal, makan terpadu, sewa perahu bersama)',
-                    'Menengah / Dive Resort: Rp 2.500.000 - Rp 4.500.000 / hari (resort pantai, sewa speedboat, diving harian)',
-                    'Mewah / Liveaboard: Rp 6.000.000+ / hari (kapal pinisi liveaboard eksklusif, tur privat pulau terpencil)'
+                    'Wisatawan Hemat / Rumah Inap: Rp 750.000 - Rp 1.400.000 / hari (rumah inap lokal, makan terpadu, sewa perahu bersama)',
+                    'Menengah / Resor Selam: Rp 2.500.000 - Rp 4.500.000 / hari (resor pantai, sewa kapal cepat, kegiatan menyelam harian)',
+                    'Mewah / Kapal Wisata Inap: Rp 6.000.000+ / hari (kapal pinisi eksklusif untuk berlayar dan menginap, tur privat ke pulau terpencil)'
                 ]
             ],
             'transportasi' => [
                 'title' => 'Pilihan Transportasi',
                 'icon'  => 'bi-car-front',
                 'items' => [
-                    'Kapal Cepat Ferry Sorong - Waisai: Rp 125.000 - Rp 250.000 / trip (durasi tempuh sekitar 2 jam)',
-                    'Sewa Speedboat Antar Pulau: Rp 2.500.000 - Rp 6.000.000 / hari (sangat disarankan patungan rombongan)',
+                    'Kapal Cepat Feri Sorong - Waisai: Rp 125.000 - Rp 250.000 / perjalanan (durasi tempuh sekitar 2 jam)',
+                    'Sewa Kapal Cepat Antar Pulau: Rp 2.500.000 - Rp 6.000.000 / hari (sangat disarankan patungan rombongan)',
                     'Ojek Lokal Waisai: Rp 20.000 - Rp 50.000 per perjalanan di sekitar pusat pulau Waigeo'
                 ]
             ],
@@ -198,7 +198,7 @@ $all_destinasi = [
                 'items' => [
                     'Siapkan Kartu Masuk Kawasan Konservasi Laut (PIN Tara) sebelum memulai tur wisata bahari',
                     'Bawa uang tunai rupiah secukupnya dari Sorong karena mesin ATM di kepulauan sangat terbatas',
-                    'Gunakan tabir surya ramah terumbu karang (reef-safe sunscreen) demi menjaga ekosistem laut'
+                    'Gunakan tabir surya yang aman bagi terumbu karang demi menjaga ekosistem laut'
                 ]
             ],
             'musim' => [
@@ -242,7 +242,7 @@ $all_destinasi = [
             ],
             [
                 'judul' => 'Surga Bahari & Olahraga Selancar',
-                'desc'  => 'Mulai dari ombak selancar kelas dunia di pesisir Uluwatu hingga ketenangan snorkeling bersama ikan pari manta di Nusa Penida.',
+                'desc'  => 'Mulai dari ombak selancar kelas dunia di pesisir Uluwatu hingga ketenangan menyelam bersama ikan pari manta di Nusa Penida.',
                 'icon'  => 'bi-water'
             ],
             [
@@ -253,7 +253,7 @@ $all_destinasi = [
         ],
         'waktu_terbaik' => [
             'musim' => 'April - Oktober (Musim Kemarau)',
-            'cuaca' => 'Cerah dengan hembusan angin sejuk, kelembapan sedang, sangat ideal untuk aktivitas pantai, trekking fajar, dan eksplorasi pura.',
+            'cuaca' => 'Cerah dengan hembusan angin sejuk, kelembapan sedang, sangat ideal untuk aktivitas pantai, pendakian saat fajar, dan eksplorasi pura.',
             'tips'  => 'Bulan Mei, Juni, dan September merupakan waktu terbaik dengan cuaca prima dan keramaian wisatawan yang lebih tenang dibanding musim puncak liburan.'
         ],
         'popular_places' => [
@@ -278,7 +278,7 @@ $all_destinasi = [
                 'nama'      => 'Pura Luhur Uluwatu',
                 'lokasi'    => 'Kuta Selatan, Badung',
                 'foto'      => 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
-                'tag'       => 'Tebing & Sunset',
+                'tag'       => 'Tebing & Senja',
                 'deskripsi' => 'Pura megah di puncak tebing karang terjal setinggi 70 meter dengan pertunjukan Tari Kecak magis saat senja.'
             ],
             [
@@ -287,7 +287,7 @@ $all_destinasi = [
                 'lokasi'    => 'Klungkung, Bali',
                 'foto'      => 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=800&q=80',
                 'tag'       => 'Wisata Bahari',
-                'deskripsi' => 'Pulau eksotis dengan tebing ikonik Kelingking Beach berbentuk T-Rex dan spot snorkeling ikan pari manta.'
+                'deskripsi' => 'Pulau eksotis dengan tebing ikonik Kelingking Beach berbentuk T-Rex dan lokasi untuk menyelam bersama ikan pari manta.'
             ]
         ],
         'recommended_stays' => [
@@ -295,31 +295,31 @@ $all_destinasi = [
                 'id'        => 'bambu-indah',
                 'nama'      => 'Bambu Indah Eco Luxury Resort',
                 'lokasi'    => 'Sayan, Ubud - Bali',
-                'jenis'     => 'Eco Luxury Resort & Villa',
+                'jenis'     => 'Resor & Vila Ekologis Mewah',
                 'harga'     => 'Rp 2.850.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
-                'fasilitas' => 'Natural Pool • Valley View • Arsitektur Bambu Alami'
+                'fasilitas' => 'Kolam Alami • Pemandangan Lembah • Arsitektur Bambu Alami'
             ],
             [
                 'id'        => 'seminyak-resort',
                 'nama'      => 'The Seminyak Beach Resort & Spa',
-                'lokasi'    => 'Seminyak Beach, Badung - Bali',
-                'jenis'     => 'Beachfront Luxury Resort',
+                'lokasi'    => 'Pantai Seminyak, Badung - Bali',
+                'jenis'     => 'Resor Mewah Tepi Pantai',
                 'harga'     => 'Rp 3.200.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
-                'fasilitas' => 'Infinity Pool Tepi Pantai • Sunset Deck • Spa Kelas Dunia'
+                'fasilitas' => 'Kolam Tepi Pantai Tanpa Batas • Dek Senja • Spa Kelas Dunia'
             ],
             [
                 'id'        => 'munduk-plantation',
                 'nama'      => 'Munduk Moding Nature Resort',
                 'lokasi'    => 'Munduk, Buleleng - Bali',
-                'jenis'     => 'Mountain Eco Lodge & Villa',
+                'jenis'     => 'Penginapan & Vila Ekologis Pegunungan',
                 'harga'     => 'Rp 1.950.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
-                'fasilitas' => 'Cloud Infinity Pool • Kebun Kopi Organik • Udara Sejuk'
+                'fasilitas' => 'Kolam Tanpa Batas di Atas Awan • Kebun Kopi Organik • Udara Sejuk'
             ]
         ],
         'local_culinary' => [
@@ -354,21 +354,21 @@ $all_destinasi = [
         'things_to_do' => [
             [
                 'icon'      => 'bi-water',
-                'judul'     => 'Snorkeling & Menyelam Bersama Manta Ray',
+                'judul'     => 'Selam Permukaan & Menyelam Bersama Pari Manta',
                 'lokasi'    => 'Manta Point & Crystal Bay, Nusa Penida',
                 'durasi'    => 'Tur 1 Hari',
                 'deskripsi' => 'Pengalaman magis berenang di air laut sejernih kristal bersama kawanan ikan pari manta raksasa dan terumbu karang tropis terlindungi.'
             ],
             [
                 'icon'      => 'bi-stars',
-                'judul'     => 'Menyaksikan Tari Kecak Sunset di Tebing Uluwatu',
+                'judul'     => 'Menyaksikan Tari Kecak Saat Senja di Tebing Uluwatu',
                 'lokasi'    => 'Panggung Terbuka Pura Uluwatu',
                 'durasi'    => 'Sore (17:30 - 19:00)',
                 'deskripsi' => 'Pementasan seni tari sakral kolosal berlatar senja Samudra Hindia yang melantunkan kisah epik Ramayana dengan paduan suara vokal dinamis.'
             ],
             [
                 'icon'      => 'bi-sun',
-                'judul'     => 'Sunrise Trekking Puncak Gunung Batur',
+                'judul'     => 'Pendakian Menyambut Matahari Terbit di Puncak Gunung Batur',
                 'lokasi'    => 'Kintamani, Bangli',
                 'durasi'    => 'Dini Hari (03:00 - 08:30)',
                 'deskripsi' => 'Pendakian fajar di kaldera vulkanik purba untuk menikmati panorama matahari terbit spektakuler di atas lautan awan dan Danau Batur.'
@@ -386,17 +386,17 @@ $all_destinasi = [
                 'title' => 'Estimasi Biaya Harian',
                 'icon'  => 'bi-cash-coin',
                 'items' => [
-                    'Backpacker / Hemat: Rp 350.000 - Rp 600.000 / hari (homestay, kuliner lokal, sewa motor)',
-                    'Menengah / Keluarga: Rp 900.000 - Rp 1.800.000 / hari (hotel bintang 3-4, rental mobil)',
-                    'Mewah / Resort: Rp 2.500.000+ / hari (private villa, fine dining, tur privat eksklusif)'
+                    'Wisatawan Hemat: Rp 350.000 - Rp 600.000 / hari (rumah inap, kuliner lokal, sewa motor)',
+                    'Menengah / Keluarga: Rp 900.000 - Rp 1.800.000 / hari (hotel bintang 3-4, sewa mobil)',
+                    'Mewah / Resor: Rp 2.500.000+ / hari (vila pribadi, santap mewah, tur privat eksklusif)'
                 ]
             ],
             'transportasi' => [
                 'title' => 'Pilihan Transportasi',
                 'icon'  => 'bi-car-front',
                 'items' => [
-                    'Sewa Sepeda Motor: Rp 70.000 - Rp 120.000 / hari (sangat efisien untuk pasangan & solo traveler)',
-                    'Rental Mobil + Supir Lokal: Rp 500.000 - Rp 750.000 / hari (sangat nyaman untuk wisata keluarga)',
+                    'Sewa Sepeda Motor: Rp 70.000 - Rp 120.000 / hari (sangat efisien untuk pasangan dan wisatawan solo)',
+                    'Sewa Mobil + Sopir Lokal: Rp 500.000 - Rp 750.000 / hari (sangat nyaman untuk wisata keluarga)',
                     'Taksi & Transportasi Online: Tersedia luas di area Denpasar, Kuta, Seminyak, Canggu, dan Ubud'
                 ]
             ],
@@ -413,7 +413,7 @@ $all_destinasi = [
                 'title' => 'Waktu Kunjungan Terbaik',
                 'icon'  => 'bi-calendar-check',
                 'items' => [
-                    'Musim Cerah (April - Oktober): Terbaik untuk aktivitas pantai, snorkeling, dan jalan-jalan luar ruangan',
+                    'Musim Cerah (April - Oktober): Terbaik untuk aktivitas pantai, selam permukaan, dan jalan-jalan luar ruangan',
                     'Musim Hujan (November - Maret): Suasana lebih tenang, sawah sangat hijau, dan harga akomodasi lebih hemat',
                     'Bulan Terbaik: Mei, Juni, dan September menawarkan cuaca paling cerah tanpa kepadatan tinggi'
                 ]
@@ -439,7 +439,7 @@ $all_destinasi = [
         'about_heading'=> 'Keajaiban Kaldera dan Savana Tengger',
         'daya_tarik'   => [
             [
-                'judul' => 'Golden Sunrise Penanjakan',
+                'judul' => 'Matahari Terbit Keemasan di Penanjakan',
                 'desc'  => 'Panorama matahari terbit spektakuler di atas lautan kabut awan dengan siluet Gunung Semeru.',
                 'icon'  => 'bi-brightness-high'
             ],
@@ -470,7 +470,7 @@ $all_destinasi = [
                 'nama'      => 'Penanjakan 1',
                 'lokasi'    => 'TNBTS, Pasuruan - Probolinggo',
                 'foto'      => 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80',
-                'tag'       => 'Golden Sunrise',
+                'tag'       => 'Matahari Terbit Keemasan',
                 'deskripsi' => 'Titik pandang tertinggi kaldera untuk menikmati panorama matahari terbit berlatar Bromo dan Semeru.'
             ],
             [
@@ -503,27 +503,27 @@ $all_destinasi = [
                 'id'        => 'plataran-bromo',
                 'nama'      => 'Plataran Bromo Resort & Venue',
                 'lokasi'    => 'Tosari, Pasuruan - Jawa Timur',
-                'jenis'     => 'Luxury Mountain Resort',
+                'jenis'     => 'Resor Mewah Pegunungan',
                 'harga'     => 'Rp 3.100.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
-                'fasilitas' => 'Private Heated Jacuzzi • Sunrise Terrace • Perkebunan Apel Organik'
+                'fasilitas' => 'Jacuzzi Air Hangat Privat • Teras Matahari Terbit • Perkebunan Apel Organik'
             ],
             [
                 'id'        => 'jiwa-jawa-bromo',
                 'nama'      => 'Jiwa Jawa Resort Bromo',
                 'lokasi'    => 'Sukapura, Probolinggo',
-                'jenis'     => 'Eco Mountain Resort & Art Gallery',
+                'jenis'     => 'Resor Ekologis Pegunungan & Galeri Seni',
                 'harga'     => 'Rp 1.750.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
-                'fasilitas' => 'Galeri Foto Alam • Cafe Lava Hangat • Pemandangan Lembah'
+                'fasilitas' => 'Galeri Foto Alam • Kafe Lava Hangat • Pemandangan Lembah'
             ],
             [
                 'id'        => 'bromo-camp-house',
                 'nama'      => 'Bromo Camp House & Lodge',
                 'lokasi'    => 'Cemorolawang, Ngadisari',
-                'jenis'     => 'Glamping & Mountain Cabin',
+                'jenis'     => 'Kemah Mewah & Kabin Pegunungan',
                 'harga'     => 'Rp 650.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
@@ -553,7 +553,7 @@ $all_destinasi = [
                 'id'        => 'bakso-malang-wedang',
                 'nama'      => 'Bakso Malang & Wedang Pokak Hangat',
                 'jenis'     => 'Sajian Penghangat Udara Dingin',
-                'lokasi'    => 'Cemorolawang Viewpoint',
+                'lokasi'    => 'Titik Pandang Cemorolawang',
                 'harga'     => 'Rp 20.000 - Rp 35.000',
                 'foto'      => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
                 'deskripsi' => 'Bakso kuah kaldu sapi hangat bertabur pangsit krispi ditemani seduhan jahe, sereh, pandan, dan kayu manis khas Bromo.'
@@ -583,8 +583,8 @@ $all_destinasi = [
             ],
             [
                 'icon'      => 'bi-moon-stars',
-                'judul'     => 'Fotografi Gugusan Bintang Milky Way di Kingkong Hill',
-                'lokasi'    => 'Bukit Kingkong Lookout, TNBTS',
+                'judul'     => 'Fotografi Gugusan Bintang Bima Sakti di Bukit Kingkong',
+                'lokasi'    => 'Gardu Pandang Bukit Kingkong, TNBTS',
                 'durasi'    => 'Malam Hari (22:00 - 02:00)',
                 'deskripsi' => 'Mengabadikan gemerlap jutaan bintang galaksi Bima Sakti di langit dataran tinggi Bromo yang bebas polusi cahaya.'
             ]
@@ -594,9 +594,9 @@ $all_destinasi = [
                 'title' => 'Estimasi Biaya Harian',
                 'icon'  => 'bi-cash-coin',
                 'items' => [
-                    'Backpacker / Hemat: Rp 350.000 - Rp 650.000 / hari (homestay Cemorolawang, sewa jeep sharing, warung lokal)',
-                    'Menengah / Keluarga: Rp 950.000 - Rp 1.800.000 / hari (resort alam, jeep privat 4 spot, kuliner hangat)',
-                    'Mewah / Eksklusif: Rp 2.800.000+ / hari (resort luxury bintang 5, tur privat sunrise eksklusif, fotografer)'
+                    'Wisatawan Hemat: Rp 350.000 - Rp 650.000 / hari (rumah inap Cemorolawang, sewa jip bersama, warung lokal)',
+                    'Menengah / Keluarga: Rp 950.000 - Rp 1.800.000 / hari (resor alam, jip privat ke 4 lokasi, kuliner hangat)',
+                    'Mewah / Eksklusif: Rp 2.800.000+ / hari (resor mewah bintang 5, tur privat menyambut matahari terbit, fotografer)'
                 ]
             ],
             'transportasi' => [
@@ -604,7 +604,7 @@ $all_destinasi = [
                 'icon'  => 'bi-car-front',
                 'items' => [
                     'Sewa Jip Hardtop 4x4 (Wajib Kaldera): Rp 600.000 - Rp 850.000 / armada (kapasitas 5-6 orang)',
-                    'Rental Mobil Malang/Surabaya - Bromo: Rp 500.000 - Rp 700.000 / hari',
+                    'Sewa Mobil Malang/Surabaya - Bromo: Rp 500.000 - Rp 700.000 / hari',
                     'Sewa Kuda Kaldera Pasir: Rp 150.000 - Rp 250.000 pulang pergi menuju anak tangga kawah'
                 ]
             ],
@@ -612,16 +612,16 @@ $all_destinasi = [
                 'title' => 'Tips Perjalanan Penting',
                 'icon'  => 'bi-shield-check',
                 'items' => [
-                    'Pesan tiket masuk TNBTS secara online lebih awal karena terdapat kuota pengunjung harian ketat',
+                    'Pesan tiket masuk TNBTS secara daring lebih awal karena kuota pengunjung harian terbatas',
                     'Bawa uang tunai rupiah secukupnya karena ATM hanya tersedia di Sukapura dan Tosari bagian bawah',
-                    'Kenakan pakaian bertingkat (layering system) dan bawa masker untuk kenyamanan di lautan pasir'
+                    'Kenakan pakaian berlapis dan bawa masker agar nyaman saat berada di lautan pasir'
                 ]
             ],
             'musim' => [
                 'title' => 'Waktu Kunjungan Terbaik',
                 'icon'  => 'bi-calendar-check',
                 'items' => [
-                    'Musim Kemarau (Juni - Oktober): Waktu terunggul menikmati sunrise bersih tanpa rintangan awan hujan',
+                    'Musim Kemarau (Juni - Oktober): Waktu terbaik menikmati matahari terbit tanpa terhalang awan hujan',
                     'Musim Upacara Kasada (Sesuai Kalender Tengger): Momen budaya spiritual paling sakral dan mengesankan',
                     'Musim Hujan (Desember - Maret): Kawasan savana sangat hijau subur dan pemandangan perbukitan lebih segar'
                 ]
@@ -643,17 +643,17 @@ $all_destinasi = [
         'total_ulasan' => 4150,
         'hero_image'   => 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1920&q=80',
         'tagline'      => 'Gerbang Eksotisme Pulau Komodo dengan Savana Dramatis dan Perairan Karang Dunia',
-        'deskripsi'    => 'Labuan Bajo adalah pintu gerbang menuju keajaiban Taman Nasional Komodo di Flores barat. Dikenal dengan perpaduan lanskap savana bukit pulau Padar, pantai pasir merah muda Pink Beach, habitat purba satwa Komodo Dragon, serta perairan jernih bertaraf dunia, Labuan Bajo menghadirkan pengalaman berlayar pinisi yang spektakuler dan tak terlupakan.',
+        'deskripsi'    => 'Labuan Bajo adalah pintu gerbang menuju keajaiban Taman Nasional Komodo di Flores barat. Dikenal dengan perpaduan lanskap savana bukit Pulau Padar, pantai pasir merah muda Pink Beach, habitat purba komodo, serta perairan jernih bertaraf dunia, Labuan Bajo menghadirkan pengalaman berlayar dengan kapal pinisi yang spektakuler dan tak terlupakan.',
         'about_heading'=> 'Pesona Savana Dramatis dan Habitat Naga Purba',
         'daya_tarik'   => [
             [
-                'judul' => 'Habitat Asli Komodo Dragon',
+                'judul' => 'Habitat Asli Komodo',
                 'desc'  => 'Satu-satunya habitat kadal purba terbesar di muka bumi di Pulau Komodo dan Rinca yang dilindungi UNESCO.',
                 'icon'  => 'bi-shield-check'
             ],
             [
                 'judul' => 'Puncak Tiga Teluk Pulau Padar',
-                'desc'  => 'Trekking menuju gardu pandang bukit savana ikonik dengan panorama tiga teluk berpasir warna berbeda.',
+                'desc'  => 'Pendakian menuju gardu pandang bukit savana ikonik dengan panorama tiga teluk berpasir warna berbeda.',
                 'icon'  => 'bi-compass'
             ],
             [
@@ -663,7 +663,7 @@ $all_destinasi = [
             ],
             [
                 'judul' => 'Pelayaran Kapal Pinisi Mewah',
-                'desc'  => 'Pengalaman berlayar liveaboard melintasi kepulauan tropis dengan fasilitas hotel berbintang di atas laut.',
+                'desc'  => 'Pengalaman berlayar dan menginap di kapal yang melintasi kepulauan tropis dengan fasilitas setara hotel berbintang di atas laut.',
                 'icon'  => 'bi-water'
             ]
         ],
@@ -695,14 +695,14 @@ $all_destinasi = [
                 'lokasi'    => 'Taman Nasional Komodo, NTT',
                 'foto'      => 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',
                 'tag'       => 'Suaka Margasatwa',
-                'deskripsi' => 'Jalur trekking hutan savana bersama ranger berpengalaman untuk melihat kehidupan satwa langka komodo.'
+                'deskripsi' => 'Jalur penjelajahan hutan savana bersama jagawana berpengalaman untuk melihat kehidupan satwa langka komodo.'
             ],
             [
                 'id'        => 'pulau-kalong',
-                'nama'      => 'Pulau Kalong Sunset',
+                'nama'      => 'Pulau Kalong Saat Senja',
                 'lokasi'    => 'Kawasan Perairan Bajo, NTT',
                 'foto'      => 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80',
-                'tag'       => 'Sunset Spektakuler',
+                'tag'       => 'Senja Spektakuler',
                 'deskripsi' => 'Kawasan hutan bakau tempat ribuan kelelawar raksasa terbang melintasi langit senja lembayung keemasan.'
             ]
         ],
@@ -711,31 +711,31 @@ $all_destinasi = [
                 'id'        => 'ayana-komodo',
                 'nama'      => 'AYANA Komodo Waecicu Beach',
                 'lokasi'    => 'Pantai Waecicu, Labuan Bajo',
-                'jenis'     => '5-Star Beachfront Luxury Resort',
+                'jenis'     => 'Resor Mewah Bintang 5 di Tepi Pantai',
                 'harga'     => 'Rp 3.800.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
-                'fasilitas' => 'Private Pier • Rooftop Sunset Bar • Akses Pantai Privat'
+                'fasilitas' => 'Dermaga Pribadi • Bar Atap untuk Menikmati Senja • Akses Pantai Privat'
             ],
             [
                 'id'        => 'sudamala-komodo',
                 'nama'      => 'Sudamala Resort Komodo',
                 'lokasi'    => 'Pantai Pede, Labuan Bajo',
-                'jenis'     => 'Luxury Coastal Resort & Villa',
+                'jenis'     => 'Resor & Vila Pesisir Mewah',
                 'harga'     => 'Rp 2.450.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
-                'fasilitas' => 'Kolam Tepi Laut • Spa Tradisional • Restoran Seafood Tropis'
+                'fasilitas' => 'Kolam Tepi Laut • Spa Tradisional • Restoran Hidangan Laut Tropis'
             ],
             [
                 'id'        => 'bajo-nature-lodge',
                 'nama'      => 'Eco Tree O’tel Labuan Bajo',
                 'lokasi'    => 'Jl. Soekarno Hatta, Kampung Ujung',
-                'jenis'     => 'Boutique Eco Hotel',
+                'jenis'     => 'Hotel Ekologis Berkonsep Butik',
                 'harga'     => 'Rp 750.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
-                'fasilitas' => 'Pemandangan Dermaga Kapal • Restoran Rooftop • Dekat Sentra Kuliner'
+                'fasilitas' => 'Pemandangan Dermaga Kapal • Restoran di Atap Gedung • Dekat Sentra Kuliner'
             ]
         ],
         'local_culinary' => [
@@ -743,7 +743,7 @@ $all_destinasi = [
                 'id'        => 'ikan-kuah-asam-bajo',
                 'nama'      => 'Ikan Kuah Asam Segar Flores',
                 'jenis'     => 'Kuliner Sup Pesisir Tradisional',
-                'lokasi'    => 'Kampung Ujung Seafood Market',
+                'lokasi'    => 'Pasar Hidangan Laut Kampung Ujung',
                 'harga'     => 'Rp 50.000 - Rp 90.000',
                 'foto'      => 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',
                 'deskripsi' => 'Ikan kerapu segar dimasak dengan kuah asam belimbing wuluh, kemangi, dan rempah kunyit harum tanpa santan.'
@@ -770,28 +770,28 @@ $all_destinasi = [
         'things_to_do' => [
             [
                 'icon'      => 'bi-water',
-                'judul'     => 'Berlayar Pinisi Liveaboard Mengelilingi Taman Nasional',
+                'judul'     => 'Berlayar dan Menginap di Kapal Pinisi Mengelilingi Taman Nasional',
                 'lokasi'    => 'Perairan Komodo & Pulau Sekitar',
                 'durasi'    => '3 Hari 2 Malam',
                 'deskripsi' => 'Tidur di atas kabin kapal pinisi megah sembari berpindah dari pulau ke pulau dengan pemandangan bintang.'
             ],
             [
                 'icon'      => 'bi-compass',
-                'judul'     => 'Trekking Puncak Savana Pulau Padar Saat Sunrise',
+                'judul'     => 'Pendakian ke Puncak Savana Pulau Padar Saat Matahari Terbit',
                 'lokasi'    => 'Puncak Gardu Pandang Pulau Padar',
                 'durasi'    => 'Pagi Hari (05:30 - 08:00)',
                 'deskripsi' => 'Mendaki tangga bukit savana untuk menyambut matahari terbit berlatar lekukan teluk legendaris kepulauan Flores.'
             ],
             [
                 'icon'      => 'bi-shield-check',
-                'judul'     => 'Menjumpai Satwa Komodo di Jalur Trekking Loh Liang',
+                'judul'     => 'Menjumpai Satwa Komodo di Jalur Penjelajahan Loh Liang',
                 'lokasi'    => 'Pulau Komodo, Taman Nasional',
                 'durasi'    => '2 - 3 Jam',
-                'deskripsi' => 'Berjalan menyusuri hutan musim dipandu naturalist guide untuk mengamati perilaku alami komodo di alam bebas.'
+                'deskripsi' => 'Berjalan menyusuri hutan musim bersama pemandu alam untuk mengamati perilaku alami komodo di alam bebas.'
             ],
             [
                 'icon'      => 'bi-sun',
-                'judul'     => 'Snorkeling Bersama Kawanan Manta di Manta Point',
+                'judul'     => 'Selam Permukaan Bersama Kawanan Pari Manta di Manta Point',
                 'lokasi'    => 'Manta Point (Karang Makassar)',
                 'durasi'    => 'Setengah Hari',
                 'deskripsi' => 'Berenang berdampingan bersama pari manta raksasa yang melayang anggun di perairan jernih berarus tenang.'
@@ -802,17 +802,17 @@ $all_destinasi = [
                 'title' => 'Estimasi Biaya Harian',
                 'icon'  => 'bi-cash-coin',
                 'items' => [
-                    'Backpacker / Hemat: Rp 550.000 - Rp 950.000 / hari (hostel kota, open trip speed boat harian, kuliner pasar malam)',
-                    'Menengah / Keluarga: Rp 1.500.000 - Rp 3.200.000 / hari (hotel tepi pantai, sharing pinisi liveaboard AC)',
-                    'Mewah / Private Charter: Rp 5.500.000+ / hari (sewa private pinisi yacht, suite resort bintang 5, chef pribadi)'
+                    'Wisatawan Hemat: Rp 550.000 - Rp 950.000 / hari (hostel kota, paket wisata bersama dengan kapal cepat, kuliner pasar malam)',
+                    'Menengah / Keluarga: Rp 1.500.000 - Rp 3.200.000 / hari (hotel tepi pantai, berbagi kapal pinisi berpendingin udara)',
+                    'Mewah / Sewa Kapal Privat: Rp 5.500.000+ / hari (sewa kapal pesiar pinisi privat, kamar suite resor bintang 5, juru masak pribadi)'
                 ]
             ],
             'transportasi' => [
                 'title' => 'Pilihan Transportasi',
                 'icon'  => 'bi-car-front',
                 'items' => [
-                    'Kapal Wisata / Pinisi: Rp 1.800.000 - Rp 4.500.000 / orang untuk paket trip 3H2M sharing',
-                    'Sewa Speedboat 1 Hari (6 Destinasi): Rp 1.200.000 - Rp 1.500.000 / orang',
+                    'Kapal Wisata / Pinisi: Rp 1.800.000 - Rp 4.500.000 / orang untuk paket perjalanan bersama 3 hari 2 malam',
+                    'Sewa Kapal Cepat 1 Hari (6 Destinasi): Rp 1.200.000 - Rp 1.500.000 / orang',
                     'Sewa Motor di Kota Bajo: Rp 75.000 - Rp 100.000 / hari untuk jalan-jalan ke Gua Rangko & Bukit Silvia'
                 ]
             ],
@@ -820,8 +820,8 @@ $all_destinasi = [
                 'title' => 'Tips Perjalanan Penting',
                 'icon'  => 'bi-shield-check',
                 'items' => [
-                    'Selalu patuhi instruksi ranger saat berada di area pengamatan komodo dan jangan membuat gerakan tiba-tiba',
-                    'Gunakan sepatu trekking berdaya cengkeram baik saat menaiki tangga terjal berbatu di bukit Pulau Padar',
+                    'Selalu patuhi instruksi jagawana saat berada di area pengamatan komodo dan jangan membuat gerakan tiba-tiba',
+                    'Gunakan sepatu pendakian dengan daya cengkeram baik saat menaiki tangga terjal berbatu di bukit Pulau Padar',
                     'Bawa botol minum isi ulang (tumbler) untuk mengurangi sampah plastik sekali pakai di kawasan taman nasional'
                 ]
             ],
@@ -829,9 +829,9 @@ $all_destinasi = [
                 'title' => 'Waktu Kunjungan Terbaik',
                 'icon'  => 'bi-calendar-check',
                 'items' => [
-                    'Musim Savana Hijau (Desember - April): Savana tampak hijau segar, musim buah mangga, perairan lebih sepi turis',
-                    'Musim Savana Emas (Mei - Oktober): Cuaca sangat cerah, pemandangan savana cokelat keemasan dramatis ala Afrika',
-                    'Musim Manta Ray (Agustus - Oktober): Waktu puncak kawanan pari manta berkumpul di perairan hangat Flores'
+                    'Musim Savana Hijau (Desember - April): Savana tampak hijau segar, musim buah mangga, perairan lebih sepi wisatawan',
+                    'Musim Savana Emas (Mei - Oktober): Cuaca sangat cerah, pemandangan savana cokelat keemasan yang dramatis',
+                    'Musim Pari Manta (Agustus - Oktober): Waktu puncak kawanan pari manta berkumpul di perairan hangat Flores'
                 ]
             ]
         ]
@@ -919,7 +919,7 @@ $all_destinasi = [
                 'id'        => 'taman-simalem',
                 'nama'      => 'Taman Simalem Resort',
                 'lokasi'    => 'Merek, Karo - Danau Toba',
-                'jenis'     => 'Eco Luxury Highland Resort',
+                'jenis'     => 'Resor Mewah Ekologis Dataran Tinggi',
                 'harga'     => 'Rp 2.100.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
@@ -929,7 +929,7 @@ $all_destinasi = [
                 'id'        => 'tiara-bunga',
                 'nama'      => 'Tiara Bunga Hotel & Villa',
                 'lokasi'    => 'Balige, Toba Samosir',
-                'jenis'     => 'Waterfront Villa & Beach Resort',
+                'jenis'     => 'Vila Tepi Danau & Resor Pantai',
                 'harga'     => 'Rp 1.450.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
@@ -939,7 +939,7 @@ $all_destinasi = [
                 'id'        => 'zoes-paradise',
                 'nama'      => 'Zoe’s Paradise Waterfront Hotel',
                 'lokasi'    => 'Tuktuk Siadong, Samosir',
-                'jenis'     => 'Boutique Nature Lodge',
+                'jenis'     => 'Penginapan Alam Berkonsep Butik',
                 'harga'     => 'Rp 650.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
@@ -968,7 +968,7 @@ $all_destinasi = [
             [
                 'id'        => 'kopi-lintong-toba',
                 'nama'      => 'Seduhan Kopi Arabika Lintong & Tipang',
-                'jenis'     => 'Kopi Single Origin Kaldera',
+                'jenis'     => 'Kopi Asal Tunggal Kaldera',
                 'lokasi'    => 'Kedai Kopi Pesisir Danau Toba',
                 'harga'     => 'Rp 20.000 - Rp 35.000',
                 'foto'      => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
@@ -992,14 +992,14 @@ $all_destinasi = [
             ],
             [
                 'icon'      => 'bi-tree-fill',
-                'judul'     => 'Trekking Perbukitan Hijau Holbung Bukit Cinta',
+                'judul'     => 'Menjelajahi Perbukitan Hijau Holbung Bukit Cinta',
                 'lokasi'    => 'Bukit Holbung, Samosir',
                 'durasi'    => '2 - 3 Jam',
                 'deskripsi' => 'Mendaki padang savana berundak dengan tiupan angin sejuk kaldera dan panorama kapal melintas di bawah bukit.'
             ],
             [
                 'icon'      => 'bi-water',
-                'judul'     => 'Menyeberang Kaldera dengan Kapal Tradisional Ferry',
+                'judul'     => 'Menyeberang Kaldera dengan Kapal Feri Tradisional',
                 'lokasi'    => 'Dermaga Parapat - Tomok Samosir',
                 'durasi'    => '45 Menit',
                 'deskripsi' => 'Menikmati ketenangan permukaan danau vulkanik luas dengan latar tebing kaldera menjulang dari atas dek kapal.'
@@ -1010,9 +1010,9 @@ $all_destinasi = [
                 'title' => 'Estimasi Biaya Harian',
                 'icon'  => 'bi-cash-coin',
                 'items' => [
-                    'Backpacker / Hemat: Rp 280.000 - Rp 500.000 / hari (guesthouse Tuktuk, sewa motor, kuliner lokal)',
-                    'Menengah / Keluarga: Rp 750.000 - Rp 1.500.000 / hari (resort tepi danau, sewa mobil keliling Samosir)',
-                    'Mewah / Highland: Rp 2.200.000+ / hari (resort bintang 5 kaldera atas, tur privat pemandu budaya Batak)'
+                    'Wisatawan Hemat: Rp 280.000 - Rp 500.000 / hari (rumah inap Tuktuk, sewa motor, kuliner lokal)',
+                    'Menengah / Keluarga: Rp 750.000 - Rp 1.500.000 / hari (resor tepi danau, sewa mobil keliling Samosir)',
+                    'Mewah / Dataran Tinggi: Rp 2.200.000+ / hari (resor bintang 5 di kaldera atas, tur privat bersama pemandu budaya Batak)'
                 ]
             ],
             'transportasi' => [
@@ -1021,7 +1021,7 @@ $all_destinasi = [
                 'items' => [
                     'Kapal Penumpang Parapat - Tuktuk: Rp 15.000 - Rp 25.000 / orang (diantar langsung ke dermaga hotel)',
                     'Sewa Motor di Samosir: Rp 80.000 - Rp 120.000 / hari (pilihan paling ideal menjelajahi pulau)',
-                    'Rental Mobil Medan/Silangit - Toba: Rp 450.000 - Rp 700.000 / hari'
+                    'Sewa Mobil Medan/Silangit - Toba: Rp 450.000 - Rp 700.000 / hari'
                 ]
             ],
             'tips' => [
@@ -1039,7 +1039,7 @@ $all_destinasi = [
                 'items' => [
                     'Musim Kering Sejuk (Mei - September): Hari-hari cerah, ombak danau sangat tenang, cocok untuk wisata air',
                     'Musim Festival (Oktober - Desember): Penuh perayaan budaya Batak, pertunjukan seni gondang, dan musik rakyat',
-                    'Bulan Terbaik: Juni dan Juli memberikan pengalaman perjalanan dengan visibilitas bukit paling jernih'
+                    'Bulan Terbaik: Juni dan Juli menawarkan pemandangan bukit paling jernih'
                 ]
             ]
         ]
@@ -1127,7 +1127,7 @@ $all_destinasi = [
                 'id'        => 'the-phoenix',
                 'nama'      => 'The Phoenix Hotel Yogyakarta (MGallery)',
                 'lokasi'    => 'Jl. Jend. Sudirman, Kota Yogyakarta',
-                'jenis'     => 'Heritage Colonial Luxury Hotel',
+                'jenis'     => 'Hotel Mewah Bergaya Kolonial Bersejarah',
                 'harga'     => 'Rp 1.450.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
@@ -1137,7 +1137,7 @@ $all_destinasi = [
                 'id'        => 'plataran-borobudur',
                 'nama'      => 'Plataran Heritage Borobudur Hotel',
                 'lokasi'    => 'Borobudur, Magelang',
-                'jenis'     => 'Luxury Heritage Resort & Spa',
+                'jenis'     => 'Resor & Spa Mewah Bernuansa Warisan Budaya',
                 'harga'     => 'Rp 2.600.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
@@ -1147,7 +1147,7 @@ $all_destinasi = [
                 'id'        => 'domah-yogya',
                 'nama'      => 'D’Omah Yogya Eco Resort',
                 'lokasi'    => 'Sewon, Bantul, Yogyakarta',
-                'jenis'     => 'Traditional Javanese Eco Villa',
+                'jenis'     => 'Vila Ekologis Tradisional Jawa',
                 'harga'     => 'Rp 850.000',
                 'periode'   => '/ malam',
                 'foto'      => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
@@ -1193,7 +1193,7 @@ $all_destinasi = [
             ],
             [
                 'icon'      => 'bi-sun',
-                'judul'     => 'Sunrise Tour Menikmati Siluet Candi Borobudur',
+                'judul'     => 'Tur Matahari Terbit Menikmati Siluet Candi Borobudur',
                 'lokasi'    => 'Punthuk Setumbu, Magelang',
                 'durasi'    => 'Subuh (04:30 - 07:00)',
                 'deskripsi' => 'Menyaksikan matahari terbit perlahan menyinari kabut lembah dengan kemunculan puncak stupa candi Borobudur.'
@@ -1218,9 +1218,9 @@ $all_destinasi = [
                 'title' => 'Estimasi Biaya Harian',
                 'icon'  => 'bi-cash-coin',
                 'items' => [
-                    'Backpacker / Hemat: Rp 200.000 - Rp 400.000 / hari (homestay Prawirotaman, sewa motor, angkringan & gudeg)',
-                    'Menengah / Keluarga: Rp 650.000 - Rp 1.400.000 / hari (hotel bintang 3-4, rental mobil terpadu, tur candi)',
-                    'Mewah / Heritage: Rp 2.200.000+ / hari (resort mewah dekat Borobudur, tur privat VIP candi, fine dining keraton)'
+                    'Wisatawan Hemat: Rp 200.000 - Rp 400.000 / hari (rumah inap Prawirotaman, sewa motor, angkringan dan gudeg)',
+                    'Menengah / Keluarga: Rp 650.000 - Rp 1.400.000 / hari (hotel bintang 3-4, sewa mobil, tur candi)',
+                    'Mewah / Warisan Budaya: Rp 2.200.000+ / hari (resor mewah dekat Borobudur, tur privat eksklusif ke candi, santap mewah di keraton)'
                 ]
             ],
             'transportasi' => [
@@ -1229,7 +1229,7 @@ $all_destinasi = [
                 'items' => [
                     'Trans Jogja & KRL Jogja-Solo: Rp 3.600 - Rp 8.000 / perjalanan (sangat ramah kantong dan menjangkau pusat wisata)',
                     'Sewa Motor Kota: Rp 70.000 - Rp 100.000 / hari (sangat lincah untuk jalan-jalan dalam dan luar kota)',
-                    'Rental Mobil + Supir: Rp 450.000 - Rp 650.000 / hari (cocok untuk rute jauh Candi Borobudur & Tebing Breksi)'
+                    'Sewa Mobil + Sopir: Rp 450.000 - Rp 650.000 / hari (cocok untuk rute jauh ke Candi Borobudur & Tebing Breksi)'
                 ]
             ],
             'tips' => [
@@ -1247,7 +1247,7 @@ $all_destinasi = [
                 'items' => [
                     'Musim Kemarau (Juni - Oktober): Waktu paling nyaman untuk tur keliling candi luar ruangan tanpa terkendala hujan',
                     'Musim Perayaan Sekaten (Maulid Nabi): Momen budaya meriah dengan pasar malam rakyat dan grebeg keraton yang sakral',
-                    'Bulan Terbaik: Juli dan Agustus bertepatan dengan pagelaran Sendratari Ramayana musim panggung terbuka (open air)'
+                    'Bulan Terbaik: Juli dan Agustus bertepatan dengan pagelaran Sendratari Ramayana di panggung terbuka'
                 ]
             ]
         ]

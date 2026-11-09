@@ -24,7 +24,8 @@ if (($_SESSION['user']['role'] ?? '') !== 'admin') {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>403 - Akses Terbatas | JelajahNusa Admin</title>
+      <meta http-equiv="content-language" content="id">
+      <title>403 - Akses Terbatas | Administrator JelajahNusa</title>
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -88,10 +89,10 @@ if (($_SESSION['user']['role'] ?? '') !== 'admin') {
         <div class="icon-circle">
           <i class="bi bi-shield-slash"></i>
         </div>
-        <span class="badge bg-danger bg-opacity-10 text-danger fw-semibold px-3 py-1 rounded-pill mb-2">403 Forbidden</span>
+        <span class="badge bg-danger bg-opacity-10 text-danger fw-semibold px-3 py-1 rounded-pill mb-2">403 — Akses Terlarang</span>
         <h3 class="fw-bold mb-2">Akses Ditolak</h3>
         <p class="text-muted small mb-4">
-          Akun Anda saat ini terdaftar sebagai <strong>Pengguna (User)</strong>. Area Dashboard Admin hanya dapat diakses oleh akun dengan hak istimewa <strong>Administrator</strong>.
+          Akun Anda saat ini terdaftar sebagai <strong>Pengguna</strong>. Area dasbor administrator hanya dapat diakses oleh akun dengan hak istimewa <strong>Administrator</strong>.
         </p>
         <div class="d-flex justify-content-center gap-2 flex-wrap">
           <a href="../index.php" class="btn btn-forest rounded-pill px-4 py-2 small fw-semibold text-decoration-none">

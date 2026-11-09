@@ -94,7 +94,8 @@ $csrf_token = generateCsrfToken();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manajemen Destinasi | JelajahNusa Admin</title>
+  <meta http-equiv="content-language" content="id">
+  <title>Manajemen Destinasi | Administrator JelajahNusa</title>
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -268,19 +269,19 @@ $csrf_token = generateCsrfToken();
 
   <!-- Sidebar -->
   <aside class="admin-sidebar" id="adminSidebar">
-    <a href="index.php" class="admin-brand" aria-label="JelajahNusa Admin Panel">
+    <a href="index.php" class="admin-brand" aria-label="Panel Administrator JelajahNusa">
       <img class="admin-brand-logo"
         src="../assets/images/logo-horizontal.svg"
-        alt="JelajahNusa — Admin Panel"
+        alt="JelajahNusa — Panel Administrator"
         width="180" height="46">
-      <div class="text-white-50 small mt-1" style="font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding-left: 2px;">Admin Management</div>
+      <div class="text-white-50 small mt-1" style="font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding-left: 2px;">Pengelolaan Administrator</div>
     </a>
 
     <ul class="admin-menu-list">
       <li>
         <a href="index.php" class="admin-menu-link">
           <i class="bi bi-speedometer2"></i>
-          <span>Dashboard</span>
+          <span>Dasbor</span>
         </a>
       </li>
       <li>
@@ -299,7 +300,7 @@ $csrf_token = generateCsrfToken();
 
     <div class="p-3 border-top border-white border-opacity-10 d-flex flex-column gap-2">
       <a href="../index.php" class="btn btn-outline-light btn-sm rounded-pill py-2 w-100 text-decoration-none">
-        <i class="bi bi-globe2 me-1"></i> Kembali ke Website
+        <i class="bi bi-globe2 me-1"></i> Kembali ke Situs Web
       </a>
       <a href="../auth/logout.php" class="btn btn-danger btn-sm rounded-pill py-2 w-100 text-decoration-none" style="background: rgba(220, 53, 69, 0.2); border-color: rgba(220, 53, 69, 0.4); color: #ffb8b8;">
         <i class="bi bi-box-arrow-right me-1"></i> Keluar
@@ -311,7 +312,7 @@ $csrf_token = generateCsrfToken();
   <div class="admin-main">
     <header class="admin-topbar">
       <div class="d-flex align-items-center gap-3">
-        <button class="btn btn-link text-dark d-lg-none p-0 fs-4" type="button" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
+        <button class="btn btn-link text-dark d-lg-none p-0 fs-4" type="button" id="sidebarToggleBtn" aria-label="Buka atau tutup menu">
           <i class="bi bi-list"></i>
         </button>
         <h5 class="fw-bold text-dark mb-0">Manajemen Destinasi</h5>
@@ -334,7 +335,7 @@ $csrf_token = generateCsrfToken();
             <i class="bi bi-check-circle-fill fs-5"></i>
             <div><?php echo htmlspecialchars($_SESSION['flash_success']); ?></div>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
         </div>
         <?php unset($_SESSION['flash_success']); ?>
       <?php endif; ?>
@@ -345,7 +346,7 @@ $csrf_token = generateCsrfToken();
             <i class="bi bi-exclamation-triangle-fill fs-5"></i>
             <div><?php echo htmlspecialchars($_SESSION['flash_error']); ?></div>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
         </div>
         <?php unset($_SESSION['flash_error']); ?>
       <?php endif; ?>
@@ -383,7 +384,7 @@ $csrf_token = generateCsrfToken();
                 <th>Nama Destinasi</th>
                 <th>Wilayah / Provinsi</th>
                 <th>Kategori</th>
-                <th>Rating</th>
+                <th>Penilaian</th>
                 <th class="text-end" style="width: 140px;">Aksi</th>
               </tr>
             </thead>
@@ -420,10 +421,10 @@ $csrf_token = generateCsrfToken();
                     </td>
                     <td class="text-end">
                       <div class="d-inline-flex gap-1">
-                        <a href="../pages/detail-destinasi.php?id=<?php echo (int)$d['id']; ?>" target="_blank" class="btn btn-outline-secondary btn-sm rounded-pill px-2 py-1" title="Lihat di Website" aria-label="Lihat">
+                        <a href="../pages/detail-destinasi.php?id=<?php echo (int)$d['id']; ?>" target="_blank" class="btn btn-outline-secondary btn-sm rounded-pill px-2 py-1" title="Lihat di Situs Web" aria-label="Lihat">
                           <i class="bi bi-eye"></i>
                         </a>
-                        <a href="destinasi_edit.php?id=<?php echo (int)$d['id']; ?>" class="btn btn-outline-forest btn-sm rounded-pill px-2 py-1" title="Edit Destinasi" aria-label="Edit">
+                        <a href="destinasi_edit.php?id=<?php echo (int)$d['id']; ?>" class="btn btn-outline-forest btn-sm rounded-pill px-2 py-1" title="Ubah Destinasi" aria-label="Ubah">
                           <i class="bi bi-pencil"></i>
                         </a>
                         <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-2 py-1 btn-delete-dest" data-id="<?php echo (int)$d['id']; ?>" data-nama="<?php echo htmlspecialchars($d['nama']); ?>" title="Hapus Destinasi" aria-label="Hapus">
@@ -454,7 +455,7 @@ $csrf_token = generateCsrfToken();
             <h5 class="modal-title fw-bold text-danger" id="deleteModalTitle">
               <i class="bi bi-exclamation-triangle-fill me-2"></i>Konfirmasi Hapus
             </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
           </div>
           <div class="modal-body p-4">
             <p class="text-muted mb-3">

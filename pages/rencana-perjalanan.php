@@ -23,11 +23,12 @@ $auth_base_url = '../auth/';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Planner — Rencana Perjalanan Nusantara | JelajahNusa</title>
+  <meta http-equiv="content-language" content="id">
+  <title>Rencana Perjalanan Nusantara | JelajahNusa</title>
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
   <meta name="jn-auth-status" content="<?php echo isset($_SESSION['user']) ? 'true' : 'false'; ?>">
-  <meta name="description" content="Rancang dan kelompokkan rencana perjalanan liburan impianmu di Indonesia per hari. Tambahkan destinasi, penginapan, dan kuliner favorit dengan mudah.">
-  <meta name="keywords" content="Travel Planner Indonesia, Rencana Perjalanan, Itinerary Bali, Itinerary Wisata, JelajahNusa">
+  <meta name="description" content="Rancang dan kelompokkan rencana liburan impianmu di Indonesia berdasarkan hari. Tambahkan destinasi, penginapan, dan kuliner favorit dengan mudah.">
+  <meta name="keywords" content="Rencana Perjalanan Indonesia, Jadwal Perjalanan Bali, Wisata Indonesia, JelajahNusa">
 
   <!-- Google Fonts: Plus Jakarta Sans & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +58,7 @@ $auth_base_url = '../auth/';
       <a class="navbar-brand" href="../index.php" aria-label="JelajahNusa — Kembali ke Beranda">
         <img class="brand-logo-img"
           src="../assets/images/logo-horizontal.svg"
-          alt="JelajahNusa — Discover Indonesia, Your Way"
+          alt="JelajahNusa — Jelajahi Indonesia dengan Caramu"
           width="240" height="56">
       </a>
 
@@ -82,7 +83,7 @@ $auth_base_url = '../auth/';
             <a class="nav-link" href="../index.php#rekomendasi">Rekomendasi</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active fw-bold" href="rencana-perjalanan.php">Travel Planner</a>
+            <a class="nav-link active fw-bold" href="rencana-perjalanan.php">Rencana Perjalanan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../index.php#tentang">Tentang Kami</a>
@@ -110,7 +111,7 @@ $auth_base_url = '../auth/';
                 <li><span class="dropdown-item-text text-muted small"><i class="bi bi-envelope me-2"></i><?php echo htmlspecialchars($_SESSION['user']['email']); ?></span></li>
                 <?php if (($_SESSION['user']['role'] ?? '') === 'admin'): ?>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item text-success fw-bold small" href="../admin/"><i class="bi bi-speedometer2 me-2"></i>Dashboard Admin</a></li>
+                  <li><a class="dropdown-item text-success fw-bold small" href="../admin/"><i class="bi bi-speedometer2 me-2"></i>Dasbor Administrator</a></li>
                 <?php endif; ?>
                 <li><hr class="dropdown-divider"></li>
                 <li>
@@ -151,7 +152,7 @@ $auth_base_url = '../auth/';
       <div class="planner-breadcrumb">
         <a href="../index.php"><i class="bi bi-house-door me-1"></i>Beranda</a>
         <span>/</span>
-        <span class="text-white">Travel Planner</span>
+        <span class="text-white">Rencana Perjalanan</span>
       </div>
 
       <div class="row align-items-center g-4">
@@ -183,7 +184,7 @@ $auth_base_url = '../auth/';
     <div class="trip-control-bar">
       <div class="row align-items-center g-3">
         
-        <!-- Trip Selector Dropdown -->
+        <!-- Pemilih Rencana Perjalanan -->
         <div class="col-lg-5 col-md-6">
           <label for="plannerTripSelect" class="trip-selector-label">
             <i class="bi bi-journal-bookmark me-1 text-success"></i> Rencana Perjalanan Aktif:
@@ -204,7 +205,7 @@ $auth_base_url = '../auth/';
           </button>
 
           <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3 py-2 border-0" id="btnDeleteCurrentTrip" title="Hapus Rencana Ini">
-            <i class="bi bi-trash3 me-1"></i> Hapus Trip
+            <i class="bi bi-trash3 me-1"></i> Hapus Rencana
           </button>
         </div>
 
@@ -266,7 +267,7 @@ $auth_base_url = '../auth/';
               <span class="text-muted small">Atur jadwal liburan impianmu</span>
             </div>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
 
         <div class="modal-body p-4">
@@ -315,12 +316,12 @@ $auth_base_url = '../auth/';
             <!-- Kategori Traveler -->
             <div class="mb-3">
               <label for="tripCategorySelect" class="planner-form-label">
-                Kategori Traveler
+                Kategori Wisatawan
               </label>
               <select id="tripCategorySelect" class="form-select planner-form-control">
                 <option value="Pasangan & Keluarga" selected>Pasangan & Keluarga</option>
-                <option value="Solo Traveler">Solo Traveler (Mandiri)</option>
-                <option value="Teman & Grup">Teman & Kelompok Traveler</option>
+                <option value="Solo Traveler">Wisatawan Solo (Mandiri)</option>
+                <option value="Teman & Grup">Teman & Kelompok</option>
               </select>
             </div>
 
@@ -359,7 +360,7 @@ $auth_base_url = '../auth/';
               <span class="text-muted small">Kelompokkan ke hari yang kamu inginkan</span>
             </div>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
 
         <div class="modal-body p-4">
@@ -415,7 +416,7 @@ $auth_base_url = '../auth/';
             <!-- Foto URL (Opsional) -->
             <div class="mb-3">
               <label for="itemPhotoInput" class="planner-form-label">
-                URL Foto (Opsional)
+                Tautan Foto (Opsional)
               </label>
               <input type="url" class="form-control planner-form-control" id="itemPhotoInput" placeholder="https://images.unsplash.com/...">
             </div>
@@ -449,7 +450,7 @@ $auth_base_url = '../auth/';
             <i class="bi bi-heart-fill text-danger fs-5"></i>
             <h5 class="fw-bold text-dark mb-0" id="favoritesModalTitle">Destinasi Favorit Saya</h5>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body p-4">
           <div id="favoritesEmptyState" class="text-center py-4 d-none">
@@ -476,15 +477,15 @@ $auth_base_url = '../auth/';
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 shadow" style="border-radius: var(--radius-lg);">
         <div class="modal-header border-bottom-0 pb-0">
-          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body p-4 pt-0">
           <div class="text-center mb-4">
             <div class="brand-leaf-icon mx-auto mb-2" style="width: 52px; height: 52px; padding: 4px;">
               <img src="../assets/images/logo-icon.svg" alt="JelajahNusa" class="brand-icon-svg">
             </div>
-            <h4 class="fw-bold text-dark mb-1" id="authModalTitle">Masuk ke JelajahNusa</h4>
-            <p class="text-muted small">Discover Indonesia, Your Way.</p>
+            <h4 class="fw-bold text-dark mb-1" id="authModalTitle">Masuk ke <span translate="no" class="notranslate">JelajahNusa</span></h4>
+            <p class="text-muted small">Jelajahi Indonesia dengan Caramu.</p>
           </div>
 
           <div class="d-flex bg-white p-1 rounded-pill border mb-4">
@@ -541,7 +542,7 @@ $auth_base_url = '../auth/';
             <div class="form-check mb-4">
               <input class="form-check-input" type="checkbox" id="termsCheck" name="terms" checked required>
               <label class="form-check-label small text-muted" for="termsCheck">
-                Saya menyetujui Ketentuan Penggunaan JelajahNusa.
+                Saya menyetujui Ketentuan Penggunaan <span translate="no" class="notranslate">JelajahNusa</span>.
               </label>
             </div>
             <button type="submit" class="btn btn-forest w-100 py-2 rounded-pill">
@@ -558,14 +559,14 @@ $auth_base_url = '../auth/';
   </div>
 
   <!-- ======================================================================
-       5. FOOTER
+       5. FOOTER (Konsisten dengan Detail Destinasi & Homepage)
        ====================================================================== -->
-  <footer class="site-footer">
+  <footer class="custom-footer site-footer">
     <div class="container">
-      <div class="row g-4 mb-5">
+      <div class="row g-4">
         
         <div class="col-lg-4 col-md-6">
-          <a href="../index.php" class="footer-brand-title" aria-label="JelajahNusa — Discover Indonesia, Your Way">
+          <a href="../index.php" class="footer-brand-title" aria-label="JelajahNusa — Jelajahi Indonesia dengan Caramu">
             <img class="footer-brand-logo"
               src="../assets/images/logo-horizontal.svg"
               alt="JelajahNusa"
@@ -575,73 +576,65 @@ $auth_base_url = '../auth/';
             Platform digital panduan wisata dan perencana perjalanan nusantara terkurasi, berlandaskan prinsip keberlanjutan dan keaslian budaya Indonesia.
           </p>
           <div class="footer-social-links">
-            <a href="#" class="social-icon-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-icon-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="social-icon-btn" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
-            <a href="#" class="social-icon-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="footer-social-btn social-icon-btn" title="Instagram" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="footer-social-btn social-icon-btn" title="Facebook" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="footer-social-btn social-icon-btn" title="Twitter" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="footer-social-btn social-icon-btn" title="YouTube" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
           </div>
         </div>
 
         <div class="col-lg-2 col-md-3 col-6">
-          <h5 class="footer-heading">Navigasi</h5>
-          <ul class="footer-menu">
+          <h4 class="footer-col-title footer-heading">Navigasi</h4>
+          <ul class="footer-link-list footer-menu">
             <li><a href="../index.php#beranda">Beranda</a></li>
             <li><a href="../index.php#destinasi">Destinasi</a></li>
             <li><a href="../index.php#kategori">Kategori</a></li>
             <li><a href="../index.php#rekomendasi">Rekomendasi</a></li>
-            <li><a href="rencana-perjalanan.php">Travel Planner</a></li>
+            <li><a href="rencana-perjalanan.php">Rencana Perjalanan</a></li>
             <li><a href="favorit.php">Favorit Saya</a></li>
           </ul>
         </div>
 
         <div class="col-lg-3 col-md-3 col-6">
-          <h5 class="footer-heading">Destinasi Populer</h5>
-          <ul class="footer-menu">
-            <li><a href="detail-destinasi.php">Pulau Bali</a></li>
-            <li><a href="../index.php#destinasi">Labuan Bajo</a></li>
-            <li><a href="../index.php#destinasi">Raja Ampat</a></li>
-            <li><a href="../index.php#destinasi">Gunung Bromo</a></li>
-            <li><a href="../index.php#destinasi">Danau Toba</a></li>
-            <li><a href="../index.php#destinasi">Yogyakarta</a></li>
+          <h4 class="footer-col-title footer-heading">Destinasi Populer</h4>
+          <ul class="footer-link-list footer-menu">
+            <li><a href="detail-destinasi.php?id=2">Pulau Bali</a></li>
+            <li><a href="detail-destinasi.php?id=4">Labuan Bajo</a></li>
+            <li><a href="detail-destinasi.php?id=1">Raja Ampat</a></li>
+            <li><a href="detail-destinasi.php?id=3">Gunung Bromo</a></li>
+            <li><a href="detail-destinasi.php?id=5">Danau Toba</a></li>
+            <li><a href="detail-destinasi.php?id=6">Yogyakarta & Candi</a></li>
           </ul>
         </div>
 
         <div class="col-lg-3 col-md-6">
-          <h5 class="footer-heading">Kontak & Bantuan</h5>
-          <ul class="footer-contact-list">
-            <li>
-              <i class="bi bi-geo-alt-fill text-success"></i>
-              <span>Gedung Pariwisata Nusantara, Jl. Merdeka Alam No. 45, Jakarta</span>
-            </li>
-            <li>
-              <i class="bi bi-envelope-fill text-success"></i>
-              <span>halo@jelajahnusa.id</span>
-            </li>
-            <li>
-              <i class="bi bi-telephone-fill text-success"></i>
-              <span>+62 21 5567 8900</span>
-            </li>
-          </ul>
+          <h4 class="footer-col-title footer-heading">Hubungi Kami & Bantuan</h4>
+          <div class="footer-contact-item">
+            <i class="bi bi-geo-alt"></i>
+            <span>Gedung Pariwisata Nusantara, Jl. Merdeka Alam No. 45, Jakarta</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="bi bi-envelope"></i>
+            <span>halo@jelajahnusa.id</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="bi bi-telephone"></i>
+            <span>+62 21 5567 8900</span>
+          </div>
         </div>
 
       </div>
 
       <div class="footer-bottom">
-        <div class="row align-items-center">
-          <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
-            <span class="copyright-text">
-              © <?php echo date('Y'); ?> <strong>JelajahNusa</strong>. Seluruh hak cipta dilindungi undang-undang.
-            </span>
-          </div>
-          <div class="col-md-6 text-center text-md-end">
-            <div class="footer-bottom-links">
-              <a href="#">Kebijakan Privasi</a>
-              <span>•</span>
-              <a href="#">Syarat & Ketentuan</a>
-              <span>•</span>
-              <a href="#">Bantuan Wisatawan</a>
-            </div>
-          </div>
+        <div>
+          &copy; <?php echo date('Y'); ?> <strong translate="no" class="notranslate">JelajahNusa</strong>. Seluruh Hak Cipta Dilindungi. Jelajahi Indonesia dengan Caramu.
+        </div>
+        <div class="d-flex gap-3 footer-bottom-links">
+          <a href="#" class="text-decoration-none text-white-50 small">Kebijakan Privasi</a>
+          <span class="text-white-50">•</span>
+          <a href="#" class="text-decoration-none text-white-50 small">Syarat & Ketentuan</a>
+          <span class="text-white-50">•</span>
+          <a href="#" class="text-decoration-none text-white-50 small">Bantuan Wisatawan</a>
         </div>
       </div>
 

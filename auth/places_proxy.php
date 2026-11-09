@@ -64,7 +64,7 @@ if ($apiKey === 'YOUR_GOOGLE_PLACES_API_KEY_HERE' || empty($apiKey)) {
     $m = $_SERVER['REQUEST_METHOD'];
     $a = $m === 'POST' ? ($_POST['action'] ?? '') : ($_GET['action'] ?? '');
     if ($a !== 'save_place_id') {
-        jsonOut(['success' => false, 'disabled' => true, 'message' => 'API key belum diisi.'], 503);
+        jsonOut(['success' => false, 'disabled' => true, 'message' => 'Kunci API belum diisi.'], 503);
     }
 }
 
@@ -107,10 +107,10 @@ if ($method === 'GET' && $action === 'search') {
 
     $query = trim($_GET['q'] ?? '');
     if (empty($query) || mb_strlen($query) < 3) {
-        jsonOut(['success' => false, 'message' => 'Query pencarian minimal 3 karakter.'], 422);
+        jsonOut(['success' => false, 'message' => 'Kata kunci pencarian minimal 3 karakter.'], 422);
     }
     if (mb_strlen($query) > 200) {
-        jsonOut(['success' => false, 'message' => 'Query terlalu panjang.'], 422);
+        jsonOut(['success' => false, 'message' => 'Kata kunci terlalu panjang.'], 422);
     }
 
     // Text Search (New) — POST dengan body JSON
@@ -153,12 +153,12 @@ if ($method === 'GET' && $action === 'search') {
     if ($status !== 200 || isset($data['error'])) {
         $msg = $data['error']['message'] ?? 'Google API mengembalikan error.';
         error_log('[Places search API] status=' . $status . ' msg=' . $msg);
-        jsonOut(['success' => false, 'message' => $msg, 'status' => $status], 502);
+        jsonOut(['success' => false, 'message' => 'Layanan Google Maps tidak dapat memproses permintaan ini. Silakan coba kembali.', 'status' => $status], 502);
     }
 
     $places = $data['places'] ?? [];
     if (empty($places)) {
-        jsonOut(['success' => true, 'places' => [], 'message' => 'Tidak ada tempat yang ditemukan untuk query ini.']);
+        jsonOut(['success' => true, 'places' => [], 'message' => 'Tidak ada tempat yang ditemukan untuk kata kunci ini.']);
     }
 
     // Mapping hasil ke format ringkas
@@ -181,12 +181,12 @@ if ($method === 'GET' && $action === 'search') {
 if ($method === 'GET' && $action === 'details') {
     $placeId = trim($_GET['place_id'] ?? '');
     if (empty($placeId)) {
-        jsonOut(['success' => false, 'message' => 'place_id wajib disertakan.'], 422);
+        jsonOut(['success' => false, 'message' => 'ID Google Maps wajib disertakan.'], 422);
     }
 
     // Sanitasi: Place ID hanya boleh berisi alfanumerik, tanda minus, dan underscore
     if (!preg_match('/^[A-Za-z0-9_\-]+$/', $placeId)) {
-        jsonOut(['success' => false, 'message' => 'Format place_id tidak valid.'], 422);
+        jsonOut(['success' => false, 'message' => 'Format ID Google Maps tidak valid.'], 422);
     }
 
     $url = GOOGLE_PLACES_BASE_URL . '/places/' . urlencode($placeId);
@@ -201,14 +201,14 @@ if ($method === 'GET' && $action === 'details') {
     $res = googleRequest($url . '?languageCode=id', $headers);
 
     if (!$res['ok']) {
-        $msg = $res['error'] ?? ($res['body']['error']['message'] ?? 'Gagal mengambil data dari Google API.');
+        $msg = $res['error'] ?? ($res['body']['error']['message'] ?? 'Kesalahan tidak diketahui.');
         error_log('[Places details] place_id=' . $placeId . ' error=' . $msg);
-        jsonOut(['success' => false, 'message' => $msg], 502);
+        jsonOut(['success' => false, 'message' => 'Gagal mengambil data dari Google Maps. Silakan coba kembali.'], 502);
     }
 
     $p = $res['body'];
     if (!$p || isset($p['error'])) {
-        jsonOut(['success' => false, 'message' => $p['error']['message'] ?? 'Data tidak ditemukan.'], 404);
+        jsonOut(['success' => false, 'message' => 'Data tempat tidak ditemukan.'], 404);
     }
 
     // Proses ulasan — max 5 sesuai yang dikembalikan API

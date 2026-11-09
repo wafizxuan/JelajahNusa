@@ -2,14 +2,14 @@
   <div class="container">
     <div class="text-center mb-5">
       <span class="section-label"><i class="bi bi-chat-square-text me-1"></i> Ulasan Pengguna</span>
-      <h2 class="section-title">Rating & Ulasan Wisatawan</h2>
+      <h2 class="section-title">Penilaian &amp; Ulasan Wisatawan</h2>
       <p class="section-subtitle">Penilaian pengguna JelajahNusa untuk <?php echo htmlspecialchars($destinasi['nama'], ENT_QUOTES, 'UTF-8'); ?>.</p>
     </div>
 
     <div class="text-center mb-4">
       <?php if ($reviewSummary['rating'] !== null): ?>
         <div class="display-4 fw-bold text-dark"><?php echo number_format($reviewSummary['rating'], 1); ?></div>
-        <div class="text-warning fs-5" aria-label="Rating <?php echo number_format($reviewSummary['rating'], 1); ?> dari 5">
+        <div class="text-warning fs-5" aria-label="Penilaian <?php echo number_format($reviewSummary['rating'], 1); ?> dari 5">
           <?php for ($star = 1; $star <= 5; $star++): ?><i class="bi <?php echo $star <= round($reviewSummary['rating']) ? 'bi-star-fill' : 'bi-star'; ?>"></i><?php endfor; ?>
         </div>
         <div class="text-muted small"><?php echo number_format($reviewSummary['total_ulasan']); ?> ulasan</div>
@@ -38,8 +38,8 @@
             <input type="hidden" name="destination_id" value="<?php echo (int)$destinasi['id']; ?>">
             <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_review'], ENT_QUOTES, 'UTF-8'); ?>">
             <fieldset class="mb-3">
-              <legend class="form-label small fw-semibold">Rating Anda</legend>
-              <div class="btn-group" role="group" aria-label="Pilih rating 1 sampai 5 bintang">
+              <legend class="form-label small fw-semibold">Penilaian Anda</legend>
+              <div class="btn-group" role="group" aria-label="Pilih penilaian 1 sampai 5 bintang">
                 <?php for ($star = 1; $star <= 5; $star++): ?>
                 <input class="btn-check" type="radio" name="rating" id="review-rating-<?php echo $star; ?>" value="<?php echo $star; ?>" required <?php echo (int)($myReview['rating'] ?? 0) === $star ? 'checked' : ''; ?>>
                 <label class="btn btn-outline-warning" for="review-rating-<?php echo $star; ?>" title="<?php echo $star; ?> bintang"><i class="bi bi-star-fill"></i> <?php echo $star; ?></label>
@@ -63,7 +63,7 @@
           <?php endif; ?>
           <?php else: ?>
           <h3 class="h5 fw-bold mb-2">Punya pengalaman di sini?</h3>
-          <p class="text-muted small">Masuk untuk memberikan rating dan ulasan.</p>
+          <p class="text-muted small">Masuk untuk memberikan penilaian dan ulasan.</p>
           <button type="button" class="btn btn-forest" data-bs-toggle="modal" data-bs-target="#authModal">Masuk untuk memberi ulasan</button>
           <?php endif; ?>
         </div>
@@ -80,12 +80,12 @@
             <article class="bg-white border rounded-3 p-3">
               <div class="d-flex justify-content-between gap-3">
                 <strong><?php echo htmlspecialchars($review['name'], ENT_QUOTES, 'UTF-8'); ?></strong>
-                <span class="text-warning" aria-label="Rating <?php echo (int)$review['rating']; ?> dari 5">
+                <span class="text-warning" aria-label="Penilaian <?php echo (int)$review['rating']; ?> dari 5">
                   <?php for ($star = 1; $star <= 5; $star++): ?><i class="bi <?php echo $star <= (int)$review['rating'] ? 'bi-star-fill' : 'bi-star'; ?>"></i><?php endfor; ?>
                 </span>
               </div>
               <p class="small text-muted mb-1"><?php echo nl2br(htmlspecialchars($review['review_text'], ENT_QUOTES, 'UTF-8')); ?></p>
-              <time class="text-muted" style="font-size:.75rem" datetime="<?php echo htmlspecialchars($review['created_at'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars(date('d M Y', strtotime($review['created_at'])), ENT_QUOTES, 'UTF-8'); ?></time>
+              <time class="text-muted" style="font-size:.75rem" datetime="<?php echo htmlspecialchars($review['created_at'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars(formatTanggalIndonesia($review['created_at']), ENT_QUOTES, 'UTF-8'); ?></time>
             </article>
           </div>
           <?php endforeach; ?>

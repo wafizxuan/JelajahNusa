@@ -518,7 +518,195 @@
   margin-bottom: 20px;
 }
 
-/* 8. MODAL FORM REFINEMENT */
+/* 8. TRAVEL PLANNER FOOTER (Identik & Konsisten dengan Detail Destinasi) */
+.site-footer,
+.custom-footer {
+  background-color: var(--c-dark-forest);
+  color: var(--c-beige);
+  padding-top: 80px;
+  padding-bottom: 30px;
+  border-top: 1px solid rgba(232, 230, 217, 0.2);
+}
+
+.site-footer .footer-brand-title,
+.custom-footer .footer-brand-title {
+  display: block;
+  margin-bottom: 12px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.site-footer .footer-brand-logo,
+.custom-footer .footer-brand-logo {
+  height: 52px;
+  width: auto;
+  max-width: 240px;
+  display: block;
+}
+
+.site-footer .footer-desc,
+.custom-footer .footer-desc {
+  font-size: 0.9rem;
+  color: rgba(232, 230, 217, 0.75);
+  line-height: 1.6;
+  max-width: 340px;
+  margin-bottom: 0;
+}
+
+.site-footer .footer-col-title,
+.site-footer .footer-heading,
+.custom-footer .footer-col-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.site-footer .footer-col-title::after,
+.site-footer .footer-heading::after,
+.custom-footer .footer-col-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background-color: var(--c-sage);
+  border-radius: 2px;
+}
+
+.site-footer .footer-link-list,
+.site-footer .footer-menu,
+.custom-footer .footer-link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-footer .footer-link-list li,
+.site-footer .footer-menu li,
+.custom-footer .footer-link-list li {
+  margin-bottom: 10px;
+}
+
+.site-footer .footer-link-list a,
+.site-footer .footer-menu a,
+.custom-footer .footer-link-list a {
+  color: rgba(232, 230, 217, 0.75);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.site-footer .footer-link-list a:hover,
+.site-footer .footer-menu a:hover,
+.custom-footer .footer-link-list a:hover {
+  color: #FFFFFF;
+  padding-left: 4px;
+}
+
+.site-footer .footer-contact-item,
+.site-footer .footer-contact-list li,
+.custom-footer .footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: rgba(232, 230, 217, 0.8);
+  margin-bottom: 12px;
+}
+
+.site-footer .footer-contact-item i,
+.site-footer .footer-contact-list i,
+.custom-footer .footer-contact-item i {
+  color: var(--c-sage) !important;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.site-footer .footer-social-links,
+.custom-footer .footer-social-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.site-footer .footer-social-btn,
+.site-footer .social-icon-btn,
+.custom-footer .footer-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: rgba(232, 230, 217, 0.1);
+  border: none;
+  color: var(--c-beige);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: var(--transition);
+  font-size: 0.95rem;
+}
+
+.site-footer .footer-social-btn:hover,
+.site-footer .social-icon-btn:hover,
+.custom-footer .footer-social-btn:hover {
+  background-color: var(--c-forest);
+  border-color: var(--c-forest);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.site-footer .footer-bottom,
+.custom-footer .footer-bottom {
+  margin-top: 60px;
+  padding-top: 24px;
+  padding-bottom: 0;
+  border-top: 1px solid rgba(232, 230, 217, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.84rem;
+  color: rgba(232, 230, 217, 0.75);
+}
+
+.site-footer .footer-bottom a,
+.site-footer .footer-bottom-links a,
+.custom-footer .footer-bottom a {
+  color: rgba(232, 230, 217, 0.75) !important;
+  text-decoration: none;
+  font-size: 0.84rem;
+  transition: var(--transition);
+}
+
+.site-footer .footer-bottom a:hover,
+.site-footer .footer-bottom-links a:hover,
+.custom-footer .footer-bottom a:hover {
+  color: #FFFFFF !important;
+}
+
+.site-footer .footer-bottom span,
+.site-footer .footer-bottom-links span {
+  color: rgba(232, 230, 217, 0.5);
+}
+
+@media (max-width: 767px) {
+  .site-footer .footer-bottom,
+  .custom-footer .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  .site-footer .footer-bottom-links {
+    justify-content: center;
+  }
+}
+
+/* 9. MODAL FORM REFINEMENT */
 .planner-form-label {
   font-size: 0.84rem;
   font-weight: 700;
@@ -540,7 +728,7 @@
   box-shadow: 0 0 0 3px rgba(52, 91, 73, 0.15);
 }
 
-/* 9. PRINT / EXPORT STYLES */
+/* 10. PRINT / EXPORT STYLES */
 @media print {
   .custom-navbar,
   .trip-control-bar,

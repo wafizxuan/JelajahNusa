@@ -42,7 +42,8 @@ try {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Admin | JelajahNusa</title>
+  <meta http-equiv="content-language" content="id">
+  <title>Dasbor Administrator | JelajahNusa</title>
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
   <!-- Google Fonts: Plus Jakarta Sans & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -249,19 +250,19 @@ try {
        ====================================================================== -->
   <aside class="admin-sidebar" id="adminSidebar">
     
-    <a href="index.php" class="admin-brand" aria-label="JelajahNusa Admin Panel">
+    <a href="index.php" class="admin-brand" aria-label="Panel Administrator JelajahNusa">
       <img class="admin-brand-logo"
         src="../assets/images/logo-horizontal.svg"
-        alt="JelajahNusa — Admin Panel"
+        alt="JelajahNusa — Panel Administrator"
         width="180" height="46">
-      <div class="text-white-50 small mt-1" style="font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding-left: 2px;">Admin Control Panel</div>
+      <div class="text-white-50 small mt-1" style="font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding-left: 2px;">Panel Kendali Administrator</div>
     </a>
 
     <ul class="admin-menu-list">
       <li>
         <a href="index.php" class="admin-menu-link active">
           <i class="bi bi-grid-1x2-fill"></i>
-          <span>Dashboard</span>
+          <span>Dasbor</span>
         </a>
       </li>
       <li>
@@ -286,7 +287,7 @@ try {
 
     <div class="admin-footer-actions">
       <a href="../index.php" class="btn btn-outline-light btn-sm rounded-pill py-2 w-100 text-decoration-none">
-        <i class="bi bi-globe2 me-1"></i> Kembali ke Website
+        <i class="bi bi-globe2 me-1"></i> Kembali ke Situs Web
       </a>
       <a href="../auth/logout.php" class="btn btn-danger btn-sm rounded-pill py-2 w-100 text-decoration-none" style="background: rgba(220, 53, 69, 0.2); border-color: rgba(220, 53, 69, 0.4); color: #ffb8b8;">
         <i class="bi bi-box-arrow-right me-1"></i> Keluar
@@ -303,10 +304,10 @@ try {
     <!-- Topbar -->
     <header class="admin-topbar">
       <div class="d-flex align-items-center gap-3">
-        <button class="btn btn-link text-dark d-lg-none p-0 fs-4" type="button" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
+        <button class="btn btn-link text-dark d-lg-none p-0 fs-4" type="button" id="sidebarToggleBtn" aria-label="Buka atau tutup menu">
           <i class="bi bi-list"></i>
         </button>
-        <h5 class="fw-bold text-dark mb-0">Dashboard Ringkasan</h5>
+        <h5 class="fw-bold text-dark mb-0">Ringkasan Dasbor</h5>
       </div>
 
       <div class="d-flex align-items-center gap-2">

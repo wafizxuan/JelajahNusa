@@ -31,6 +31,7 @@ $csrfToken = $_SESSION['csrf_profile'];
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-language" content="id">
   <title>Pengaturan Akun — JelajahNusa</title>
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
   <meta name="jn-auth-status" content="true">
@@ -153,13 +154,13 @@ $csrfToken = $_SESSION['csrf_profile'];
       <a class="navbar-brand" href="../index.php" aria-label="JelajahNusa — Kembali ke Beranda">
         <img class="brand-logo-img"
              src="../assets/images/logo-horizontal.svg"
-             alt="JelajahNusa — Discover Indonesia, Your Way"
+             alt="JelajahNusa — Jelajahi Indonesia dengan Caramu"
              width="240" height="56">
       </a>
 
       <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
               data-bs-target="#navbarContent" aria-controls="navbarContent"
-              aria-expanded="false" aria-label="Toggle navigation">
+              aria-expanded="false" aria-label="Buka atau tutup navigasi">
         <i class="bi bi-list"></i>
       </button>
 
@@ -169,7 +170,7 @@ $csrfToken = $_SESSION['csrf_profile'];
           <li class="nav-item"><a class="nav-link" href="../index.php#destinasi">Jelajahi Wisata</a></li>
           <li class="nav-item"><a class="nav-link" href="../index.php#kategori">Kategori</a></li>
           <li class="nav-item"><a class="nav-link" href="../index.php#rekomendasi">Rekomendasi</a></li>
-          <li class="nav-item"><a class="nav-link" href="rencana-perjalanan.php">Travel Planner</a></li>
+          <li class="nav-item"><a class="nav-link" href="rencana-perjalanan.php">Rencana Perjalanan</a></li>
           <li class="nav-item"><a class="nav-link" href="../index.php#tentang">Tentang Kami</a></li>
         </ul>
 
@@ -193,7 +194,7 @@ $csrfToken = $_SESSION['csrf_profile'];
               <li><span class="dropdown-item-text text-muted small"><i class="bi bi-envelope me-2"></i><?php echo htmlspecialchars($currentUser['email']); ?></span></li>
               <?php if (($currentUser['role'] ?? '') === 'admin'): ?>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item text-success fw-bold small" href="../admin/"><i class="bi bi-speedometer2 me-2"></i>Dashboard Admin</a></li>
+                <li><a class="dropdown-item text-success fw-bold small" href="../admin/"><i class="bi bi-speedometer2 me-2"></i>Dasbor Administrator</a></li>
               <?php endif; ?>
               <li><hr class="dropdown-divider"></li>
               <li>
@@ -230,7 +231,7 @@ $csrfToken = $_SESSION['csrf_profile'];
             <i class="bi bi-envelope me-1"></i><?php echo htmlspecialchars($currentUser['email']); ?>
             &nbsp;·&nbsp;
             <span class="badge <?php echo $currentUser['role'] === 'admin' ? 'bg-warning text-dark' : 'bg-success bg-opacity-25 text-success'; ?> rounded-pill px-2 py-1">
-              <?php echo ucfirst($currentUser['role'] ?? 'user'); ?>
+              <?php echo ($currentUser['role'] ?? 'user') === 'admin' ? 'Administrator' : 'Pengguna'; ?>
             </span>
           </p>
         </div>
@@ -259,7 +260,7 @@ $csrfToken = $_SESSION['csrf_profile'];
 
           <div class="profil-card-header d-flex align-items-center gap-2">
             <i class="bi bi-person-fill" style="color:var(--c-forest);font-size:1.1rem;"></i>
-            <h5>Edit Profil</h5>
+            <h5>Ubah Profil</h5>
           </div>
 
           <div class="profil-card-body">
@@ -287,11 +288,12 @@ $csrfToken = $_SESSION['csrf_profile'];
                 <i class="bi bi-calendar-check text-muted"></i>
                 <?php
                   require_once __DIR__ . '/../config/database.php';
+                  require_once __DIR__ . '/../config/helpers.php';
                   try {
                     $stmt = $pdo->prepare('SELECT created_at FROM users WHERE id = :uid LIMIT 1');
                     $stmt->execute(['uid' => (int)$currentUser['id']]);
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                    $joinDate = $row ? date('d F Y', strtotime($row['created_at'])) : '—';
+                    $joinDate = $row ? formatTanggalIndonesia($row['created_at']) : '—';
                   } catch (Exception $e) { $joinDate = '—'; }
                 ?>
                 <span><?php echo htmlspecialchars($joinDate); ?></span>
@@ -361,7 +363,7 @@ $csrfToken = $_SESSION['csrf_profile'];
                          placeholder="Masukkan kata sandi saat ini" required
                          autocomplete="current-password">
                   <button class="btn btn-outline-secondary border-start-0" type="button"
-                          data-toggle-pass="oldPassword" title="Tampilkan/sembunyikan">
+                          data-toggle-pass="oldPassword" title="Tampilkan atau sembunyikan">
                     <i class="bi bi-eye"></i>
                   </button>
                 </div>
@@ -377,7 +379,7 @@ $csrfToken = $_SESSION['csrf_profile'];
                          placeholder="Minimal 8 karakter" required
                          autocomplete="new-password" minlength="8">
                   <button class="btn btn-outline-secondary border-start-0" type="button"
-                          data-toggle-pass="newPassword" title="Tampilkan/sembunyikan">
+                          data-toggle-pass="newPassword" title="Tampilkan atau sembunyikan">
                     <i class="bi bi-eye"></i>
                   </button>
                 </div>
@@ -398,7 +400,7 @@ $csrfToken = $_SESSION['csrf_profile'];
                          placeholder="Ulangi kata sandi baru" required
                          autocomplete="new-password">
                   <button class="btn btn-outline-secondary border-start-0" type="button"
-                          data-toggle-pass="confirmPassword" title="Tampilkan/sembunyikan">
+                          data-toggle-pass="confirmPassword" title="Tampilkan atau sembunyikan">
                     <i class="bi bi-eye"></i>
                   </button>
                 </div>
@@ -438,7 +440,7 @@ $csrfToken = $_SESSION['csrf_profile'];
             <li><a href="../index.php#beranda">Beranda</a></li>
             <li><a href="../index.php#destinasi">Jelajahi Wisata</a></li>
             <li><a href="favorit.php">Favorit</a></li>
-            <li><a href="rencana-perjalanan.php">Travel Planner</a></li>
+            <li><a href="rencana-perjalanan.php">Rencana Perjalanan</a></li>
           </ul>
         </div>
         <div class="col-lg-4 col-md-12">
@@ -451,7 +453,7 @@ $csrfToken = $_SESSION['csrf_profile'];
         </div>
       </div>
       <div class="footer-bottom">
-        <div>&copy; <?php echo date('Y'); ?> <strong>JelajahNusa</strong>. Seluruh Hak Cipta Dilindungi.</div>
+        <div>&copy; <?php echo date('Y'); ?> <strong translate="no" class="notranslate">JelajahNusa</strong>. Seluruh Hak Cipta Dilindungi.</div>
         <div class="d-flex gap-3">
           <a href="#" class="text-decoration-none text-white-50 small">Privasi</a>
           <span class="text-white-50">•</span>

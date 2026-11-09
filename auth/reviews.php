@@ -54,7 +54,7 @@ try {
         $textLength = function_exists('mb_strlen') ? mb_strlen($reviewText, 'UTF-8') : strlen($reviewText);
 
         if ($rating === false || $rating === null || $reviewText === '' || $textLength > 3000) {
-            $_SESSION['review_flash'] = ['type' => 'danger', 'message' => 'Pilih rating 1–5 dan isi ulasan maksimal 3.000 karakter.'];
+            $_SESSION['review_flash'] = ['type' => 'danger', 'message' => 'Pilih penilaian 1–5 dan isi ulasan maksimal 3.000 karakter.'];
         } else {
             $stmt = $pdo->prepare(" 
                 INSERT INTO destination_reviews (destination_id, user_id, rating, review_text, status)

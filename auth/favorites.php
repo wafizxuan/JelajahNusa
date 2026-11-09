@@ -41,7 +41,7 @@ function requireAuth(): int
         jsonResponse([
             'success'   => false,
             'auth'      => false,
-            'message'   => 'Silakan login terlebih dahulu untuk menggunakan fitur Favorit.',
+            'message' => 'Silakan masuk terlebih dahulu untuk menggunakan fitur Favorit.',
         ], 401);
     }
     return (int) $_SESSION['user']['id'];

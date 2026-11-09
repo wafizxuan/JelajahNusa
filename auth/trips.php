@@ -44,7 +44,7 @@ function requireAuth(): int
         jsonOut([
             'success' => false,
             'auth'    => false,
-            'message' => 'Silakan login terlebih dahulu untuk mengelola rencana perjalanan.',
+            'message' => 'Silakan masuk terlebih dahulu untuk mengelola rencana perjalanan.',
         ], 401);
     }
     return (int) $_SESSION['user']['id'];
@@ -63,7 +63,7 @@ function vStr(mixed $raw, int $max = 200, bool $required = true): string
 {
     $s = trim((string)($raw ?? ''));
     if ($required && $s === '') {
-        jsonOut(['success' => false, 'message' => 'Field wajib tidak boleh kosong.'], 422);
+        jsonOut(['success' => false, 'message' => 'Kolom wajib tidak boleh kosong.'], 422);
     }
     return mb_substr($s, 0, $max);
 }
@@ -102,7 +102,7 @@ function ownsTrip(PDO $pdo, int $tripId, int $userId): void
     $s = $pdo->prepare("SELECT id FROM trips WHERE id = :tid AND user_id = :uid LIMIT 1");
     $s->execute(['tid' => $tripId, 'uid' => $userId]);
     if (!$s->fetch()) {
-        jsonOut(['success' => false, 'message' => 'Trip tidak ditemukan atau bukan milik Anda.'], 403);
+        jsonOut(['success' => false, 'message' => 'Rencana perjalanan tidak ditemukan atau bukan milik Anda.'], 403);
     }
 }
 
@@ -115,7 +115,7 @@ $action = match ($method) {
 };
 
 // ══════════════════════════════════════════════════════════════════════════════
-// GET: list — semua trip milik user
+// GET: list — semua rencana perjalanan milik pengguna
 // ══════════════════════════════════════════════════════════════════════════════
 if ($method === 'GET' && $action === 'list') {
     $uid = requireAuth();
@@ -138,12 +138,12 @@ if ($method === 'GET' && $action === 'list') {
         jsonOut(['success' => true, 'trips' => $trips]);
     } catch (PDOException $e) {
         error_log('[trips list] ' . $e->getMessage());
-        jsonOut(['success' => false, 'message' => 'Gagal mengambil data trip.'], 500);
+        jsonOut(['success' => false, 'message' => 'Gagal mengambil data rencana perjalanan.'], 500);
     }
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// GET: get — detail 1 trip + item-nya
+// GET: get — detail satu rencana perjalanan beserta kegiatannya
 // ══════════════════════════════════════════════════════════════════════════════
 if ($method === 'GET' && $action === 'get') {
     $uid    = requireAuth();
@@ -169,12 +169,12 @@ if ($method === 'GET' && $action === 'get') {
         jsonOut(['success' => true, 'trip' => $trip]);
     } catch (PDOException $e) {
         error_log('[trips get] ' . $e->getMessage());
-        jsonOut(['success' => false, 'message' => 'Gagal mengambil detail trip.'], 500);
+        jsonOut(['success' => false, 'message' => 'Gagal mengambil detail rencana perjalanan.'], 500);
     }
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// POST: create — buat trip baru (+ opsional item pertama)
+// POST: create — buat rencana perjalanan baru (+ opsional kegiatan pertama)
 // ══════════════════════════════════════════════════════════════════════════════
 if ($method === 'POST' && $action === 'create') {
     $uid  = requireAuth();
@@ -260,7 +260,7 @@ if ($method === 'POST' && $action === 'create') {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// POST: delete_trip — hapus trip beserta semua item (via CASCADE)
+// POST: delete_trip — hapus rencana perjalanan beserta semua kegiatannya (via CASCADE)
 // ══════════════════════════════════════════════════════════════════════════════
 if ($method === 'POST' && $action === 'delete_trip') {
     $uid    = requireAuth();
@@ -278,25 +278,25 @@ if ($method === 'POST' && $action === 'delete_trip') {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// POST: add_item — tambah item ke trip yang sudah ada
+// POST: add_item — tambah kegiatan ke rencana perjalanan yang sudah ada
 // ══════════════════════════════════════════════════════════════════════════════
 if ($method === 'POST' && $action === 'add_item') {
     $uid    = requireAuth();
     $tripId = vInt($_POST['trip_id'] ?? null);
     ownsTrip($pdo, $tripId, $uid);
 
-    // Validasi day_number tidak melebihi durasi trip
+    // Validasi day_number tidak melebihi durasi rencana perjalanan
     try {
         $tripRow = $pdo->prepare("SELECT days FROM trips WHERE id = :tid LIMIT 1");
         $tripRow->execute(['tid' => $tripId]);
         $tripData = $tripRow->fetch();
     } catch (PDOException $e) {
-        jsonOut(['success' => false, 'message' => 'Trip tidak ditemukan.'], 404);
+        jsonOut(['success' => false, 'message' => 'Rencana perjalanan tidak ditemukan.'], 404);
     }
 
     $dayNum = (int)($_POST['day_number'] ?? 1);
     if ($dayNum < 1 || $dayNum > (int)$tripData['days']) {
-        jsonOut(['success' => false, 'message' => "Hari ke-{$dayNum} tidak valid untuk trip ini (durasi: {$tripData['days']} hari)."], 422);
+        jsonOut(['success' => false, 'message' => "Hari ke-{$dayNum} tidak valid untuk rencana perjalanan ini (durasi: {$tripData['days']} hari)."], 422);
     }
 
     $name  = vStr($_POST['name']     ?? '', 200);
@@ -307,7 +307,7 @@ if ($method === 'POST' && $action === 'add_item') {
     $note  = vStr($_POST['note']       ?? '', 1000, false);
 
     if (mb_strlen($name) > 200) {
-        jsonOut(['success' => false, 'message' => 'Nama item maksimal 200 karakter.'], 422);
+        jsonOut(['success' => false, 'message' => 'Nama kegiatan maksimal 200 karakter.'], 422);
     }
 
     try {
@@ -341,17 +341,17 @@ if ($method === 'POST' && $action === 'add_item') {
 
         jsonOut([
             'success' => true,
-            'message' => 'Item berhasil ditambahkan ke rencana perjalanan.',
+            'message' => 'Kegiatan berhasil ditambahkan ke rencana perjalanan.',
             'item_id' => $newItemId,
         ]);
     } catch (PDOException $e) {
         error_log('[trips add_item] ' . $e->getMessage());
-        jsonOut(['success' => false, 'message' => 'Gagal menambahkan item.'], 500);
+        jsonOut(['success' => false, 'message' => 'Gagal menambahkan kegiatan.'], 500);
     }
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// POST: delete_item — hapus 1 item dari trip
+// POST: delete_item — hapus satu kegiatan dari rencana perjalanan
 // ══════════════════════════════════════════════════════════════════════════════
 if ($method === 'POST' && $action === 'delete_item') {
     $uid    = requireAuth();
@@ -362,15 +362,15 @@ if ($method === 'POST' && $action === 'delete_item') {
         $check = $pdo->prepare("SELECT id FROM trip_items WHERE id = :iid AND user_id = :uid LIMIT 1");
         $check->execute(['iid' => $itemId, 'uid' => $uid]);
         if (!$check->fetch()) {
-            jsonOut(['success' => false, 'message' => 'Item tidak ditemukan atau bukan milik Anda.'], 403);
+            jsonOut(['success' => false, 'message' => 'Kegiatan tidak ditemukan atau bukan milik Anda.'], 403);
         }
 
         $pdo->prepare("DELETE FROM trip_items WHERE id = :iid AND user_id = :uid")
             ->execute(['iid' => $itemId, 'uid' => $uid]);
-        jsonOut(['success' => true, 'message' => 'Item berhasil dihapus.']);
+        jsonOut(['success' => true, 'message' => 'Kegiatan berhasil dihapus.']);
     } catch (PDOException $e) {
         error_log('[trips delete_item] ' . $e->getMessage());
-        jsonOut(['success' => false, 'message' => 'Gagal menghapus item.'], 500);
+        jsonOut(['success' => false, 'message' => 'Gagal menghapus kegiatan.'], 500);
     }
 }
 

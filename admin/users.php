@@ -6,6 +6,7 @@
 
 require_once __DIR__ . '/auth_check.php';
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/helpers.php';
 
 $currentAdminId = (int)($_SESSION['user']['id'] ?? 0);
 
@@ -50,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $updateStmt = $pdo->prepare("UPDATE users SET role = ? WHERE id = ?");
             $updateStmt->execute([$newRole, $targetId]);
 
-            $roleLabel = ($newRole === 'admin') ? 'Administrator' : 'User';
+            $roleLabel = ($newRole === 'admin') ? 'Administrator' : 'Pengguna';
             $_SESSION['flash_success'] = 'Peran akun "' . htmlspecialchars($targetUser['name']) . '" (' . htmlspecialchars($targetUser['email']) . ') berhasil diubah menjadi ' . $roleLabel . '.';
 
         } elseif ($action === 'delete_user') {
@@ -87,7 +88,8 @@ $csrf_token = generateCsrfToken();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manajemen Pengguna | JelajahNusa Admin</title>
+  <meta http-equiv="content-language" content="id">
+  <title>Manajemen Pengguna | Administrator JelajahNusa</title>
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -241,19 +243,19 @@ $csrf_token = generateCsrfToken();
 
   <!-- Sidebar -->
   <aside class="admin-sidebar" id="adminSidebar">
-    <a href="index.php" class="admin-brand" aria-label="JelajahNusa Admin Panel">
+    <a href="index.php" class="admin-brand" aria-label="Panel Administrator JelajahNusa">
       <img class="admin-brand-logo"
         src="../assets/images/logo-horizontal.svg"
-        alt="JelajahNusa — Admin Panel"
+        alt="JelajahNusa — Panel Administrator"
         width="180" height="46">
-      <div class="text-white-50 small mt-1" style="font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding-left: 2px;">Admin Management</div>
+      <div class="text-white-50 small mt-1" style="font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding-left: 2px;">Pengelolaan Administrator</div>
     </a>
 
     <ul class="admin-menu-list">
       <li>
         <a href="index.php" class="admin-menu-link">
           <i class="bi bi-speedometer2"></i>
-          <span>Dashboard</span>
+          <span>Dasbor</span>
         </a>
       </li>
       <li>
@@ -272,7 +274,7 @@ $csrf_token = generateCsrfToken();
 
     <div class="p-3 border-top border-white border-opacity-10 d-flex flex-column gap-2">
       <a href="../index.php" class="btn btn-outline-light btn-sm rounded-pill py-2 w-100 text-decoration-none">
-        <i class="bi bi-globe2 me-1"></i> Kembali ke Website
+        <i class="bi bi-globe2 me-1"></i> Kembali ke Situs Web
       </a>
       <a href="../auth/logout.php" class="btn btn-danger btn-sm rounded-pill py-2 w-100 text-decoration-none" style="background: rgba(220, 53, 69, 0.2); border-color: rgba(220, 53, 69, 0.4); color: #ffb8b8;">
         <i class="bi bi-box-arrow-right me-1"></i> Keluar
@@ -284,7 +286,7 @@ $csrf_token = generateCsrfToken();
   <div class="admin-main">
     <header class="admin-topbar">
       <div class="d-flex align-items-center gap-3">
-        <button class="btn btn-link text-dark d-lg-none p-0 fs-4" type="button" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
+        <button class="btn btn-link text-dark d-lg-none p-0 fs-4" type="button" id="sidebarToggleBtn" aria-label="Buka atau tutup menu">
           <i class="bi bi-list"></i>
         </button>
         <h5 class="fw-bold text-dark mb-0">Manajemen Pengguna</h5>
@@ -307,7 +309,7 @@ $csrf_token = generateCsrfToken();
             <i class="bi bi-check-circle-fill fs-5"></i>
             <div><?php echo htmlspecialchars($_SESSION['flash_success']); ?></div>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
         </div>
         <?php unset($_SESSION['flash_success']); ?>
       <?php endif; ?>
@@ -318,7 +320,7 @@ $csrf_token = generateCsrfToken();
             <i class="bi bi-exclamation-triangle-fill fs-5"></i>
             <div><?php echo htmlspecialchars($_SESSION['flash_error']); ?></div>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
         </div>
         <?php unset($_SESSION['flash_error']); ?>
       <?php endif; ?>
@@ -330,21 +332,21 @@ $csrf_token = generateCsrfToken();
         </div>
         <div class="d-flex gap-2 align-items-center">
           <span class="badge bg-light text-dark border px-3 py-2 rounded-pill small">
-            Total: <span id="userCountBadge"><?php echo count($users); ?></span> Pengguna
+            Jumlah: <span id="userCountBadge"><?php echo count($users); ?></span> Pengguna
           </span>
         </div>
       </div>
 
-      <!-- Preview Pengguna Terdaftar -->
+      <!-- Daftar Pengguna Terdaftar -->
       <div class="content-card">
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
           <div class="d-flex align-items-center gap-2">
             <h6 class="fw-bold text-dark mb-0">Akun Terdaftar di Database</h6>
-            <span class="badge bg-success bg-opacity-10 text-success small"><i class="bi bi-shield-check me-1"></i>Proteksi Password Hash</span>
+            <span class="badge bg-success bg-opacity-10 text-success small"><i class="bi bi-shield-check me-1"></i>Kata Sandi Terlindungi</span>
           </div>
           <div class="input-group input-group-sm" style="max-width: 280px;">
             <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-search"></i></span>
-            <input type="text" id="userSearchInput" class="form-control bg-light border-start-0 ps-0" placeholder="Cari nama, email, role...">
+            <input type="text" id="userSearchInput" class="form-control bg-light border-start-0 ps-0" placeholder="Cari nama, email, atau peran...">
           </div>
         </div>
 
@@ -355,7 +357,7 @@ $csrf_token = generateCsrfToken();
                 <th style="width: 70px;">ID</th>
                 <th>Nama Lengkap</th>
                 <th>Alamat Email</th>
-                <th>Role / Peran</th>
+                <th>Peran</th>
                 <th>Tanggal Terdaftar</th>
                 <th class="text-end" style="width: 170px;">Aksi</th>
               </tr>
@@ -389,12 +391,12 @@ $csrf_token = generateCsrfToken();
                         </span>
                       <?php else: ?>
                         <span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill px-3 py-1 small fw-semibold">
-                          <i class="bi bi-person me-1"></i>User
+                          <i class="bi bi-person me-1"></i>Pengguna
                         </span>
                       <?php endif; ?>
                     </td>
                     <td class="small text-muted">
-                      <?php echo !empty($u['created_at']) ? htmlspecialchars(date('d M Y, H:i', strtotime($u['created_at']))) : '-'; ?>
+                      <?php echo !empty($u['created_at']) ? htmlspecialchars(formatTanggalIndonesia($u['created_at'], true)) : '-'; ?>
                     </td>
                     <td class="text-end">
                       <?php if ($isSelf): ?>
@@ -406,8 +408,8 @@ $csrf_token = generateCsrfToken();
                                   data-id="<?php echo (int)$u['id']; ?>" 
                                   data-name="<?php echo htmlspecialchars($u['name']); ?>" 
                                   data-role="<?php echo htmlspecialchars($u['role'] ?? 'user'); ?>"
-                                  title="Ubah Role">
-                            <i class="bi bi-arrow-repeat me-1"></i><?php echo (($u['role'] ?? '') === 'admin') ? 'Ubah ke User' : 'Jadikan Admin'; ?>
+                                  title="Ubah Peran">
+                            <i class="bi bi-arrow-repeat me-1"></i><?php echo (($u['role'] ?? '') === 'admin') ? 'Ubah ke Pengguna' : 'Jadikan Administrator'; ?>
                           </button>
                           <!-- Tombol Hapus Akun -->
                           <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-2 py-1 btn-delete-user" 
@@ -429,7 +431,7 @@ $csrf_token = generateCsrfToken();
     </main>
   </div>
 
-  <!-- Modal Konfirmasi Ubah Role Pengguna -->
+  <!-- Modal Konfirmasi Ubah Peran Pengguna -->
   <div class="modal fade" id="roleModal" tabindex="-1" aria-labelledby="roleModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content rounded-4 border-0 shadow">
@@ -440,9 +442,9 @@ $csrf_token = generateCsrfToken();
 
           <div class="modal-header border-0 pb-0">
             <h5 class="modal-title fw-bold text-dark" id="roleModalTitle">
-              <i class="bi bi-shield-exclamation text-warning me-2"></i>Konfirmasi Perubahan Peran (Role)
+              <i class="bi bi-shield-exclamation text-warning me-2"></i>Konfirmasi Perubahan Peran
             </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
           </div>
           <div class="modal-body p-4">
             <p class="text-muted mb-3">
@@ -450,7 +452,7 @@ $csrf_token = generateCsrfToken();
             </p>
             <div class="p-3 bg-light rounded-3 border small text-muted">
               <i class="bi bi-info-circle text-primary me-1"></i>
-              <strong>Catatan:</strong> Jika dijadikan Administrator, pengguna ini akan mendapatkan akses penuh ke seluruh menu Admin Dashboard.
+              <strong>Catatan:</strong> Jika dijadikan Administrator, pengguna ini akan mendapatkan akses penuh ke seluruh menu dasbor administrator.
             </div>
           </div>
           <div class="modal-footer border-0 pt-0">
@@ -477,7 +479,7 @@ $csrf_token = generateCsrfToken();
             <h5 class="modal-title fw-bold text-danger" id="deleteUserModalTitle">
               <i class="bi bi-exclamation-triangle-fill me-2"></i>Konfirmasi Hapus Pengguna
             </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
           </div>
           <div class="modal-body p-4">
             <p class="text-muted mb-3">
@@ -485,7 +487,7 @@ $csrf_token = generateCsrfToken();
             </p>
             <div class="p-3 bg-light rounded-3 border small text-muted">
               <i class="bi bi-exclamation-circle text-danger me-1"></i>
-              <strong>Peringatan:</strong> Pengguna ini tidak akan dapat login kembali ke JelajahNusa. Tindakan ini bersifat permanen.
+              <strong>Peringatan:</strong> Pengguna ini tidak akan dapat masuk kembali ke JelajahNusa. Tindakan ini bersifat permanen.
             </div>
           </div>
           <div class="modal-footer border-0 pt-0">
@@ -515,7 +517,7 @@ $csrf_token = generateCsrfToken();
       });
     }
 
-    // Modal Ubah Role
+    // Modal Ubah Peran
     const roleModalEl = document.getElementById('roleModal');
     if (roleModalEl) {
       const roleModal = new bootstrap.Modal(roleModalEl);
@@ -528,7 +530,7 @@ $csrf_token = generateCsrfToken();
           const id = btn.getAttribute('data-id');
           const name = btn.getAttribute('data-name');
           const role = btn.getAttribute('data-role');
-          const target = (role === 'admin') ? 'User (Pengguna Biasa)' : 'Administrator';
+          const target = (role === 'admin') ? 'Pengguna Biasa' : 'Administrator';
 
           roleUserId.value = id;
           roleUserName.textContent = name;

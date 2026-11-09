@@ -5,6 +5,7 @@
 
 require_once __DIR__ . '/auth_check.php';
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/helpers.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
@@ -59,7 +60,8 @@ $adminUser = $_SESSION['user'];
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moderasi Ulasan | JelajahNusa Admin</title>
+  <meta http-equiv="content-language" content="id">
+  <title>Moderasi Ulasan | Administrator JelajahNusa</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -76,7 +78,7 @@ $adminUser = $_SESSION['user'];
 <body>
   <main class="review-admin-main">
     <nav class="review-admin-nav" aria-label="Navigasi admin">
-      <a class="btn btn-outline-success btn-sm" href="index.php"><i class="bi bi-grid me-1"></i>Dashboard</a>
+      <a class="btn btn-outline-success btn-sm" href="index.php"><i class="bi bi-grid me-1"></i>Dasbor</a>
       <a class="btn btn-outline-success btn-sm" href="destinasi.php">Destinasi</a>
       <a class="btn btn-outline-success btn-sm" href="users.php">Pengguna</a>
       <a class="btn btn-success btn-sm" href="reviews.php">Ulasan</a>
@@ -106,14 +108,14 @@ $adminUser = $_SESSION['user'];
             <div class="small text-muted">
               <?php echo htmlspecialchars($review['user_name'], ENT_QUOTES, 'UTF-8'); ?>
               <span class="mx-1">·</span>
-              <?php echo htmlspecialchars(date('d M Y', strtotime($review['created_at'])), ENT_QUOTES, 'UTF-8'); ?>
+              <?php echo htmlspecialchars(formatTanggalIndonesia($review['created_at']), ENT_QUOTES, 'UTF-8'); ?>
             </div>
           </div>
           <span class="badge <?php echo $review['status'] === 'hidden' ? 'text-bg-secondary' : 'text-bg-success'; ?>">
             <?php echo $review['status'] === 'hidden' ? 'Disembunyikan' : 'Publik'; ?>
           </span>
         </div>
-        <div class="text-warning my-2" aria-label="Rating <?php echo (int)$review['rating']; ?> dari 5">
+        <div class="text-warning my-2" aria-label="Penilaian <?php echo (int)$review['rating']; ?> dari 5">
           <?php for ($star = 1; $star <= 5; $star++): ?><i class="bi <?php echo $star <= (int)$review['rating'] ? 'bi-star-fill' : 'bi-star'; ?>"></i><?php endfor; ?>
           <span class="text-dark small ms-1"><?php echo (int)$review['rating']; ?>/5</span>
         </div>

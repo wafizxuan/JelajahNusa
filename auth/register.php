@@ -13,7 +13,7 @@ header('Content-Type: application/json; charset=utf-8');
 // Hanya menerima metode POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Metode request tidak diizinkan.']);
+    echo json_encode(['success' => false, 'message' => 'Metode permintaan tidak diizinkan.']);
     exit;
 }
 

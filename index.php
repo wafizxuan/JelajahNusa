@@ -80,8 +80,8 @@ $destinasi_fallback = [
         'rating'      => null,
         'foto'        => 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=800&q=80',
         'deskripsi'   => 'Gugusan pulau karst zamrud yang dikelilingi perairan toska sejernih kristal dengan keanekaragaman hayati laut terkaya di dunia.',
-        'tags'        => ['Diving', 'Pianemo', 'Karst', 'Konservasi'],
-        'highlights'  => 'Pianemo Lagoon, Kepulauan Wayag, Snorkeling Terumbu Karang, Pasir Timbul Mansuar'
+        'tags'        => ['Menyelam', 'Pianemo', 'Karst', 'Konservasi'],
+        'highlights'  => 'Pianemo Lagoon, Kepulauan Wayag, Selam Permukaan Terumbu Karang, Pasir Timbul Mansuar'
     ],
     [
         'id'          => 2,
@@ -93,7 +93,7 @@ $destinasi_fallback = [
         'foto'        => 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',
         'deskripsi'   => 'Harmoni magis antara keteduhan terasering sawah Ubud, pesona pantai selancar dunia, dan keluhuran tradisi spiritual pura.',
         'tags'        => ['Ubud Sawah', 'Pura Luhur', 'Pantai', 'Seni Tari'],
-        'highlights'  => 'Terasering Tegalalang, Pura Uluwatu Sunset, Desa Wisata Penglipuran, Sanur Coastal Path'
+        'highlights'  => 'Terasering Tegalalang, Pura Uluwatu saat Senja, Desa Wisata Penglipuran, Jalur Pesisir Sanur'
     ],
     [
         'id'          => 3,
@@ -104,8 +104,8 @@ $destinasi_fallback = [
         'rating'      => null,
         'foto'        => 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80',
         'deskripsi'   => 'Bentang alam kaldera purba megah dengan panorama matahari terbit berkabut di atas hamparan lautan pasir vulkanik yang mistis.',
-        'tags'        => ['Sunrise', 'Lautan Pasir', 'Kawah Bromo', 'Trekking'],
-        'highlights'  => 'Penanjakan 1 Sunrise View, Pasir Berbisik, Pura Poten, Bukit Teletubbies Bromo'
+        'tags'        => ['Matahari Terbit', 'Lautan Pasir', 'Kawah Bromo', 'Pendakian'],
+        'highlights'  => 'Pemandangan Matahari Terbit Penanjakan 1, Pasir Berbisik, Pura Poten, Bukit Teletubbies Bromo'
     ],
     [
         'id'          => 4,
@@ -115,9 +115,9 @@ $destinasi_fallback = [
         'kategori_id' => 'alam',
         'rating'      => null,
         'foto'        => 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80',
-        'deskripsi'   => 'Pintu gerbang penjelajahan pulau-pulau savana dramatis, habitat purba Komodo Dragon, serta keindahan unik pantai Pink Beach.',
-        'tags'        => ['Pulau Padar', 'Komodo', 'Pink Beach', 'Liveaboard'],
-        'highlights'  => 'Trekking Puncak Padar, Berlayar Kapal Pinisi, Manta Point Snorkeling, Sunset Pulau Kalong'
+        'deskripsi'   => 'Pintu gerbang penjelajahan pulau-pulau savana dramatis, habitat purba komodo, serta keindahan unik pantai Pink Beach.',
+        'tags'        => ['Pulau Padar', 'Komodo', 'Pink Beach', 'Kapal Wisata Inap'],
+        'highlights'  => 'Pendakian Puncak Padar, Berlayar dengan Kapal Pinisi, Selam Permukaan di Manta Point, Senja di Pulau Kalong'
     ],
     [
         'id'          => 5,
@@ -169,55 +169,55 @@ if (empty($destinasi_wisata)) {
 }
 
 // ==========================================================================
-// 3. DATA REKOMENDASI PERJALANAN (Stay, Culinary, Experiences)
+// 3. DATA REKOMENDASI PERJALANAN
 // ==========================================================================
 $rekomendasi_perjalanan = [
     // --- STAY ---
     [
         'tipe'       => 'stay',
-        'tipe_label' => 'Stay',
+        'tipe_label' => 'Penginapan',
         'nama'       => 'Bambu Indah Eco Villa',
         'lokasi'     => 'Ubud, Bali',
         'foto'       => 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
-        'deskripsi'  => 'Resort ramah lingkungan dengan arsitektur bambu alami yang menghadap langsung ke lembah sungai Ayung.',
-        'highlight'  => 'Eco-Resort • Private Pool • View Sungai',
+        'deskripsi'  => 'Resor ramah lingkungan dengan arsitektur bambu alami yang menghadap langsung ke lembah Sungai Ayung.',
+        'highlight'  => 'Resor ramah lingkungan • Kolam renang pribadi • Pemandangan sungai',
         'rating'     => 4.9
     ],
     [
         'tipe'       => 'stay',
-        'tipe_label' => 'Stay',
+        'tipe_label' => 'Penginapan',
         'nama'       => 'Plataran Komodo Resort',
         'lokasi'     => 'Labuan Bajo, NTT',
         'foto'       => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
         'deskripsi'  => 'Vila mewah tepi pantai berpasir putih pribadi dengan akses langsung untuk menjelajahi perairan Komodo.',
-        'highlight'  => 'Beachfront Villa • Sunset Deck • Dermaga Pribadi',
+        'highlight'  => 'Vila tepi pantai • Dek untuk menikmati senja • Dermaga pribadi',
         'rating'     => 4.8
     ],
     [
         'tipe'       => 'stay',
-        'tipe_label' => 'Stay',
+        'tipe_label' => 'Penginapan',
         'nama'       => 'Bobocabin Signature Toba',
         'lokasi'     => 'Danau Toba, Sumatera Utara',
         'foto'       => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
-        'deskripsi'  => 'Kabin modern berkonsep glamping di perbukitan pinus yang menyajikan panorama langsung ke danau kaldera.',
-        'highlight'  => 'Cabin Alam • Smart Window • Api Unggun',
+        'deskripsi'  => 'Kabin modern berkonsep kemah mewah di perbukitan pinus yang menyajikan panorama langsung ke danau kaldera.',
+        'highlight'  => 'Kabin Alam • Jendela Pintar • Api Unggun',
         'rating'     => 4.7
     ],
 
     // --- CULINARY ---
     [
         'tipe'       => 'culinary',
-        'tipe_label' => 'Culinary',
+        'tipe_label' => 'Kuliner',
         'nama'       => 'Bebek Bengil & Sambal Matah',
         'lokasi'     => 'Ubud, Bali',
         'foto'       => 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
         'deskripsi'  => 'Kuliner bebek goreng renyah legendaris khas Bali yang disajikan dengan aneka racikan sambal matah autentik.',
-        'highlight'  => 'Kuliner Ikonik • View Tepi Sawah • Autentik',
+        'highlight'  => 'Kuliner Ikonik • Pemandangan Tepi Sawah • Autentik',
         'rating'     => 4.8
     ],
     [
         'tipe'       => 'culinary',
-        'tipe_label' => 'Culinary',
+        'tipe_label' => 'Kuliner',
         'nama'       => 'Gudeg Yu Djum Wijilan',
         'lokasi'     => 'Yogyakarta',
         'foto'       => 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',
@@ -227,8 +227,8 @@ $rekomendasi_perjalanan = [
     ],
     [
         'tipe'       => 'culinary',
-        'tipe_label' => 'Culinary',
-        'nama'       => 'Kampung Ujung Seafood Market',
+        'tipe_label' => 'Kuliner',
+        'nama'       => 'Pasar Hidangan Laut Kampung Ujung',
         'lokasi'     => 'Labuan Bajo, NTT',
         'foto'       => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
         'deskripsi'  => 'Pusat kuliner hidangan laut segar tangkapan nelayan lokal yang dibakar dengan bumbu rempah khas pesisir.',
@@ -239,28 +239,28 @@ $rekomendasi_perjalanan = [
     // --- EXPERIENCES ---
     [
         'tipe'       => 'experiences',
-        'tipe_label' => 'Experiences',
-        'nama'       => 'Pinisi Sunset Liveaboard 3D2N',
+        'tipe_label' => 'Aktivitas',
+        'nama'       => 'Pelayaran Pinisi Senja 3 Hari 2 Malam',
         'lokasi'     => 'Taman Nasional Komodo, NTT',
         'foto'       => 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
         'deskripsi'  => 'Pengalaman berlayar santai di atas kapal pinisi kayu tradisional menyusuri pulau-pulau savana eksotis.',
-        'highlight'  => 'Berlayar Pinisi • Snorkeling Manta • Sunset Cruise',
+        'highlight'  => 'Berlayar dengan pinisi • Selam permukaan bersama pari manta • Pelayaran saat senja',
         'rating'     => 5.0
     ],
     [
         'tipe'       => 'experiences',
-        'tipe_label' => 'Experiences',
-        'nama'       => 'Private Jeep Sunrise Bromo',
+        'tipe_label' => 'Aktivitas',
+        'nama'       => 'Tur Jeep Pribadi Menyaksikan Matahari Terbit di Bromo',
         'lokasi'     => 'Bromo Tengger Semeru, Jatim',
         'foto'       => 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
         'deskripsi'  => 'Petualangan jeep 4x4 melintasi lautan pasir purba menuju titik pandang terbaik matahari terbit.',
-        'highlight'  => 'Jeep 4x4 Tour • Golden Sunrise • Pemandu Lokal',
+        'highlight'  => 'Tur Jip 4x4 • Matahari Terbit Keemasan • Pemandu Lokal',
         'rating'     => 4.9
     ],
     [
         'tipe'       => 'experiences',
-        'tipe_label' => 'Experiences',
-        'nama'       => 'Snorkeling & Karst Kayaking',
+        'tipe_label' => 'Aktivitas',
+        'nama'       => 'Selam Permukaan & Kayak Karst',
         'lokasi'     => 'Misool, Raja Ampat',
         'foto'       => 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80',
         'deskripsi'  => 'Menjelajahi laguna tersembunyi dengan kayak transparan dan melihat terumbu karang warna-warni terlindungi.',
@@ -274,8 +274,8 @@ $rekomendasi_perjalanan = [
 // ==========================================================================
 $travel_inspirations = [
     [
-        'judul'     => 'Menyatu dengan Alam: Panduan Slow Travel di Ubud Bali',
-        'kategori'  => 'Slow Living & Nature',
+        'judul'     => 'Menyatu dengan Alam: Panduan Wisata Santai di Ubud Bali',
+        'kategori'  => 'Kehidupan Santai & Alam',
         'tanggal'   => '28 Oktober 2026',
         'baca'      => '5 menit membaca',
         'foto'      => 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80',
@@ -283,7 +283,7 @@ $travel_inspirations = [
     ],
     [
         'judul'     => 'Menjelajah Labuan Bajo di Luar Jalur Wisata Umum',
-        'kategori'  => 'Island Guide',
+        'kategori'  => 'Panduan Kepulauan',
         'tanggal'   => '20 Oktober 2026',
         'baca'      => '6 menit membaca',
         'foto'      => 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=900&q=80',
@@ -291,7 +291,7 @@ $travel_inspirations = [
     ],
     [
         'judul'     => 'Jejak Rasa Gastronomi Autentik di Jantung Yogyakarta',
-        'kategori'  => 'Culinary Journey',
+        'kategori'  => 'Wisata Kuliner',
         'tanggal'   => '14 Oktober 2026',
         'baca'      => '4 menit membaca',
         'foto'      => 'https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=900&q=80',
@@ -304,11 +304,12 @@ $travel_inspirations = [
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JelajahNusa — Discover Indonesia, Your Way</title>
+  <meta http-equiv="content-language" content="id">
+  <title>JelajahNusa — Jelajahi Indonesia dengan Caramu</title>
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
   <meta name="jn-auth-status" content="<?php echo isset($_SESSION['user']) ? 'true' : 'false'; ?>">
-  <meta name="description" content="Platform digital travel guide & travel planner untuk menemukan destinasi wisata Indonesia, rekomendasi penginapan, kuliner khas, dan menyusun itinerary perjalanan impian.">
-  <meta name="keywords" content="JelajahNusa, Travel Guide Indonesia, Travel Planner, Wisata Indonesia, Raja Ampat, Bali, Bromo, Labuan Bajo, Danau Toba, Yogyakarta">
+  <meta name="description" content="Platform digital panduan wisata dan rencana perjalanan untuk menemukan destinasi wisata Indonesia, rekomendasi penginapan, kuliner khas, dan menyusun rencana liburan impian.">
+  <meta name="keywords" content="JelajahNusa, Panduan Wisata Indonesia, Rencana Perjalanan, Wisata Indonesia, Raja Ampat, Bali, Bromo, Labuan Bajo, Danau Toba, Yogyakarta">
 
   <!-- Google Fonts: Plus Jakarta Sans & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -336,7 +337,7 @@ $travel_inspirations = [
       <a class="navbar-brand" href="#beranda" aria-label="JelajahNusa — Kembali ke Beranda">
         <img class="brand-logo-img"
           src="assets/images/logo-horizontal.svg"
-          alt="JelajahNusa — Discover Indonesia, Your Way"
+          alt="JelajahNusa — Jelajahi Indonesia dengan Caramu"
           width="240" height="56">
       </a>
 
@@ -361,7 +362,7 @@ $travel_inspirations = [
             <a class="nav-link" href="#rekomendasi">Rekomendasi</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#planner">Travel Planner</a>
+            <a class="nav-link" href="#planner">Rencana Perjalanan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#tentang">Tentang Kami</a>
@@ -389,7 +390,7 @@ $travel_inspirations = [
                 <li><span class="dropdown-item-text text-muted small"><i class="bi bi-envelope me-2"></i><?php echo htmlspecialchars($_SESSION['user']['email']); ?></span></li>
                 <?php if (($_SESSION['user']['role'] ?? '') === 'admin'): ?>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item text-success fw-bold small" href="admin/"><i class="bi bi-speedometer2 me-2"></i>Dashboard Admin</a></li>
+                  <li><a class="dropdown-item text-success fw-bold small" href="admin/"><i class="bi bi-speedometer2 me-2"></i>Dasbor Administrator</a></li>
                 <?php endif; ?>
                 <li><hr class="dropdown-divider"></li>
                 <li>
@@ -433,7 +434,7 @@ $travel_inspirations = [
         <!-- Nature-inspired Pill Badge -->
         <div class="hero-badge">
           <i class="bi bi-tree"></i>
-          <span>Platform Travel Guide & Travel Planner Indonesia</span>
+          <span>Platform Panduan Wisata & Rencana Perjalanan Indonesia</span>
         </div>
 
         <!-- Headline & Description -->
@@ -623,7 +624,7 @@ $travel_inspirations = [
                     <?php echo htmlspecialchars($dest['lokasi']); ?>
                   </span>
                   <?php if ($dest['rating'] !== null): ?>
-                  <span class="destination-rating-inline" title="Rating dari ulasan pengguna">
+                  <span class="destination-rating-inline" title="Penilaian dari ulasan pengguna">
                     <i class="bi bi-star-fill text-warning"></i>
                     <?php echo number_format((float)$dest['rating'], 1); ?>
                     <span class="text-muted small">(<?php echo number_format((int)($dest['total_ulasan'] ?? 0)); ?>)</span>
@@ -699,13 +700,13 @@ $travel_inspirations = [
             <i class="bi bi-collection"></i> Semua
           </button>
           <button type="button" class="rekomendasi-tab-btn" data-category="stay">
-            <i class="bi bi-house-door"></i> Stay
+            <i class="bi bi-house-door"></i> Penginapan
           </button>
           <button type="button" class="rekomendasi-tab-btn" data-category="culinary">
-            <i class="bi bi-cup-hot"></i> Culinary
+            <i class="bi bi-cup-hot"></i> Kuliner
           </button>
           <button type="button" class="rekomendasi-tab-btn" data-category="experiences">
-            <i class="bi bi-compass"></i> Experiences
+            <i class="bi bi-compass"></i> Aktivitas
           </button>
         </div>
       </div>
@@ -769,13 +770,13 @@ $travel_inspirations = [
         <!-- Left Column: Explanation & Features -->
         <div class="col-lg-6">
           <span class="section-label section-label-forest">
-            <i class="bi bi-calendar2-check"></i> Travel Planner Terpadu
+            <i class="bi bi-calendar2-check"></i> Rencana Perjalanan Terpadu
           </span>
           <h2 class="section-title mb-3">
             Rencanakan Perjalananmu dalam Satu Tempat
           </h2>
           <p class="text-muted mb-4 lead" style="font-size: 1.05rem;">
-            Tidak perlu repot membuka banyak aplikasi terpisah. JelajahNusa membantu mengumpulkan destinasi pilihan, penginapan ramah lingkungan, kuliner khas, dan aktivitas wisata favorit dalam satu rencana perjalanan (itinerary) yang rapi dan terstruktur.
+            Tidak perlu repot membuka banyak aplikasi terpisah. JelajahNusa membantu mengumpulkan destinasi pilihan, penginapan ramah lingkungan, kuliner khas, dan aktivitas wisata favorit dalam satu rencana perjalanan yang rapi dan terstruktur.
           </p>
 
           <!-- 3 Feature Points -->
@@ -784,7 +785,7 @@ $travel_inspirations = [
               <i class="bi bi-map"></i>
             </div>
             <div>
-              <h5 class="fw-bold text-dark mb-1">Itinerary Hari Demi Hari</h5>
+              <h5 class="fw-bold text-dark mb-1">Jadwal Perjalanan Hari demi Hari</h5>
               <p class="text-muted small mb-0">Atur jadwal dari pagi hingga malam dengan waktu perjalanan dan rute yang logis.</p>
             </div>
           </div>
@@ -843,15 +844,15 @@ $travel_inspirations = [
               
               <!-- Hari 1 -->
               <div class="timeline-item">
-                <span class="timeline-badge badge-stay">Stay</span>
+                <span class="timeline-badge badge-stay">Penginapan</span>
                 <div class="timeline-details">
-                  <div class="timeline-title">Check-in di Plataran Komodo Resort</div>
+                  <div class="timeline-title">Tiba dan masuk ke Plataran Komodo Resort</div>
                   <div class="timeline-meta">14:00 • Vila tepi pantai & istirahat sejenak setelah penerbangan</div>
                 </div>
               </div>
 
               <div class="timeline-item">
-                <span class="timeline-badge badge-culinary">Culinary</span>
+                <span class="timeline-badge badge-culinary">Kuliner</span>
                 <div class="timeline-details">
                   <div class="timeline-title">Makan Malam Ikan Bakar di Kampung Ujung</div>
                   <div class="timeline-meta">19:00 • Kuliner bahari autentik segar bersama keluarga</div>
@@ -860,24 +861,24 @@ $travel_inspirations = [
 
               <!-- Hari 2 -->
               <div class="timeline-item">
-                <span class="timeline-badge badge-exp">Experience</span>
+                <span class="timeline-badge badge-exp">Aktivitas</span>
                 <div class="timeline-details">
                   <div class="timeline-title">Berlayar Kapal Pinisi & Trekking Puncak Pulau Padar</div>
-                  <div class="timeline-meta">07:00 • Menikmati tiga teluk warna-warni & snorkeling Pink Beach</div>
+                  <div class="timeline-meta">07:00 • Menikmati tiga teluk warna-warni & snorkeling di Pantai Merah</div>
                 </div>
               </div>
 
               <div class="timeline-item">
-                <span class="timeline-badge badge-exp">Experience</span>
+                <span class="timeline-badge badge-exp">Aktivitas</span>
                 <div class="timeline-details">
-                  <div class="timeline-title">Manta Point Snorkeling & Sunset Pulau Kalong</div>
+                  <div class="timeline-title">Snorkeling di Manta Point & senja di Pulau Kalong</div>
                   <div class="timeline-meta">16:30 • Menyaksikan ribuan kelelawar terbang saat matahari terbenam</div>
                 </div>
               </div>
 
               <!-- Hari 3 -->
               <div class="timeline-item">
-                <span class="timeline-badge badge-culinary">Culinary</span>
+                <span class="timeline-badge badge-culinary">Kuliner</span>
                 <div class="timeline-details">
                   <div class="timeline-title">Kopi Flores & Belanja Tenun Tradisional Manggarai</div>
                   <div class="timeline-meta">10:00 • Dukungan untuk pengrajin lokal sebelum jadwal kepulangan</div>
@@ -976,7 +977,7 @@ $travel_inspirations = [
               <i class="bi bi-flower1"></i> Filosofi JelajahNusa
             </span>
             <h3 class="fw-bold text-dark mt-2 mb-3 fs-2">
-              Discover Indonesia, Your Way.
+              Jelajahi Indonesia dengan Caramu.
             </h3>
             <p class="text-muted mb-0 lead" style="font-size: 1.02rem;">
               JelajahNusa hadir sebagai panduan wisata dan perencana perjalanan digital yang mengedepankan kelestarian alam, keaslian budaya, dan kenyamanan wisatawan. Kami percaya bahwa setiap perjalanan di bumi nusantara harus memberikan manfaat positif bagi komunitas lokal serta menghadirkan kenangan bermakna bagi setiap pengunjung.
@@ -995,8 +996,8 @@ $travel_inspirations = [
               <div class="d-flex align-items-center gap-3">
                 <i class="bi bi-check-circle-fill fs-3 text-success"></i>
                 <div>
-                  <strong class="d-block text-dark">Itinerary Terpadu</strong>
-                  <span class="text-muted small">Stay, culinary, dan aktivitas dalam 1 klik</span>
+                  <strong class="d-block text-dark">Jadwal Perjalanan Terpadu</strong>
+                  <span class="text-muted small">Penginapan, kuliner, dan aktivitas dalam satu klik</span>
                 </div>
               </div>
               <div class="d-flex align-items-center gap-3">
@@ -1023,14 +1024,14 @@ $travel_inspirations = [
         
         <!-- Brand & Mission -->
         <div class="col-lg-4 col-md-6">
-          <a href="#beranda" class="footer-brand-title" aria-label="JelajahNusa — Discover Indonesia, Your Way">
+          <a href="#beranda" class="footer-brand-title" aria-label="JelajahNusa — Jelajahi Indonesia dengan Caramu">
             <img class="footer-brand-logo"
               src="assets/images/logo-horizontal.svg"
               alt="JelajahNusa"
               width="200" height="52">
           </a>
           <p class="footer-desc">
-            Platform digital travel guide & travel planner nusantara. Membantu menemukan destinasi terbaik, penginapan estetik, kuliner autentik, dan merancang itinerary perjalanan impianmu di Indonesia.
+            Platform panduan wisata dan rencana perjalanan di Nusantara. Membantu menemukan destinasi terbaik, penginapan estetik, kuliner autentik, dan merancang perjalanan impianmu di Indonesia.
           </p>
           <div class="footer-social-links">
             <a href="#" class="footer-social-btn" title="Instagram" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
@@ -1048,7 +1049,7 @@ $travel_inspirations = [
             <li><a href="#destinasi">Jelajahi Wisata</a></li>
             <li><a href="#kategori">Kategori</a></li>
             <li><a href="#rekomendasi">Rekomendasi</a></li>
-            <li><a href="#planner">Travel Planner</a></li>
+            <li><a href="#planner">Rencana Perjalanan</a></li>
             <li><a href="#tentang">Tentang Kami</a></li>
           </ul>
         </div>
@@ -1057,9 +1058,9 @@ $travel_inspirations = [
         <div class="col-lg-3 col-md-6 col-6">
           <h4 class="footer-col-title">Rekomendasi</h4>
           <ul class="footer-link-list">
-            <li><a href="#rekomendasi" onclick="document.querySelector('[data-category=stay]').click();">Stay & Eco-Resort</a></li>
-            <li><a href="#rekomendasi" onclick="document.querySelector('[data-category=culinary]').click();">Culinary & Rasa Lokal</a></li>
-            <li><a href="#rekomendasi" onclick="document.querySelector('[data-category=experiences]').click();">Experiences & Tur</a></li>
+            <li><a href="#rekomendasi" onclick="document.querySelector('[data-category=stay]').click();">Penginapan & Resor Ramah Lingkungan</a></li>
+            <li><a href="#rekomendasi" onclick="document.querySelector('[data-category=culinary]').click();">Kuliner & Rasa Lokal</a></li>
+            <li><a href="#rekomendasi" onclick="document.querySelector('[data-category=experiences]').click();">Aktivitas & Tur</a></li>
             <li><a href="#kategori" onclick="document.querySelector('[data-category-id=pantai]').click();">Wisata Pantai</a></li>
             <li><a href="#kategori" onclick="document.querySelector('[data-category-id=pegunungan]').click();">Wisata Pegunungan</a></li>
           </ul>
@@ -1067,7 +1068,7 @@ $travel_inspirations = [
 
         <!-- Kontak & Buletin -->
         <div class="col-lg-3 col-md-6">
-          <h4 class="footer-col-title">Informasi Kontak</h4>
+          <h4 class="footer-col-title">Hubungi Kami</h4>
           <div class="footer-contact-item">
             <i class="bi bi-geo-alt"></i>
             <span>Ubud - Bali & Jakarta Pusat, Indonesia</span>
@@ -1097,7 +1098,7 @@ $travel_inspirations = [
       <!-- Copyright Bar -->
       <div class="footer-bottom">
         <div>
-          &copy; <?php echo date('Y'); ?> <strong>JelajahNusa</strong>. Seluruh Hak Cipta Dilindungi. Discover Indonesia, Your Way.
+          &copy; <?php echo date('Y'); ?> <strong translate="no" class="notranslate">JelajahNusa</strong>. Seluruh Hak Cipta Dilindungi. Jelajahi Indonesia dengan Caramu.
         </div>
         <div class="d-flex gap-3">
           <a href="#" class="text-decoration-none text-white-50 small">Privasi</a>
@@ -1126,7 +1127,7 @@ $travel_inspirations = [
             <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25" id="modalCategory">Kategori</span>
             <span class="text-muted small"><i class="bi bi-geo-alt me-1 text-success"></i><span id="modalLocation">Lokasi</span></span>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body p-0">
           <div style="height: 300px; overflow: hidden; background-color: var(--c-beige);">
@@ -1148,7 +1149,7 @@ $travel_inspirations = [
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
           <button type="button" class="btn btn-forest rounded-pill px-4" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#plannerModal">
-            <i class="bi bi-plus-circle me-1"></i> Masukkan ke Itinerary
+            <i class="bi bi-plus-circle me-1"></i> Masukkan ke Jadwal Perjalanan
           </button>
         </div>
       </div>
@@ -1168,11 +1169,11 @@ $travel_inspirations = [
             </div>
             <h5 class="fw-bold text-dark mb-0" id="plannerModalTitle">Mulai Rencana Perjalanan</h5>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body p-4">
           <p class="text-muted small mb-4">
-            Pilih destinasi dan preferensi perjalananmu untuk menyusun rekomendasi itinerary terpadu.
+            Pilih destinasi dan preferensi perjalananmu untuk menyusun rekomendasi perjalanan terpadu.
           </p>
 
           <form id="plannerBuilderForm">
@@ -1202,16 +1203,16 @@ $travel_inspirations = [
 
             <!-- Tipe Wisatawan -->
             <div class="mb-4">
-              <label for="planTypeSelect" class="form-label small fw-bold text-dark">Kategori Traveler</label>
+              <label for="planTypeSelect" class="form-label small fw-bold text-dark">Kategori Wisatawan</label>
               <select id="planTypeSelect" class="form-select" required>
                 <option value="Pasangan & Keluarga" selected>Pasangan & Keluarga</option>
-                <option value="Solo Traveler">Solo Traveler (Mandiri)</option>
-                <option value="Teman & Grup">Teman & Kelompok Traveler</option>
+                <option value="Solo Traveler">Wisatawan Solo (Mandiri)</option>
+                <option value="Teman & Grup">Teman & Kelompok</option>
               </select>
             </div>
 
             <button type="submit" class="btn btn-forest w-100 py-2">
-              <i class="bi bi-magic me-1"></i> Buat & Tampilkan Itinerary
+              <i class="bi bi-magic me-1"></i> Buat & Tampilkan Jadwal Perjalanan
             </button>
           </form>
         </div>
@@ -1227,7 +1228,7 @@ $travel_inspirations = [
       <div class="modal-content">
         
         <div class="modal-header border-bottom-0 pb-0">
-          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
 
         <div class="modal-body p-4 pt-0">
@@ -1235,8 +1236,8 @@ $travel_inspirations = [
             <div class="brand-leaf-icon mx-auto mb-2" style="width: 52px; height: 52px; padding: 4px;">
               <img src="assets/images/logo-icon.svg" alt="JelajahNusa" class="brand-icon-svg">
             </div>
-            <h4 class="fw-bold text-dark mb-1" id="authModalTitle">Masuk ke JelajahNusa</h4>
-            <p class="text-muted small">Discover Indonesia, Your Way.</p>
+            <h4 class="fw-bold text-dark mb-1" id="authModalTitle">Masuk ke <span translate="no" class="notranslate">JelajahNusa</span></h4>
+            <p class="text-muted small">            Jelajahi Indonesia dengan Caramu.</p>
           </div>
 
           <!-- Tab Masuk / Daftar -->
@@ -1296,7 +1297,7 @@ $travel_inspirations = [
             <div class="form-check mb-4">
               <input class="form-check-input" type="checkbox" id="termsCheck" name="terms" checked required>
               <label class="form-check-label small text-muted" for="termsCheck">
-                Saya menyetujui Ketentuan Penggunaan JelajahNusa.
+                Saya menyetujui Ketentuan Penggunaan <span translate="no" class="notranslate">JelajahNusa</span>.
               </label>
             </div>
             <button type="submit" class="btn btn-forest w-100 py-2">
@@ -1323,7 +1324,7 @@ $travel_inspirations = [
             <i class="bi bi-heart-fill text-danger fs-5"></i>
             <h5 class="fw-bold text-dark mb-0" id="favoritesModalTitle">Destinasi Favorit Saya</h5>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body p-4">
           

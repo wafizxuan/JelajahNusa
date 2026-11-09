@@ -61,11 +61,12 @@ $totalFavorit = count($favorites);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-language" content="id">
   <title>Destinasi Favorit Saya — JelajahNusa</title>
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
   <meta name="jn-auth-status" content="true"><!-- Halaman ini hanya bisa diakses setelah login -->
   <meta name="description" content="Koleksi tempat wisata impian Indonesia yang telah kamu simpan di JelajahNusa. Rencanakan perjalananmu dengan mudah.">
-  <meta name="keywords" content="JelajahNusa, Destinasi Favorit, Wisata Indonesia, Travel Planner">
+  <meta name="keywords" content="JelajahNusa, Destinasi Favorit, Wisata Indonesia, Rencana Perjalanan">
 
   <!-- Google Fonts: Plus Jakarta Sans & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -94,12 +95,12 @@ $totalFavorit = count($favorites);
       <a class="navbar-brand" href="../index.php" aria-label="JelajahNusa — Kembali ke Beranda">
         <img class="brand-logo-img"
           src="../assets/images/logo-horizontal.svg"
-          alt="JelajahNusa — Discover Indonesia, Your Way"
+          alt="JelajahNusa — Jelajahi Indonesia dengan Caramu"
           width="240" height="56">
       </a>
 
       <!-- Mobile Toggler -->
-      <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Buka atau tutup navigasi">
         <i class="bi bi-list"></i>
       </button>
 
@@ -119,7 +120,7 @@ $totalFavorit = count($favorites);
             <a class="nav-link" href="../index.php#rekomendasi">Rekomendasi</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../index.php#planner">Travel Planner</a>
+            <a class="nav-link" href="../index.php#planner">Rencana Perjalanan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../index.php#tentang">Tentang Kami</a>
@@ -147,7 +148,7 @@ $totalFavorit = count($favorites);
                 <li><span class="dropdown-item-text text-muted small"><i class="bi bi-envelope me-2"></i><?php echo htmlspecialchars($_SESSION['user']['email']); ?></span></li>
                 <?php if (($_SESSION['user']['role'] ?? '') === 'admin'): ?>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item text-success fw-bold small" href="../admin/"><i class="bi bi-speedometer2 me-2"></i>Dashboard Admin</a></li>
+                  <li><a class="dropdown-item text-success fw-bold small" href="../admin/"><i class="bi bi-speedometer2 me-2"></i>Dasbor Administrator</a></li>
                 <?php endif; ?>
                 <li><hr class="dropdown-divider"></li>
                 <li>
@@ -291,7 +292,7 @@ $totalFavorit = count($favorites);
                     <i class="bi bi-geo-alt"></i> <?php echo htmlspecialchars($fav['lokasi']); ?>
                   </span>
                   <?php if ($fav['rating'] !== null): ?>
-                  <span class="destination-rating-inline" title="Rating dari ulasan pengguna">
+                  <span class="destination-rating-inline" title="Penilaian dari ulasan pengguna">
                     <i class="bi bi-star-fill text-warning"></i>
                     <?php echo number_format((float)$fav['rating'], 1); ?>
                     <span class="text-muted small">(<?php echo number_format((int)$fav['total_ulasan']); ?>)</span>
@@ -338,7 +339,7 @@ $totalFavorit = count($favorites);
         
         <!-- Brand & Mission -->
         <div class="col-lg-4 col-md-6">
-          <a href="../index.php" class="footer-brand-title" aria-label="JelajahNusa — Discover Indonesia, Your Way">
+          <a href="../index.php" class="footer-brand-title" aria-label="JelajahNusa — Jelajahi Indonesia dengan Caramu">
             <img class="footer-brand-logo"
               src="../assets/images/logo-horizontal.svg"
               alt="JelajahNusa"
@@ -363,7 +364,7 @@ $totalFavorit = count($favorites);
             <li><a href="../index.php#destinasi">Jelajahi Wisata</a></li>
             <li><a href="../index.php#kategori">Kategori</a></li>
             <li><a href="../index.php#rekomendasi">Rekomendasi</a></li>
-            <li><a href="../index.php#planner">Travel Planner</a></li>
+            <li><a href="../index.php#planner">Rencana Perjalanan</a></li>
             <li><a href="../index.php#tentang">Tentang Kami</a></li>
           </ul>
         </div>
@@ -412,7 +413,7 @@ $totalFavorit = count($favorites);
       <!-- Copyright Bar -->
       <div class="footer-bottom">
         <div>
-          &copy; <?php echo date('Y'); ?> <strong>JelajahNusa</strong>. Seluruh Hak Cipta Dilindungi. Discover Indonesia, Your Way.
+          &copy; <?php echo date('Y'); ?> <strong translate="no" class="notranslate">JelajahNusa</strong>. Seluruh Hak Cipta Dilindungi. Jelajahi Indonesia dengan Caramu.
         </div>
         <div class="d-flex gap-3">
           <a href="#" class="text-decoration-none text-white-50 small">Privasi</a>
@@ -438,7 +439,7 @@ $totalFavorit = count($favorites);
       <div class="modal-content">
         
         <div class="modal-header border-bottom-0 pb-0">
-          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
 
         <div class="modal-body p-4 pt-0">
@@ -446,8 +447,8 @@ $totalFavorit = count($favorites);
             <div class="brand-leaf-icon mx-auto mb-2" style="width: 52px; height: 52px; padding: 4px;">
               <img src="../assets/images/logo-icon.svg" alt="JelajahNusa" class="brand-icon-svg">
             </div>
-            <h4 class="fw-bold text-dark mb-1" id="authModalTitle">Masuk ke JelajahNusa</h4>
-            <p class="text-muted small">Discover Indonesia, Your Way.</p>
+            <h4 class="fw-bold text-dark mb-1" id="authModalTitle">Masuk ke <span translate="no" class="notranslate">JelajahNusa</span></h4>
+            <p class="text-muted small">Jelajahi Indonesia dengan Caramu.</p>
           </div>
 
           <!-- Tab Masuk / Daftar -->
@@ -505,7 +506,7 @@ $totalFavorit = count($favorites);
             <div class="form-check mb-4">
               <input class="form-check-input" type="checkbox" id="termsCheck" name="terms" checked required>
               <label class="form-check-label small text-muted" for="termsCheck">
-                Saya menyetujui Ketentuan Penggunaan JelajahNusa.
+                Saya menyetujui Ketentuan Penggunaan <span translate="no" class="notranslate">JelajahNusa</span>.
               </label>
             </div>
             <button type="submit" class="btn btn-forest w-100 py-2">

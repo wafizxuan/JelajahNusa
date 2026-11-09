@@ -12,6 +12,7 @@ $auth_base_url = '../auth/';
 
 // Muat konfigurasi database & data master destinasi komprehensif
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/helpers.php';
 require_once __DIR__ . '/../data/destinasi.php';
 
 // Ambil ID destinasi dari parameter URL (default ke ID 2: Bali)
@@ -118,7 +119,8 @@ $travel_info       = $destinasi['travel_info'];
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jelajah <?php echo htmlspecialchars($destinasi['nama']); ?> — Wisata, Penginapan, Kuliner & Travel Guide | JelajahNusa</title>
+  <meta http-equiv="content-language" content="id">
+  <title>Jelajah <?php echo htmlspecialchars($destinasi['nama']); ?> — Wisata, Penginapan & Kuliner | JelajahNusa</title>
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
   <meta name="jn-auth-status" content="<?php echo isset($_SESSION['user']) ? 'true' : 'false'; ?>">
   <meta name="description" content="Panduan lengkap wisata <?php echo htmlspecialchars($destinasi['nama']); ?>: tempat wisata populer, rekomendasi penginapan dan eco-resort, kuliner khas autentik, serta panduan praktis perjalanan di JelajahNusa.">
@@ -139,7 +141,7 @@ $travel_info       = $destinasi['travel_info'];
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/detail-destinasi.css">
 </head>
-<body>
+<body class="detail-destination-page">
 
   <!-- ======================================================================
        1. NAVBAR (Konsisten dengan Homepage JelajahNusa)
@@ -151,12 +153,12 @@ $travel_info       = $destinasi['travel_info'];
       <a class="navbar-brand" href="../index.php" aria-label="JelajahNusa — Kembali ke Beranda">
         <img class="brand-logo-img"
           src="../assets/images/logo-horizontal.svg"
-          alt="JelajahNusa — Discover Indonesia, Your Way"
+          alt="JelajahNusa — Jelajahi Indonesia dengan Caramu"
           width="240" height="56">
       </a>
 
       <!-- Mobile Toggler -->
-      <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Buka atau tutup navigasi">
         <i class="bi bi-list"></i>
       </button>
 
@@ -176,7 +178,7 @@ $travel_info       = $destinasi['travel_info'];
             <a class="nav-link" href="../index.php#rekomendasi">Rekomendasi</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="rencana-perjalanan.php">Travel Planner</a>
+            <a class="nav-link" href="rencana-perjalanan.php">Rencana Perjalanan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../index.php#tentang">Tentang Kami</a>
@@ -204,7 +206,7 @@ $travel_info       = $destinasi['travel_info'];
                 <li><span class="dropdown-item-text text-muted small"><i class="bi bi-envelope me-2"></i><?php echo htmlspecialchars($_SESSION['user']['email']); ?></span></li>
                 <?php if (($_SESSION['user']['role'] ?? '') === 'admin'): ?>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item text-success fw-bold small" href="../admin/"><i class="bi bi-speedometer2 me-2"></i>Dashboard Admin</a></li>
+                  <li><a class="dropdown-item text-success fw-bold small" href="../admin/"><i class="bi bi-speedometer2 me-2"></i>Dasbor Administrator</a></li>
                 <?php endif; ?>
                 <li><hr class="dropdown-divider"></li>
                 <li>
@@ -310,7 +312,7 @@ $travel_info       = $destinasi['travel_info'];
                   data-foto="<?php echo htmlspecialchars($destinasi['hero_image']); ?>"
                   id="btnAddToTripHero">
             <i class="bi bi-calendar2-plus"></i>
-            <span>Tambahkan ke Trip</span>
+            <span>Tambahkan ke Rencana</span>
           </button>
 
           <!-- Tombol Kembali ke Beranda -->
@@ -436,7 +438,7 @@ $travel_info       = $destinasi['travel_info'];
                           data-lokasi="<?php echo htmlspecialchars($place['lokasi']); ?>"
                           data-kategori="Destinasi"
                           data-foto="<?php echo htmlspecialchars($place['foto']); ?>">
-                    <i class="bi bi-calendar-plus me-1"></i> Tambah ke Trip
+                    <i class="bi bi-calendar-plus me-1"></i> Tambah ke Rencana
                   </button>
                 </div>
               </div>
@@ -462,7 +464,7 @@ $travel_info       = $destinasi['travel_info'];
         </span>
         <h2 class="section-title">Rekomendasi Penginapan di <?php echo htmlspecialchars($destinasi['nama']); ?></h2>
         <p class="section-subtitle">
-          Istirahat dengan nyaman di pilihan akomodasi terbaik di <?php echo htmlspecialchars($destinasi['nama']); ?>, mulai dari eco-resort hingga penginapan bernuansa alam.
+          Istirahat dengan nyaman di pilihan akomodasi terbaik di <?php echo htmlspecialchars($destinasi['nama']); ?>, mulai dari resor ramah lingkungan hingga penginapan bernuansa alam.
         </p>
       </div>
 
@@ -511,7 +513,7 @@ $travel_info       = $destinasi['travel_info'];
                           data-lokasi="<?php echo htmlspecialchars($stay['lokasi']); ?>"
                           data-kategori="Penginapan"
                           data-foto="<?php echo htmlspecialchars($stay['foto']); ?>">
-                    <i class="bi bi-calendar-plus me-1"></i> Tambah ke Trip
+                    <i class="bi bi-calendar-plus me-1"></i> Tambah ke Rencana
                   </button>
                 </div>
               </div>
@@ -584,7 +586,7 @@ $travel_info       = $destinasi['travel_info'];
                           data-lokasi="<?php echo htmlspecialchars($cul['lokasi']); ?>"
                           data-kategori="Kuliner"
                           data-foto="<?php echo htmlspecialchars($cul['foto']); ?>">
-                    <i class="bi bi-calendar-plus me-1"></i> Tambah ke Trip
+                    <i class="bi bi-calendar-plus me-1"></i> Tambah ke Rencana
                   </button>
                 </div>
               </div>
@@ -762,7 +764,7 @@ $travel_info       = $destinasi['travel_info'];
   <section class="section-detail-cta">
       <div class="detail-cta-card">
         <span class="section-label" style="background-color: rgba(247, 247, 242, 0.15); color: var(--c-beige);">
-          <i class="bi bi-calendar2-heart"></i> Itinerary Builder
+          <i class="bi bi-calendar2-heart"></i> Penyusun Rencana Perjalanan
         </span>
         <h2 class="text-white fw-bold mb-3 fs-1">
           Siap Menyusun Perjalanan Impianmu ke <?php echo htmlspecialchars($destinasi['nama']); ?>?
@@ -800,7 +802,7 @@ $travel_info       = $destinasi['travel_info'];
         
         <!-- Brand & Mission -->
         <div class="col-lg-4 col-md-6">
-          <a href="../index.php" class="footer-brand-title" aria-label="JelajahNusa — Discover Indonesia, Your Way">
+          <a href="../index.php" class="footer-brand-title" aria-label="JelajahNusa — Jelajahi Indonesia dengan Caramu">
             <img class="footer-brand-logo"
               src="../assets/images/logo-horizontal.svg"
               alt="JelajahNusa"
@@ -825,7 +827,7 @@ $travel_info       = $destinasi['travel_info'];
             <li><a href="../index.php#destinasi">Jelajahi Wisata</a></li>
             <li><a href="../index.php#kategori">Kategori</a></li>
             <li><a href="../index.php#rekomendasi">Rekomendasi</a></li>
-            <li><a href="rencana-perjalanan.php">Travel Planner</a></li>
+            <li><a href="rencana-perjalanan.php">Rencana Perjalanan</a></li>
             <li><a href="../index.php#tentang">Tentang Kami</a></li>
           </ul>
         </div>
@@ -875,7 +877,7 @@ $travel_info       = $destinasi['travel_info'];
       <!-- Copyright Bar -->
       <div class="footer-bottom">
         <div>
-          &copy; <?php echo date('Y'); ?> <strong>JelajahNusa</strong>. Seluruh Hak Cipta Dilindungi. Discover Indonesia, Your Way.
+          &copy; <?php echo date('Y'); ?> <strong translate="no" class="notranslate">JelajahNusa</strong>. Seluruh Hak Cipta Dilindungi. Jelajahi Indonesia dengan Caramu.
         </div>
         <div class="d-flex gap-3">
           <a href="#" class="text-decoration-none text-white-50 small">Privasi</a>
@@ -906,7 +908,7 @@ $travel_info       = $destinasi['travel_info'];
             </div>
             <h5 class="fw-bold text-dark mb-0" id="plannerModalTitle">Tambahkan <?php echo htmlspecialchars($destinasi['nama']); ?> ke Rencana Perjalanan</h5>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body p-4">
           <p class="text-muted small mb-4">
@@ -940,11 +942,11 @@ $travel_info       = $destinasi['travel_info'];
 
             <!-- Tipe Wisatawan -->
             <div class="mb-4">
-              <label for="planTypeSelect" class="form-label small fw-bold text-dark">Kategori Traveler</label>
+              <label for="planTypeSelect" class="form-label small fw-bold text-dark">Kategori Wisatawan</label>
               <select id="planTypeSelect" class="form-select" required>
                 <option value="Pasangan & Keluarga" selected>Pasangan & Keluarga</option>
-                <option value="Solo Traveler">Solo Traveler (Mandiri & Santai)</option>
-                <option value="Teman & Grup">Teman & Kelompok Traveler</option>
+                <option value="Solo Traveler">Wisatawan Solo (Mandiri & Santai)</option>
+                <option value="Teman & Grup">Teman & Kelompok</option>
               </select>
             </div>
 
@@ -968,7 +970,7 @@ $travel_info       = $destinasi['travel_info'];
             <i class="bi bi-heart-fill text-danger fs-5"></i>
             <h5 class="fw-bold text-dark mb-0" id="favoritesModalTitle">Destinasi Favorit Saya</h5>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body p-4">
           
@@ -1001,7 +1003,7 @@ $travel_info       = $destinasi['travel_info'];
       <div class="modal-content">
         
         <div class="modal-header border-bottom-0 pb-0">
-          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
 
         <div class="modal-body p-4 pt-0">
@@ -1009,8 +1011,8 @@ $travel_info       = $destinasi['travel_info'];
             <div class="brand-leaf-icon mx-auto mb-2" style="width: 52px; height: 52px; padding: 4px;">
               <img src="../assets/images/logo-icon.svg" alt="JelajahNusa" class="brand-icon-svg">
             </div>
-            <h4 class="fw-bold text-dark mb-1" id="authModalTitle">Masuk ke JelajahNusa</h4>
-            <p class="text-muted small">Discover Indonesia, Your Way.</p>
+            <h4 class="fw-bold text-dark mb-1" id="authModalTitle">Masuk ke <span translate="no" class="notranslate">JelajahNusa</span></h4>
+            <p class="text-muted small">Jelajahi Indonesia dengan Caramu.</p>
           </div>
 
           <!-- Tab Masuk / Daftar -->
@@ -1068,7 +1070,7 @@ $travel_info       = $destinasi['travel_info'];
             <div class="form-check mb-4">
               <input class="form-check-input" type="checkbox" id="termsCheck" name="terms" checked required>
               <label class="form-check-label small text-muted" for="termsCheck">
-                Saya menyetujui Ketentuan Penggunaan JelajahNusa.
+                Saya menyetujui Ketentuan Penggunaan <span translate="no" class="notranslate">JelajahNusa</span>.
               </label>
             </div>
             <button type="submit" class="btn btn-forest w-100 py-2">
@@ -1099,10 +1101,10 @@ $travel_info       = $destinasi['travel_info'];
             </div>
             <div>
               <h5 class="fw-bold text-dark mb-0" id="addToTripModalTitle">Tambahkan ke Rencana Perjalanan</h5>
-              <span class="text-muted small" id="addToTripItemSubtitle">Pilih trip atau buat baru</span>
+              <span class="text-muted small" id="addToTripItemSubtitle">Pilih rencana atau buat yang baru</span>
             </div>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
 
         <div class="modal-body p-4">
@@ -1128,14 +1130,14 @@ $travel_info       = $destinasi['travel_info'];
               <button class="nav-link active w-100 rounded-pill fw-bold small py-1"
                       id="tab-existing-btn" data-bs-toggle="pill"
                       data-bs-target="#tabExisting" type="button" role="tab">
-                <i class="bi bi-list-check me-1"></i> Trip Saya
+                <i class="bi bi-list-check me-1"></i> Rencana Saya
               </button>
             </li>
             <li class="nav-item flex-fill" role="presentation">
               <button class="nav-link w-100 rounded-pill fw-bold small py-1"
                       id="tab-new-btn" data-bs-toggle="pill"
                       data-bs-target="#tabNew" type="button" role="tab">
-                <i class="bi bi-plus-circle me-1"></i> Buat Trip Baru
+                <i class="bi bi-plus-circle me-1"></i> Buat Rencana Baru
               </button>
             </li>
           </ul>
@@ -1147,27 +1149,27 @@ $travel_info       = $destinasi['travel_info'];
 
               <!-- State: loading -->
               <div id="existingTripsLoading" class="text-center py-3">
-                <span class="spinner-border spinner-border-sm text-success me-2"></span>Memuat daftar trip...
+                <span class="spinner-border spinner-border-sm text-success me-2"></span>Memuat daftar rencana...
               </div>
 
               <!-- State: belum login -->
               <div id="existingTripsGuest" class="text-center py-4 d-none">
                 <i class="bi bi-lock fs-1 text-muted d-block mb-2"></i>
-                <p class="text-muted mb-3 small">Login terlebih dahulu untuk menyimpan ke rencana perjalanan.</p>
+                <p class="text-muted mb-3 small">Masuk terlebih dahulu untuk menyimpan ke rencana perjalanan.</p>
                 <button type="button" class="btn btn-forest btn-sm rounded-pill px-4"
                         data-bs-dismiss="modal"
                         data-bs-toggle="modal"
                         data-bs-target="#authModal">
-                  <i class="bi bi-box-arrow-in-right me-1"></i> Login Sekarang
+                  <i class="bi bi-box-arrow-in-right me-1"></i> Masuk Sekarang
                 </button>
               </div>
 
               <!-- State: belum ada trip -->
               <div id="existingTripsEmpty" class="text-center py-4 d-none">
                 <i class="bi bi-calendar-x fs-1 text-muted d-block mb-2"></i>
-                <p class="text-muted mb-3 small">Kamu belum punya rencana perjalanan. Buat trip baru terlebih dahulu.</p>
+                <p class="text-muted mb-3 small">Kamu belum punya rencana perjalanan. Buat rencana baru terlebih dahulu.</p>
                 <button type="button" class="btn btn-outline-forest btn-sm rounded-pill px-4" id="switchToNewTripTab">
-                  <i class="bi bi-plus-circle me-1"></i> Buat Trip Baru
+                  <i class="bi bi-plus-circle me-1"></i> Buat Rencana Baru
                 </button>
               </div>
 
@@ -1205,7 +1207,7 @@ $travel_info       = $destinasi['travel_info'];
                 </div>
 
                 <button type="submit" class="btn btn-forest w-100 py-2 rounded-pill fw-bold" id="addToExistingTripBtn">
-                  <i class="bi bi-plus-circle me-1"></i> Tambahkan ke Trip Ini
+                  <i class="bi bi-plus-circle me-1"></i> Tambahkan ke Rencana Ini
                 </button>
               </form>
             </div>
@@ -1216,12 +1218,12 @@ $travel_info       = $destinasi['travel_info'];
               <!-- State: belum login -->
               <div id="newTripGuest" class="text-center py-4 d-none">
                 <i class="bi bi-lock fs-1 text-muted d-block mb-2"></i>
-                <p class="text-muted mb-3 small">Login terlebih dahulu untuk membuat rencana perjalanan.</p>
+                <p class="text-muted mb-3 small">Masuk terlebih dahulu untuk membuat rencana perjalanan.</p>
                 <button type="button" class="btn btn-forest btn-sm rounded-pill px-4"
                         data-bs-dismiss="modal"
                         data-bs-toggle="modal"
                         data-bs-target="#authModal">
-                  <i class="bi bi-box-arrow-in-right me-1"></i> Login Sekarang
+                  <i class="bi bi-box-arrow-in-right me-1"></i> Masuk Sekarang
                 </button>
               </div>
 
@@ -1260,10 +1262,10 @@ $travel_info       = $destinasi['travel_info'];
                 </div>
 
                 <div class="mb-3">
-                  <label for="newTripCategory" class="form-label small fw-bold text-dark">Kategori Traveler</label>
+                  <label for="newTripCategory" class="form-label small fw-bold text-dark">Kategori Wisatawan</label>
                   <select id="newTripCategory" class="form-select">
                     <option value="Pasangan & Keluarga" selected>Pasangan &amp; Keluarga</option>
-                    <option value="Solo Traveler">Solo Traveler</option>
+                    <option value="Solo Traveler">Wisatawan Solo</option>
                     <option value="Teman & Grup">Teman &amp; Kelompok</option>
                   </select>
                 </div>
@@ -1281,7 +1283,7 @@ $travel_info       = $destinasi['travel_info'];
                 </div>
 
                 <button type="submit" class="btn btn-forest w-100 py-2 rounded-pill fw-bold" id="createNewTripBtn">
-                  <i class="bi bi-check2-circle me-1"></i> Buat Trip &amp; Tambahkan Item
+                  <i class="bi bi-check2-circle me-1"></i> Buat Rencana &amp; Tambahkan Kegiatan
                 </button>
               </form>
             </div>
@@ -1291,7 +1293,7 @@ $travel_info       = $destinasi['travel_info'];
 
         <div class="modal-footer bg-white">
           <a href="rencana-perjalanan.php" class="btn btn-outline-forest btn-sm rounded-pill px-3">
-            <i class="bi bi-map me-1"></i> Buka Travel Planner
+            <i class="bi bi-map me-1"></i> Buka Rencana Perjalanan
           </a>
           <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" data-bs-dismiss="modal">Tutup</button>
         </div>

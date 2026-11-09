@@ -97,7 +97,7 @@
     });
 
     const hdr  = el('div', { class: 'd-flex justify-content-between align-items-center mb-2' });
-    const badge = el('span', { class: 'jfb-item-badge badge rounded-pill', text: `Item ${index + 1}` });
+    const badge = el('span', { class: 'jfb-item-badge badge rounded-pill', text: `Data ${index + 1}` });
     const del   = el('button', {
       type:  'button',
       class: 'btn btn-outline-danger btn-sm rounded-pill px-2 py-0',
@@ -147,7 +147,7 @@
     list.querySelectorAll('.jfb-item-card').forEach((c, i) => {
       c.dataset.itemIndex = i;
       const b = c.querySelector('.jfb-item-badge');
-      if (b) b.textContent = `Item ${i + 1}`;
+      if (b) b.textContent = `Data ${i + 1}`;
     });
   }
 
@@ -311,7 +311,7 @@
       row.appendChild(col(12, 'md-3', field('Harga per Malam', 'harga', d.harga, 'Contoh: Rp 1.850.000')));
       row.appendChild(col(12, 'md-2', field('Periode', 'periode', d.periode || '/ malam', '/ malam')));
       row.appendChild(col(12, 'md-7', field('URL Foto (800px)', 'foto', d.foto, 'https://images.unsplash.com/...')));
-      row.appendChild(col(12, 'md-12', field('Fasilitas (pisahkan •)', 'fasilitas', d.fasilitas, 'Contoh: Infinity View • Restoran Lokal')));
+      row.appendChild(col(12, 'md-12', field('Fasilitas (pisahkan •)', 'fasilitas', d.fasilitas, 'Contoh: Pemandangan Luas • Restoran Lokal')));
 
       card.appendChild(row);
       list.appendChild(card);
@@ -442,7 +442,7 @@
 
     // 4 seksi tetap — key tidak boleh berubah karena backend dan detail-destinasi.php bergantung pada ini
     const SECTIONS = [
-      { key: 'biaya',        label: 'Estimasi Biaya Harian',   defaultIcon: 'bi-cash-coin',     iconClass: 'text-success', ph: 'Contoh: Backpacker / Hemat: Rp 350.000 - Rp 600.000 / hari' },
+      { key: 'biaya',        label: 'Estimasi Biaya Harian',   defaultIcon: 'bi-cash-coin',     iconClass: 'text-success', ph: 'Contoh: Wisatawan Hemat: Rp 350.000 - Rp 600.000 / hari' },
       { key: 'transportasi', label: 'Pilihan Transportasi',    defaultIcon: 'bi-car-front',     iconClass: 'text-primary', ph: 'Contoh: Sewa Motor: Rp 75.000 - Rp 120.000 / hari' },
       { key: 'tips',         label: 'Tips Perjalanan Penting', defaultIcon: 'bi-shield-check',  iconClass: 'text-warning', ph: 'Contoh: Siapkan uang tunai yang cukup' },
       { key: 'musim',        label: 'Waktu Kunjungan Terbaik', defaultIcon: 'bi-calendar-check', iconClass: 'text-info',   ph: 'Contoh: Musim Cerah: Cuaca bersahabat untuk wisata luar ruangan' },
